@@ -7,7 +7,7 @@ interface FooterProps {
 
 export const Footer: React.FC<FooterProps> = ({ onOpenContactModal }) => {
   return (
-    <footer className="bg-[#050608] text-white border-t border-white/10 font-sans">
+    <footer className="bg-[#050608] text-white border-t border-white/10">
       
       <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 py-16 sm:py-20">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-12 justify-between">
@@ -23,7 +23,7 @@ export const Footer: React.FC<FooterProps> = ({ onOpenContactModal }) => {
             </a>
             
             <div className="space-y-2 text-sm text-[#8E95A2] font-light leading-relaxed">
-              <div className="font-bold text-white uppercase font-mono text-xs">C-CONCEPTS VERTRIEBS GMBH</div>
+              <div className="font-bold text-white uppercase text-xs tracking-wider">C-CONCEPTS VERTRIEBS GMBH</div>
               <div className="flex items-center space-x-2">
                 <MapPin className="w-4 h-4 text-[#0077E6] shrink-0" />
                 <span>Im Maerenthal 6a, 56337 Simmern / Germany</span>
@@ -38,13 +38,13 @@ export const Footer: React.FC<FooterProps> = ({ onOpenContactModal }) => {
               </div>
             </div>
 
-            <p className="text-xs text-[#8E95A2]/80 font-mono">
+            <p className="text-xs text-[#8E95A2]/80 uppercase tracking-wider">
               Innovative Marketing Concepts – Made in Germany
             </p>
           </div>
 
           {/* Navigation */}
-          <div className="md:col-span-3 space-y-3 font-mono text-xs text-[#8E95A2]">
+          <div className="md:col-span-3 space-y-3 text-xs text-[#8E95A2]">
             <div className="text-white font-bold tracking-widest uppercase mb-4 text-xs">NAVIGATION</div>
             <div><a href="#home" className="hover:text-[#0077E6] transition-colors">HOME</a></div>
             <div><a href="#leistungen" className="hover:text-[#0077E6] transition-colors">LEISTUNGEN</a></div>
@@ -55,7 +55,7 @@ export const Footer: React.FC<FooterProps> = ({ onOpenContactModal }) => {
           </div>
 
           {/* Legal */}
-          <div className="md:col-span-3 space-y-3 font-mono text-xs text-[#8E95A2]">
+          <div className="md:col-span-3 space-y-3 text-xs text-[#8E95A2]">
             <div className="text-white font-bold tracking-widest uppercase mb-4 text-xs">RECHTLICHES</div>
             <div><a href="#kontakt" className="hover:text-[#0077E6] transition-colors">IMPRESSUM</a></div>
             <div><a href="#kontakt" className="hover:text-[#0077E6] transition-colors">DATENSCHUTZ</a></div>
@@ -64,14 +64,14 @@ export const Footer: React.FC<FooterProps> = ({ onOpenContactModal }) => {
             <div className="pt-6">
               <button
                 onClick={onOpenContactModal}
-                className="inline-flex items-center space-x-2 text-[#0077E6] hover:text-white font-bold tracking-wider uppercase"
+                className="inline-flex items-center space-x-2 text-[#0077E6] hover:text-white font-bold tracking-wider uppercase cursor-pointer"
               >
                 <span>TERMIN VEREINBAREN</span>
                 <ArrowUpRight className="w-3.5 h-3.5" />
               </button>
             </div>
 
-            <div className="pt-4 text-[#8E95A2]/60 text-[11px]">
+            <div className="pt-4 text-[#8E95A2]/60 text-[11px] tracking-wider">
               © 1993–2026 C-CONCEPTS VERTRIEBS GMBH
             </div>
           </div>

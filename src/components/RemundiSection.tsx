@@ -9,9 +9,9 @@ export const RemundiSection: React.FC<RemundiSectionProps> = ({ onOpenContactMod
   const [isPlaying, setIsPlaying] = useState(false);
 
   return (
-    <section className="py-28 sm:py-36 bg-[#080A0E] text-white border-t border-white/10 relative overflow-hidden">
+    <section className="py-28 sm:py-36 bg-[#080A0E] text-white border-t border-white/5 relative overflow-hidden">
       
-      {/* Background ambient lighting */}
+      {/* Ambient lighting background */}
       <div className="absolute left-1/4 top-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-[#005496]/15 rounded-full blur-[120px] pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 relative z-10">
@@ -20,14 +20,14 @@ export const RemundiSection: React.FC<RemundiSectionProps> = ({ onOpenContactMod
           {/* Left Column: Story & Content */}
           <div className="lg:col-span-6 space-y-8">
             
-            {/* Small Label */}
-            <div className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-[#005496]/15 border border-[#005496]/30 text-[#0077E6] font-mono text-xs font-semibold tracking-widest uppercase">
+            {/* Small Eyebrow Label */}
+            <div className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-[#005496]/15 border border-[#005496]/30 text-[#0077E6] text-xs font-semibold tracking-widest uppercase">
               <Sparkles className="w-3.5 h-3.5" />
               <span>EINE KONSTRUKTION AUS UNSEREM HAUSE</span>
             </div>
 
             {/* Headline */}
-            <h2 className="font-sans font-extrabold text-4xl sm:text-6xl text-white tracking-tight uppercase leading-[0.92]">
+            <h2 className="font-extrabold text-4xl sm:text-6xl text-white tracking-tight uppercase leading-[0.92]">
               DAS REMUNDI <br />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-white via-[#E6E9EE] to-[#0077E6]">
                 GRILL-ERLEBNIS
@@ -35,7 +35,7 @@ export const RemundiSection: React.FC<RemundiSectionProps> = ({ onOpenContactMod
             </h2>
 
             {/* Copy */}
-            <div className="space-y-4 text-base sm:text-lg text-[#E6E9EE] font-sans font-light leading-relaxed">
+            <div className="space-y-4 text-base sm:text-lg text-[#E6E9EE] font-light leading-relaxed">
               <p>
                 Vorbei sind die Zeiten, in denen der Grillmeister im Abseits sein Dasein fristete. Ab jetzt gibt es das gemeinsame Grill- und Genuss-Erlebnis.
               </p>
@@ -46,19 +46,19 @@ export const RemundiSection: React.FC<RemundiSectionProps> = ({ onOpenContactMod
 
             {/* Feature Bullets */}
             <div className="space-y-3 pt-2">
-              <div className="flex items-center space-x-3 text-sm text-[#E6E9EE] font-sans">
+              <div className="flex items-center space-x-3 text-sm text-[#E6E9EE]">
                 <div className="p-1 bg-[#005496]/20 border border-[#005496]/40 rounded-full text-[#0077E6]">
                   <Check className="w-3.5 h-3.5" />
                 </div>
                 <span>Wetterfester Cortenstahl mit Edelstahl-Laser-Branding</span>
               </div>
-              <div className="flex items-center space-x-3 text-sm text-[#E6E9EE] font-sans">
+              <div className="flex items-center space-x-3 text-sm text-[#E6E9EE]">
                 <div className="p-1 bg-[#005496]/20 border border-[#005496]/40 rounded-full text-[#0077E6]">
                   <Check className="w-3.5 h-3.5" />
                 </div>
                 <span>10mm Hitzespeicher-Carbonstahlplatte für perfekte Grillergebnisse</span>
               </div>
-              <div className="flex items-center space-x-3 text-sm text-[#E6E9EE] font-sans">
+              <div className="flex items-center space-x-3 text-sm text-[#E6E9EE]">
                 <div className="p-1 bg-[#005496]/20 border border-[#005496]/40 rounded-full text-[#0077E6]">
                   <Check className="w-3.5 h-3.5" />
                 </div>
@@ -70,7 +70,7 @@ export const RemundiSection: React.FC<RemundiSectionProps> = ({ onOpenContactMod
             <div className="pt-4">
               <button
                 onClick={onOpenContactModal}
-                className="inline-flex items-center space-x-3 px-8 py-4 bg-[#005496] hover:bg-[#0066C2] text-white font-mono text-xs font-bold tracking-widest uppercase rounded-xs transition-all duration-300 shadow-xl shadow-[#005496]/20"
+                className="inline-flex items-center space-x-3 px-8 py-4 bg-[#005496] hover:bg-[#0066C2] text-white text-xs font-bold tracking-widest uppercase rounded-xl transition-all duration-300 shadow-xl shadow-[#005496]/20 cursor-pointer"
               >
                 <span>REMUNDI PROJEKT ANFRAGEN</span>
                 <ArrowUpRight className="w-4 h-4" />
@@ -81,7 +81,7 @@ export const RemundiSection: React.FC<RemundiSectionProps> = ({ onOpenContactMod
 
           {/* Right Column: Visual Showcase & Interactive Video Frame */}
           <div className="lg:col-span-6 relative">
-            <div className="relative aspect-[16/10] w-full rounded-xs overflow-hidden border border-white/10 bg-[#0D0F14] shadow-2xl group">
+            <div className="relative aspect-[16/10] w-full rounded-2xl overflow-hidden border border-white/10 bg-[#0D0F14] shadow-2xl group">
               
               {!isPlaying ? (
                 <>
@@ -101,17 +101,17 @@ export const RemundiSection: React.FC<RemundiSectionProps> = ({ onOpenContactMod
                     <div className="w-16 h-16 rounded-full bg-[#005496]/90 backdrop-blur-md border border-white/30 flex items-center justify-center text-white group-hover/play:scale-110 group-hover/play:bg-[#0066C2] transition-all duration-300 shadow-2xl">
                       <Play className="w-6 h-6 fill-white translate-x-0.5" />
                     </div>
-                    <span className="font-mono text-xs text-white uppercase tracking-widest font-bold bg-[#0A0B0D]/80 px-4 py-1.5 rounded-xs border border-white/10">
+                    <span className="text-xs text-white uppercase tracking-widest font-bold bg-[#0A0B0D]/80 px-4 py-1.5 rounded-full border border-white/10">
                       VIDEO ANSEHEN
                     </span>
                   </button>
 
-                  <div className="absolute bottom-4 left-4 right-4 p-3 bg-[#0A0B0D]/85 backdrop-blur-md border border-white/10 rounded-xs flex items-center justify-between font-mono text-xs text-[#8E95A2]">
-                    <span className="flex items-center space-x-2 text-white">
+                  <div className="absolute bottom-4 left-4 right-4 p-3 bg-[#0A0B0D]/85 backdrop-blur-md border border-white/10 rounded-xl flex items-center justify-between text-xs text-[#8E95A2]">
+                    <span className="flex items-center space-x-2 text-white font-medium">
                       <Flame className="w-4 h-4 text-[#0077E6]" />
                       <span>REMUNDI FIRE GRILL</span>
                     </span>
-                    <span>C-CONCEPTS FABRICATION</span>
+                    <span className="font-light">C-CONCEPTS FABRICATION</span>
                   </div>
                 </>
               ) : (
@@ -125,7 +125,7 @@ export const RemundiSection: React.FC<RemundiSectionProps> = ({ onOpenContactMod
                   />
                   <button
                     onClick={() => setIsPlaying(false)}
-                    className="absolute top-4 right-4 px-3 py-1 bg-black/80 text-white font-mono text-xs rounded-xs border border-white/20 hover:bg-[#005496]"
+                    className="absolute top-4 right-4 px-3 py-1 bg-black/80 text-white text-xs rounded-lg border border-white/20 hover:bg-[#005496] cursor-pointer"
                   >
                     SCHLIESSEN ✕
                   </button>

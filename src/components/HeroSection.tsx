@@ -1,6 +1,5 @@
 import React from 'react';
 import { ArrowUpRight, ChevronRight, Sparkles } from 'lucide-react';
-import { Industrial3DCanvas } from './Industrial3DCanvas';
 
 interface HeroSectionProps {
   onOpenContactModal: () => void;
@@ -8,100 +7,85 @@ interface HeroSectionProps {
 
 export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenContactModal }) => {
   return (
-    <section id="home" className="relative min-h-screen pt-32 sm:pt-40 pb-20 flex flex-col justify-center bg-[#0A0B0D] overflow-hidden">
+    <section id="home" className="relative min-h-[90vh] lg:min-h-screen pt-36 sm:pt-44 pb-20 flex flex-col justify-center bg-[#0A0B0D] overflow-hidden">
       
-      {/* Background ambient light grid */}
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_30%,#005496_0%,transparent_45%)] opacity-15 pointer-events-none" />
-      <div className="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-[#005496]/10 to-transparent pointer-events-none" />
+      {/* 1. Full-Bleed Background Video Hero */}
+      <div className="absolute inset-0 w-full h-full overflow-hidden z-0">
+        <video
+          autoPlay
+          loop
+          muted
+          playsInline
+          poster="/images/perfect-match.jpg"
+          className="w-full h-full object-cover scale-105 filter brightness-[0.85] contrast-105"
+        >
+          <source src="/assets/cconcepts-hero.mp4" type="video/mp4" />
+          <source src="https://cdn.coverr.co/videos/coverr-industrial-laser-engraving-4648/1080p.mp4" type="video/mp4" />
+          <source src="https://assets.mixkit.co/videos/preview/mixkit-laser-cutting-metal-in-a-factory-41562-large.mp4" type="video/mp4" />
+        </video>
 
-      <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 w-full my-auto z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+        {/* Subtle Dark Overlay / Gradients for High Typography Readability */}
+        <div className="absolute inset-0 bg-gradient-to-r from-[#0A0B0D]/95 via-[#0A0B0D]/80 to-[#0A0B0D]/50 z-10" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#0A0B0D] via-transparent to-[#0A0B0D]/70 z-10" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_40%,#005496_0%,transparent_50%)] opacity-20 z-10 pointer-events-none" />
+      </div>
+
+      {/* Hero Typography & Content */}
+      <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 w-full my-auto z-20 relative">
+        <div className="max-w-3xl space-y-8">
           
-          {/* Left Column: Editorial Headlines & Copy */}
-          <div className="lg:col-span-7 space-y-8 z-10">
-            
-            {/* Small Brand Eyebrow */}
-            <div className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-[#005496]/10 border border-[#005496]/30 text-[#0077E6] font-mono text-xs font-semibold tracking-widest uppercase">
-              <Sparkles className="w-3.5 h-3.5" />
-              <span>WERBEARTIKEL MIT FULL-SERVICE</span>
-            </div>
-
-            {/* Main Headline */}
-            <h1 className="font-sans font-extrabold text-5xl sm:text-7xl lg:text-8xl tracking-tight text-white leading-[0.92] uppercase">
-              STARKE WERBUNG <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-white via-[#E6E9EE] to-[#8E95A2]">
-                FÜR IHR UNTERNEHMEN
-              </span>
-            </h1>
-
-            {/* Supporting Text */}
-            <p className="text-base sm:text-xl text-[#8E95A2] font-sans font-light leading-relaxed max-w-2xl">
-              Wir sind Ihr zuverlässiger Partner für Werbeartikel, Gimmicks, Give-Aways, Erlebnis-Promotion – und deren Konfektionierung. Wir entwickeln innovative Produkte, organisieren Verpackung und übernehmen die Logistik bis zu Ihren Kunden an den Point of Sale.
-            </p>
-
-            {/* CTA Buttons */}
-            <div className="pt-4 flex flex-wrap gap-4 items-center">
-              <button
-                onClick={onOpenContactModal}
-                className="inline-flex items-center space-x-3 px-8 py-4 bg-[#005496] hover:bg-[#0066C2] text-white font-mono text-xs font-bold tracking-widest uppercase rounded-xs transition-all duration-300 shadow-xl shadow-[#005496]/25 hover:shadow-[#005496]/40 hover:-translate-y-0.5"
-              >
-                <span>TERMIN VEREINBAREN</span>
-                <ArrowUpRight className="w-4 h-4" />
-              </button>
-
-              <a
-                href="#leistungen"
-                className="inline-flex items-center space-x-2 px-8 py-4 bg-white/5 hover:bg-white/10 border border-white/15 text-white font-mono text-xs font-bold tracking-widest uppercase rounded-xs transition-all duration-300"
-              >
-                <span>FULL-SERVICE ENTDECKEN</span>
-                <ChevronRight className="w-4 h-4 text-[#8E95A2]" />
-              </a>
-            </div>
-
-            {/* Trust highlights */}
-            <div className="pt-8 border-t border-white/10 grid grid-cols-3 gap-6 font-mono text-xs text-[#8E95A2]">
-              <div>
-                <span className="block text-white font-bold text-sm">SEIT 1993</span>
-                <span>Made in Germany</span>
-              </div>
-              <div>
-                <span className="block text-white font-bold text-sm">FULL-SERVICE</span>
-                <span>Von der Idee bis POS</span>
-              </div>
-              <div>
-                <span className="block text-white font-bold text-sm">SEDEX PARTNER</span>
-                <span>Ethische Standards</span>
-              </div>
-            </div>
-
+          {/* Eyebrow Label */}
+          <div className="inline-flex items-center space-x-2.5 px-4 py-2 rounded-full bg-[#005496]/20 border border-[#005496]/40 text-[#0077E6] text-xs font-semibold tracking-widest uppercase backdrop-blur-md">
+            <Sparkles className="w-3.5 h-3.5" />
+            <span>WERBEARTIKEL MIT FULL-SERVICE</span>
           </div>
 
-          {/* Right Column: Hero Visual Showcase */}
-          <div className="lg:col-span-5 relative h-[420px] sm:h-[540px] w-full flex items-center justify-center">
-            
-            {/* Visual background glow */}
-            <div className="absolute inset-0 bg-[#005496]/20 rounded-2xl blur-3xl" />
-            
-            {/* 3D Industrial Canvas & Authentic Hero Image Treatment */}
-            <div className="relative w-full h-full rounded-xs border border-white/10 bg-[#0D0F14]/90 p-4 shadow-2xl flex flex-col justify-between overflow-hidden group">
-              <Industrial3DCanvas />
-              
-              {/* Floating Overlay Badge */}
-              <div className="absolute bottom-6 left-6 right-6 p-4 bg-[#0A0B0D]/90 backdrop-blur-md border border-white/10 rounded-xs flex items-center justify-between">
-                <div>
-                  <div className="font-mono text-[10px] text-[#0077E6] uppercase tracking-widest">REALES PROJEKT BEISPIEL</div>
-                  <div className="font-sans font-extrabold text-sm text-white uppercase">PUNICA PROMOTION SCOOTER</div>
-                </div>
-                <a 
-                  href="#projekte"
-                  className="p-2 bg-[#005496] text-white rounded-xs hover:bg-[#0066C2] transition-colors"
-                  aria-label="Projekt ansehen"
-                >
-                  <ArrowUpRight className="w-4 h-4" />
-                </a>
-              </div>
-            </div>
+          {/* Main Title */}
+          <h1 className="font-extrabold text-5xl sm:text-7xl lg:text-8xl tracking-tight text-white leading-[0.92] uppercase">
+            STARKE WERBUNG <br />
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-white via-[#E6E9EE] to-[#8E95A2]">
+              FÜR IHR UNTERNEHMEN
+            </span>
+          </h1>
 
+          {/* Body */}
+          <p className="text-lg sm:text-xl text-[#E6E9EE]/90 font-light leading-relaxed max-w-2xl">
+            Wir sind Ihr zuverlässiger Partner für Werbeartikel, Gimmicks, Give-Aways und Erlebnis-Promotion – von der Idee bis zum Point of Sale.
+          </p>
+
+          {/* Action Buttons */}
+          <div className="pt-2 flex flex-wrap gap-4 items-center">
+            <button
+              onClick={onOpenContactModal}
+              className="inline-flex items-center space-x-3 px-8 py-4 bg-[#005496] hover:bg-[#0066C2] text-white text-xs font-bold tracking-widest uppercase rounded-xl transition-all duration-300 shadow-xl shadow-[#005496]/30 hover:shadow-[#005496]/50 hover:-translate-y-0.5 cursor-pointer"
+            >
+              <span>TERMIN VEREINBAREN</span>
+              <ArrowUpRight className="w-4 h-4" />
+            </button>
+
+            <a
+              href="#leistungen"
+              className="inline-flex items-center space-x-2 px-8 py-4 bg-white/10 hover:bg-white/15 border border-white/20 hover:border-white/40 text-white text-xs font-bold tracking-widest uppercase rounded-xl backdrop-blur-md transition-all duration-300"
+            >
+              <span>FULL-SERVICE ENTDECKEN</span>
+              <ChevronRight className="w-4 h-4 text-[#8E95A2]" />
+            </a>
+          </div>
+
+          {/* Small Stat / Feature Row (Requirement 10) */}
+          <div className="pt-10 border-t border-white/15 grid grid-cols-1 sm:grid-cols-3 gap-6 sm:gap-8 text-xs text-[#8E95A2]">
+            <div className="space-y-1">
+              <span className="block text-white font-bold text-sm tracking-wider uppercase">SEIT 1993</span>
+              <span className="text-[#8E95A2] font-light">Made in Germany</span>
+            </div>
+            <div className="space-y-1 sm:border-l sm:border-white/15 sm:pl-8">
+              <span className="block text-white font-bold text-sm tracking-wider uppercase">FULL-SERVICE</span>
+              <span className="text-[#8E95A2] font-light">Von der Idee bis zum POS</span>
+            </div>
+            <div className="space-y-1 sm:border-l sm:border-white/15 sm:pl-8">
+              <span className="block text-white font-bold text-sm tracking-wider uppercase">SEDEX PARTNER</span>
+              <span className="text-[#8E95A2] font-light">Ethische Standards</span>
+            </div>
           </div>
 
         </div>
