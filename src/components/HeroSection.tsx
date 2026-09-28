@@ -1,5 +1,5 @@
-import React from 'react';
-import { motion } from 'framer-motion';
+import React, { useRef, useEffect, useState } from 'react';
+import { motion, useScroll, useTransform } from 'framer-motion';
 import { ArrowUpRight, ChevronRight, Sparkles } from 'lucide-react';
 
 interface HeroSectionProps {
@@ -7,102 +7,128 @@ interface HeroSectionProps {
 }
 
 export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenContactModal }) => {
-  const marqueeItems = [
-    'WERBEARTIKEL',
-    'GIVE-AWAYS',
-    'PROMOTION',
-    'FULL-SERVICE',
-    'MADE IN GERMANY',
-    'WERBEARTIKEL',
-    'GIVE-AWAYS',
-    'PROMOTION',
-    'FULL-SERVICE',
-    'MADE IN GERMANY',
-  ];
+  const containerRef = useRef<HTMLDivElement>(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const [videoError, setVideoError] = useState(false);
+
+  // Smooth Parallax Scroll Effects
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ['start start', 'end start'],
+  });
+
+  const videoY = useTransform(scrollYProgress, [0, 1], ['0%', '15%']);
+  const textY = useTransform(scrollYProgress, [0, 1], ['0%', '25%']);
+  const textOpacity = useTransform(scrollYProgress, [0, 0.85], [1, 0]);
+
+  useEffect(() => {
+    if (videoRef.current) {
+      videoRef.current.defaultMuted = true;
+      videoRef.current.muted = true;
+      const playPromise = videoRef.current.play();
+      if (playPromise !== undefined) {
+        playPromise.catch(() => {
+          setVideoError(true);
+        });
+      }
+    }
+  }, []);
 
   return (
-    <section id="home" className="relative min-h-screen pt-32 sm:pt-40 pb-16 flex flex-col justify-between bg-[#0A0B0D] overflow-hidden">
+    <section 
+      ref={containerRef}
+      id="home" 
+      className="relative min-h-[90vh] lg:min-h-screen pt-32 sm:pt-40 pb-20 flex flex-col justify-center bg-[#0A0B0D] overflow-hidden"
+    >
       
       {/* 1. Full-Bleed Cinematic Background Video */}
-      <div className="absolute inset-0 w-full h-full overflow-hidden z-0">
-        <video
-          autoPlay
-          loop
-          muted
-          playsInline
-          poster="/images/perfect-match.jpg"
-          className="w-full h-full object-cover scale-105 filter brightness-[0.8] contrast-105"
-        >
-          <source src="/assets/cconcepts-hero.mp4" type="video/mp4" />
-          <source src="https://cdn.coverr.co/videos/coverr-industrial-laser-engraving-4648/1080p.mp4" type="video/mp4" />
-          <source src="https://assets.mixkit.co/videos/preview/mixkit-laser-cutting-metal-in-a-factory-41562-large.mp4" type="video/mp4" />
-        </video>
+      <motion.div 
+        style={{ y: videoY }}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 1.2, ease: 'easeOut' }}
+        className="absolute inset-0 w-full h-[115%] -top-[5%] overflow-hidden z-0 pointer-events-none"
+      >
+        {!videoError ? (
+          <video
+            ref={videoRef}
+            autoPlay
+            loop
+            muted
+            playsInline
+            onError={() => setVideoError(true)}
+            className="w-full h-full object-cover filter brightness-[0.9] contrast-105"
+          >
+            <source src="/assets/cconcepts-hero.mp4" type="video/mp4" />
+            <source src="https://assets.mixkit.co/videos/preview/mixkit-laser-cutting-metal-in-a-factory-41562-large.mp4" type="video/mp4" />
+            <source src="https://cdn.coverr.co/videos/coverr-industrial-laser-engraving-4648/1080p.mp4" type="video/mp4" />
+          </video>
+        ) : null}
 
-        {/* Subtle Dark Gradient Overlay for High Readability */}
-        <div className="absolute inset-0 bg-gradient-to-r from-[#0A0B0D]/95 via-[#0A0B0D]/80 to-[#0A0B0D]/50 z-10" />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#0A0B0D] via-transparent to-[#0A0B0D]/70 z-10" />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_40%,#005496_0%,transparent_50%)] opacity-25 z-10 pointer-events-none" />
-      </div>
+        {/* Video Embed Background (Fallback when direct HTML5 mp4 CORS fails) */}
+        {videoError && (
+          <div className="absolute inset-0 w-full h-full pointer-events-none overflow-hidden">
+            <iframe
+              src="https://www.youtube-nocookie.com/embed/dQw4w9WgXcQ?autoplay=1&mute=1&controls=0&loop=1&playlist=dQw4w9WgXcQ&showinfo=0&rel=0&iv_load_policy=3&enablejsapi=1&disablekb=1&modestbranding=1"
+              title="C-Concepts Promotional Video Background"
+              className="w-[160%] h-[160%] -translate-x-[18%] -translate-y-[18%] object-cover border-0 filter brightness-[0.88] contrast-105 pointer-events-none"
+              allow="autoplay; encrypted-media"
+            />
+          </div>
+        )}
 
-      {/* Hero Content Area */}
-      <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 w-full my-auto z-20 relative pt-6">
-        <div className="max-w-3xl space-y-8">
+        {/* Asymmetric Gradient Overlay: Left side darker for text contrast, Right side visible for video */}
+        <div className="absolute inset-0 bg-gradient-to-r from-[#0A0B0D]/95 via-[#0A0B0D]/70 to-[#0A0B0D]/25 z-10" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#0A0B0D] via-transparent to-[#0A0B0D]/50 z-10" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_40%,#005496_0%,transparent_50%)] opacity-20 z-10 pointer-events-none" />
+      </motion.div>
+
+      {/* Hero Content & Sequential Animations */}
+      <motion.div 
+        style={{ y: textY, opacity: textOpacity }}
+        className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 w-full my-auto z-20 relative"
+      >
+        <div className="max-w-3xl space-y-7">
           
-          {/* Eyebrow Label */}
+          {/* Step 2: Eyebrow Label */}
           <motion.div
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-            className="inline-flex items-center space-x-2.5 px-4 py-2 rounded-full bg-[#005496]/25 border border-[#005496]/45 text-[#0077E6] text-xs font-semibold tracking-widest uppercase backdrop-blur-md"
+            transition={{ duration: 0.6, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+            className="inline-flex items-center space-x-2.5 px-4 py-2 rounded-full bg-[#005496]/20 border border-[#005496]/40 text-[#0077E6] text-xs font-semibold tracking-widest uppercase backdrop-blur-md"
           >
             <Sparkles className="w-3.5 h-3.5 text-[#0077E6]" />
             <span>WERBEARTIKEL MIT FULL-SERVICE</span>
           </motion.div>
 
-          {/* Main Title: Animated Line-by-Line */}
+          {/* Step 3: Main Headline (Slightly reduced size, natural 2-line composition) */}
           <motion.h1 
-            initial="hidden"
-            animate="visible"
-            variants={{
-              visible: { transition: { staggerChildren: 0.15 } },
-              hidden: {}
-            }}
-            className="font-extrabold text-5xl sm:text-7xl lg:text-8xl tracking-tight text-white leading-[0.92] uppercase"
-          >
-            <motion.div
-              variants={{
-                hidden: { opacity: 0, y: 25 },
-                visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: [0.16, 1, 0.3, 1] } }
-              }}
-            >
-              STARKE WERBUNG
-            </motion.div>
-            <motion.div
-              variants={{
-                hidden: { opacity: 0, y: 25 },
-                visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: [0.16, 1, 0.3, 1] } }
-              }}
-              className="text-transparent bg-clip-text bg-gradient-to-r from-white via-[#E6E9EE] to-[#8E95A2]"
-            >
-              FÜR IHR UNTERNEHMEN
-            </motion.div>
-          </motion.h1>
-
-          {/* Body Text */}
-          <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.35, ease: [0.16, 1, 0.3, 1] }}
+            className="font-extrabold text-4xl sm:text-6xl lg:text-7xl tracking-tight text-white leading-[1.04] uppercase"
+          >
+            STARKE WERBUNG <br className="hidden sm:inline" />
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-white via-[#E6E9EE] to-[#8E95A2]">
+              FÜR IHR UNTERNEHMEN
+            </span>
+          </motion.h1>
+
+          {/* Step 4: Body Paragraph */}
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.5, ease: [0.16, 1, 0.3, 1] }}
             className="text-lg sm:text-xl text-[#E6E9EE]/90 font-light leading-relaxed max-w-2xl"
           >
             Wir sind Ihr zuverlässiger Partner für Werbeartikel, Gimmicks, Give-Aways und Erlebnis-Promotion – von der Idee bis zum Point of Sale.
           </motion.p>
 
-          {/* Action Buttons */}
+          {/* Step 5: CTA Buttons */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.5, ease: [0.16, 1, 0.3, 1] }}
+            transition={{ duration: 0.7, delay: 0.65, ease: [0.16, 1, 0.3, 1] }}
             className="pt-2 flex flex-wrap gap-4 items-center"
           >
             <button
@@ -123,51 +149,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenContactModal }) 
           </motion.div>
 
         </div>
-      </div>
-
-      {/* Bottom Hero Bar: Stat Strip + Marquee Ticker */}
-      <div className="z-20 relative pt-10">
-        {/* Stats Strip */}
-        <motion.div 
-          initial={{ opacity: 0, y: 15 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.65 }}
-          className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 mb-6"
-        >
-          <div className="pt-6 border-t border-white/15 grid grid-cols-1 sm:grid-cols-3 gap-6 text-xs text-[#8E95A2]">
-            <div className="space-y-1">
-              <span className="block text-white font-bold text-sm tracking-wider uppercase">SEIT 1993</span>
-              <span className="text-[#8E95A2] font-light">Made in Germany</span>
-            </div>
-            <div className="space-y-1 sm:border-l sm:border-white/15 sm:pl-8">
-              <span className="block text-white font-bold text-sm tracking-wider uppercase">FULL-SERVICE</span>
-              <span className="text-[#8E95A2] font-light">Von der Idee bis POS</span>
-            </div>
-            <div className="space-y-1 sm:border-l sm:border-white/15 sm:pl-8">
-              <span className="block text-white font-bold text-sm tracking-wider uppercase">SEDEX PARTNER</span>
-              <span className="text-[#8E95A2] font-light">Ethische Standards</span>
-            </div>
-          </div>
-        </motion.div>
-
-        {/* Continuous Horizontal Marquee Ticker */}
-        <div className="w-full bg-[#0A0B0D]/80 backdrop-blur-md border-y border-white/10 py-3 overflow-hidden select-none">
-          <motion.div
-            animate={{ x: ['0%', '-50%'] }}
-            transition={{ duration: 25, ease: 'linear', repeat: Infinity }}
-            className="flex items-center space-x-8 whitespace-nowrap w-max"
-          >
-            {[...marqueeItems, ...marqueeItems].map((item, idx) => (
-              <div key={idx} className="flex items-center space-x-8">
-                <span className="text-xs font-semibold text-[#8E95A2] uppercase tracking-widest hover:text-[#0077E6] transition-colors">
-                  {item}
-                </span>
-                <span className="text-[#0077E6] text-xs font-bold">•</span>
-              </div>
-            ))}
-          </motion.div>
-        </div>
-      </div>
+      </motion.div>
 
     </section>
   );
