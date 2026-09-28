@@ -5,7 +5,9 @@
     --bg-primary: #0A0B0D;
     --text-primary: #F4F5F6;
     --text-secondary: #8E95A2;
-    --brand-accent: #FF4500;
+    --brand-accent: #005496;
+    --brand-accent-hover: #0066C2;
+    --brand-light-blue: #0077E6;
   }
 
   body {
@@ -28,8 +30,8 @@
   background: #0A0B0D;
 }
 ::-webkit-scrollbar-thumb {
-  background: #242832;
+  background: #1A2333;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #FF4500;
+  background: #005496;
 }

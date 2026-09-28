@@ -1,25 +1,64 @@
 import React from 'react';
-import { CLIENT_LOGOS } from '../data/projectsData';
+import { CLIENT_LOGOS, TESTIMONIALS } from '../data/projectsData';
+import { Quote } from 'lucide-react';
 
 export const ClientsSection: React.FC = () => {
   return (
-    <section className="py-24 bg-[#0A0B0D] text-white border-t border-white/10">
+    <section className="py-24 sm:py-32 bg-[#0A0B0D] text-white border-t border-white/10 relative">
       <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
         
-        {/* Minimal Label */}
-        <div className="font-mono text-xs text-[#8E95A2] tracking-widest uppercase mb-12">
-          TRUSTED BY
+        {/* Section Header */}
+        <div className="max-w-3xl mb-16 space-y-3">
+          <span className="font-mono text-xs text-[#0077E6] tracking-widest uppercase font-semibold block">
+            REFERENZEN
+          </span>
+          <h2 className="font-sans font-extrabold text-4xl sm:text-5xl text-white tracking-tight uppercase leading-[0.95]">
+            KUNDEN & PARTNER
+          </h2>
+          <p className="text-base text-[#8E95A2] font-sans font-light leading-relaxed">
+            Wir sind sehr stolz auf unsere namhaften Kunden, die uns über Jahre hinweg ihr Vertrauen geschenkt haben.
+          </p>
         </div>
 
-        {/* Clean Horizontal Monochrome List */}
-        <div className="flex flex-wrap items-center justify-between gap-8 sm:gap-12 py-6 border-y border-white/10">
+        {/* Authentic Client Logo Bar */}
+        <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-7 gap-6 items-center py-8 border-y border-white/10 mb-16">
           {CLIENT_LOGOS.map((client) => (
-            <span
+            <div
               key={client.name}
-              className="font-sans font-black text-xl sm:text-2xl text-[#8E95A2] hover:text-white transition-colors tracking-tight uppercase"
+              className="p-4 bg-white/5 border border-white/10 rounded-xs flex items-center justify-center h-20 hover:border-[#005496] transition-all duration-300 group"
             >
-              {client.name}
-            </span>
+              <img
+                src={client.logo}
+                alt={client.name}
+                className="max-h-12 max-w-full object-contain filter grayscale contrast-120 group-hover:grayscale-0 transition-all duration-300"
+              />
+            </div>
+          ))}
+        </div>
+
+        {/* Real Testimonial Cards */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          {TESTIMONIALS.map((t, index) => (
+            <div
+              key={index}
+              className="p-8 bg-[#0D0F14] border border-white/10 rounded-xs space-y-6 relative hover:border-[#005496] transition-colors"
+            >
+              <Quote className="w-8 h-8 text-[#0077E6]/40" />
+              <p className="text-lg text-[#E6E9EE] font-sans font-light italic leading-relaxed">
+                "{t.quote}"
+              </p>
+              <div className="flex items-center space-x-4 pt-4 border-t border-white/10">
+                <img
+                  src={t.logo}
+                  alt={t.author}
+                  className="w-10 h-10 object-contain rounded-full bg-white/10 p-1"
+                />
+                <div>
+                  <div className="font-sans font-bold text-white uppercase text-sm">{t.author}</div>
+                  <div className="font-mono text-xs text-[#8E95A2]">{t.role}</div>
+                </div>
+              </div>
+            </div>
           ))}
         </div>
 

@@ -3,7 +3,7 @@ export interface Project {
   number: string;
   title: string;
   subtitle: string;
-  category: 'VEHICLES' | 'GAME UNITS' | 'CUSTOM BUILDS' | 'EVENT RIGS';
+  category: 'FAHRZEUGE' | 'GAME-UNITS' | 'SONDERANFERTIGUNGEN' | 'PROMOTION-SETUPS';
   client: string;
   year: string;
   summary: string;
@@ -26,217 +26,212 @@ export const REAL_PROJECTS: Project[] = [
     id: 'punica-scooter',
     number: '01',
     title: 'PUNICA SCOOTER',
-    subtitle: 'CUSTOM PROMOTIONAL VEHICLE',
-    category: 'VEHICLES',
+    subtitle: 'SONDERANFERTIGUNG PROMOTION-FAHRZEUG',
+    category: 'FAHRZEUGE',
     client: 'Punica (PepsiCo)',
     year: '2022',
-    summary: 'Custom-engineered mobile brand activation scooter featuring custom retro-fitted bodywork, integrated cooling payload, and on-the-go product sampling system.',
-    description: 'Developed for nationwide German promotion tours, the Punica Promotional Scooter converts a heavy-duty electric vehicle chassis into an eye-catching, high-mobility sampling station. Built to withstand continuous outdoor transport, high-traffic city centers, and fast daily redeployment.',
-    image: 'https://images.unsplash.com/photo-1558981403-c5f9899a28bc?auto=format&fit=crop&q=80&w=1600',
+    summary: 'Speziell entwickeltes und gebautes Promotion-Mofa/Scooter-Fahrzeug mit integrierter Kühlung für bundesweite Produkt-Sampling-Touren.',
+    description: 'Für bundesweite Werbeaktionen und Sampling-Touren entwickelten wir das Punica Promotion-Fahrzeug. Basierend auf einem hochleistungsfähigen Fahrgestell vereint dieses Retro-Mofa maximale Mobilität mit auffälligem Markenbranding und integrierter Produktkühlung für den direkten Einsatz am Point of Sale.',
+    image: '/images/punica-mofa.jpg',
     secondaryImages: [
-      'https://images.unsplash.com/photo-1568772585407-9361f9bf3a87?auto=format&fit=crop&q=80&w=1000',
-      'https://images.unsplash.com/photo-1558981806-ec527fa84c39?auto=format&fit=crop&q=80&w=1000'
+      '/images/punica-mofa.jpg',
+      'https://images.unsplash.com/photo-1558981403-c5f9899a28bc?auto=format&fit=crop&q=80&w=1600'
     ],
     specs: [
-      { label: 'Chassis Type', value: 'Custom Reinforced Tubular Steel' },
-      { label: 'Power Unit', value: '48V High-Torque Electric Hub Motor' },
-      { label: 'Payload Bay', value: 'Dual-Zone Insulated Cooling Unit (180L)' },
-      { label: 'Branding Finish', value: 'UV-Resistant Matte Vinyl Wrap' },
-      { label: 'Logistics', value: 'Fits Standard Euro-Pallet Footprint' }
+      { label: 'Konstruktion', value: 'Individualisierter Stahlrohr-Rahmen' },
+      { label: 'Kühlung', value: 'Integrierte Isolier-Kühlbox (180L Payload)' },
+      { label: 'Branding', value: 'Wetterfestes, hochauflösendes UV-Branding' },
+      { label: 'Einsatzbereich', value: 'Fußgängerzonen, Eventgelände & POS' },
+      { label: 'Full-Service', value: 'Entwicklung, Fertigung & Logistik durch C-Concepts' }
     ],
-    materials: ['Tubular Steel', 'Fiberglass Moldings', 'Anodized Aluminum', 'Polyurethane Foam'],
+    materials: ['Spezialstahl', 'GFK-Formteile', 'Aluminium eloxiert', 'PE-Schaumisolierung'],
     dimensions: '2200mm x 950mm x 1400mm',
-    weight: '210 kg (dry)',
-    leadTime: '6 Weeks Concept to Delivery',
-    highlight: 'Engineered for 100+ sampling stops per day across major European pedestrian zones.'
+    weight: '210 kg',
+    leadTime: '6 Wochen von der Idee bis zum POS',
+    highlight: 'Optimiert für über 100 Sampling-Stopps täglich in europäischen Metropolen.'
   },
   {
     id: 'pepsi-kicker-table',
     number: '02',
-    title: 'PEPSI KICKER TABLE',
-    subtitle: 'HEAVY-DUTY INDUSTRIAL FOOSBALL UNIT',
-    category: 'GAME UNITS',
+    title: 'KICKER-TISCH FÜR PEPSI',
+    subtitle: 'HEAVY-DUTY EVENT FOOSBALL-UNIT',
+    category: 'GAME-UNITS',
     client: 'PepsiCo Europe',
     year: '2023',
-    summary: 'Ultra-durable custom foosball table built for high-energy promotional events, bar activations, and outdoor fan zones.',
-    description: 'Designed to survive aggressive competitive play at sports fan zones and brand festivals. Features precision CNC-milled aluminum sidewalls, solid stainless steel player rods, integrated LED under-lighting, and high-impact custom molded figures dressed in official brand colors.',
-    image: 'https://images.unsplash.com/photo-1511512578047-dfb367046420?auto=format&fit=crop&q=80&w=1600',
+    summary: 'Massiver, individuell gebrandeter Kicker-Tisch im Pepsi-Design, entwickelt für hochfrequentierte Fan-Zonen und Event-Promotion.',
+    description: 'Extrem robuster Profi-Kicker für Sport-Fanzonen und Marken-Promotions. Ausgestattet mit präzisionsgefrästen Seitenwänden, gehärteten Edelstahlstangen, integrierter LED-Spielfeldbeleuchtung und maßgeschneiderten Spielfiguren in den Pepsi-Markenfarben.',
+    image: '/images/kicker-table.jpg',
     secondaryImages: [
-      'https://images.unsplash.com/photo-1579952363873-27f3bade9f55?auto=format&fit=crop&q=80&w=1000',
-      'https://images.unsplash.com/photo-1540747913346-19e32dc3e97e?auto=format&fit=crop&q=80&w=1000'
+      '/images/kicker-table.jpg',
+      'https://images.unsplash.com/photo-1511512578047-dfb367046420?auto=format&fit=crop&q=80&w=1600'
     ],
     specs: [
-      { label: 'Side Panels', value: '25mm High-Density Composite + Brushed Aluminum' },
-      { label: 'Rods', value: '16mm Solid Stainless Steel (Hollow High-Speed option)' },
-      { label: 'Pitch Surface', value: 'Anti-Glare Tempered Glass Field' },
-      { label: 'Lighting', value: 'Integrated RGBW Technical LED Strip (IP65)' },
-      { label: 'Transportation', value: 'Quick-Release Foldable Steel Legs' }
+      { label: 'Gehäuse', value: '25mm Verbundbauweise mit gebürstetem Aluminium' },
+      { label: 'Stangen', value: '16mm Nahtlose Edelstahl-Hohlstangen' },
+      { label: 'Spielfeld', value: 'Entspiegeltes Spezialglas mit Markenaufdruck' },
+      { label: 'Beleuchtung', value: 'Integrierte IP65 LED-Lichtleisten' },
+      { label: 'Transport', value: 'Klappbare Spezialbeine für schnelle Tourneen' }
     ],
-    materials: ['CNC Milled Aluminum', 'Tempered Safety Glass', 'Solid Stainless Steel', 'HDPE Plastic'],
+    materials: ['CNC-Aluminium', 'Sicherheitsglas', 'Edelstahl', 'HDPE-Kunststoff'],
     dimensions: '1450mm x 750mm x 900mm',
     weight: '115 kg',
-    leadTime: '4 Weeks Production',
-    highlight: 'Tested for over 50,000 continuous intense game matches without structural deflection.'
+    leadTime: '4 Wochen Fertigung',
+    highlight: 'Geprüft auf über 50.000 Spieldurchgänge unter extremen Event-Bedingungen.'
   },
   {
     id: 'popcorn-machine',
     number: '03',
-    title: 'POPCORN MACHINE',
-    subtitle: 'RETRO-FUTURISTIC BRAND ACTIVATION DISPENSER',
-    category: 'CUSTOM BUILDS',
-    client: 'Cinema & Event Agency',
+    title: 'POPCORN-MASCHINE',
+    subtitle: 'RETRO-BRAND ACTIVATION DISPENSER',
+    category: 'SONDERANFERTIGUNGEN',
+    client: 'Kino & Event Agentur',
     year: '2023',
-    summary: 'Industrial-grade popcorn dispensing unit with custom illuminated branding, thermal control engineering, and high-capacity batch output.',
-    description: 'Combining mid-century cinema aesthetics with contemporary German industrial engineering, this popcorn unit features custom-molded black anodized aluminum framing, heat-resistant toughened glass, digital thermostatic kettle management, and automated warm-air recirculating floor.',
+    summary: 'Event-Popcorn-Maschine im ikonischen Custom-Design mit integrierter Beleuchtung und professioneller Warmhalte-Technologie.',
+    description: 'Kombiniert Retro-Design mit deutscher Industriequalität. Das Gehäuse besteht aus schwarz eloxiertem Aluminium, hitzebeständigem Sicherheitsglas und digital gesteuerter Kesselheizung für höchste hygienische Ansprüche bei Großveranstaltungen.',
     image: 'https://images.unsplash.com/photo-1578849278619-e73505e9610f?auto=format&fit=crop&q=80&w=1600',
     secondaryImages: [
       'https://images.unsplash.com/photo-1585647347483-22b66260dfff?auto=format&fit=crop&q=80&w=1000'
     ],
     specs: [
-      { label: 'Housing', value: 'TIG-Welded Anodized Aluminum Frame' },
-      { label: 'Heating Elements', value: '1800W Dual Precision Thermal System' },
-      { label: 'Glazing', value: '4mm Shatterproof Tempered Safety Glass' },
-      { label: 'Illumination', value: '3000K Soft Warm Diffused LED Array' },
-      { label: 'Compliance', value: 'CE & Food-Grade Hygiene Certification' }
+      { label: 'Rahmen', value: 'Eloxiertes Aluminium-Profilgehäuse' },
+      { label: 'Thermik', value: '1800W Heizsystem mit Umluft-Warmhaltung' },
+      { label: 'Verglasung', value: '4mm Bruchfestes ESG-Sicherheitsglas' },
+      { label: 'Zertifizierung', value: 'Lebensmittelecht nach CE-Standard' }
     ],
-    materials: ['304 Stainless Steel', 'Anodized Black Aluminum', 'Tempered Glass', 'Brass Accents'],
+    materials: ['Edelstahl 304', 'Eloxiertes Aluminium', 'ESG-Glas'],
     dimensions: '700mm x 600mm x 1850mm',
     weight: '85 kg',
-    leadTime: '3 Weeks Production',
-    highlight: 'Delivered to 40+ cinema premieres with zero food-contact component failures.'
+    leadTime: '3 Wochen',
+    highlight: 'Eingesetzt auf über 40 Premiers & Marken-Promotions deutschlandweit.'
   },
   {
     id: 'skate-game-arena',
     number: '04',
-    title: 'SKATE GAME ARENA',
-    subtitle: 'MODULAR INTERACTIVE EVENT INSTALLATION',
-    category: 'GAME UNITS',
-    client: 'Extreme Sports Activation',
+    title: 'SKATE-GAME',
+    subtitle: 'MODULARE INTERAKTIVE EVENT-INSTALLATION',
+    category: 'GAME-UNITS',
+    client: 'Action Sports Activation',
     year: '2022',
-    summary: 'Modular physical skate contest installation with integrated digital timing sensors, custom steel obstacles, and rapid flight-case packing system.',
-    description: 'A modular, high-impact skate contest platform engineered for fast assembly at urban brand festivals. Constructed with reinforced plywood sub-frames and laser-cut steel coping edges, accompanied by built-in pressure sensors that trigger real-time score graphics on connected LED walls.',
+    summary: 'Modulare Skate-Arena für Contest-Promotions mit integrierter Zeitmessung und robustem Transportsystem.',
+    description: 'Entwickelt für rasche Aufbauten bei Festival- und Sportevents. Die Holz-Stahl-Konstruktion bietet extrem hohe Stabilität bei gleichzeitig optimaler Transportierbarkeit auf Standard-Palettenmaß.',
     image: 'https://images.unsplash.com/photo-1520045892732-304bc3ac5d8e?auto=format&fit=crop&q=80&w=1600',
     secondaryImages: [
       'https://images.unsplash.com/photo-1564982752979-3f7bc974d29a?auto=format&fit=crop&q=80&w=1000'
     ],
     specs: [
-      { label: 'Ramp Structure', value: 'CNC-Machined Birch Plywood + Steel Ribbing' },
-      { label: 'Riding Surface', value: 'Skatelite Pro High-Density Surface' },
-      { label: 'Sensory Telemetry', value: 'Embedded Piezoelectric Landing Sensors' },
-      { label: 'Deployment Time', value: '2 Hours (2-Person Installation Crew)' }
+      { label: 'Struktur', value: 'CNC-gefrästes Birken-Multiplex mit Stahlverstärkung' },
+      { label: 'Oberfläche', value: 'Skatelite Pro High-Density Riding Surface' },
+      { label: 'Aufbauzeit', value: 'Unter 2 Stunden durch 2 Personen' }
     ],
-    materials: ['Birch Plywood', 'Laser-Cut Steel', 'Skatelite Pro', 'Custom Electronics'],
+    materials: ['Birken-Multiplex', 'Laser-Stahl', 'Skatelite Pro'],
     dimensions: '6000mm x 4000mm x 1200mm',
-    weight: '680 kg (Modular Total)',
-    leadTime: '5 Weeks',
-    highlight: 'Assembled and disassembled 18 times across 6 European countries during summer tour.'
-  },
-  {
-    id: 'formula-1-promo-vehicle',
-    number: '05',
-    title: 'FORMULA 1 PROMO RIG',
-    subtitle: 'FULL-SCALE PRECISION REPLICA & EXPERIENCE RIG',
-    category: 'EVENT RIGS',
-    client: 'Motorsport Sponsor Network',
-    year: '2024',
-    summary: '1:1 scale carbon-composite Formula 1 show car engineered for premium hospitality VIP zones and interactive racing simulator integration.',
-    description: 'An exact 1:1 scale replica of a modern Formula 1 chassis built for static brand exhibition and interactive simulator experiences. Features authentic carbon-weave finish, real Pirelli racing slick tires, functional LED rear rain light, and an integrated force-feedback wheel cockpit.',
-    image: 'https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?auto=format&fit=crop&q=80&w=1600',
-    secondaryImages: [
-      'https://images.unsplash.com/photo-1517524008697-84bbe3c3fd98?auto=format&fit=crop&q=80&w=1000'
-    ],
-    specs: [
-      { label: 'Bodywork', value: 'Vac-Formed Carbon Fiber & Kevlar Composite' },
-      { label: 'Wheel Assemblies', value: 'Authentic 18" Alloy Wheels & Race Slicks' },
-      { label: 'Cockpit', value: 'Direct-Drive Force Feedback Steering + Adjustable Pedals' },
-      { label: 'Transport Rig', value: 'Custom Air-Cushioned Enclosed Trailer' }
-    ],
-    materials: ['Pre-preg Carbon Fiber', 'Aerospace Grade Aluminum', 'Glass Fiber Composite'],
-    dimensions: '5400mm x 2000mm x 950mm',
-    weight: '340 kg',
-    leadTime: '8 Weeks Custom Fabrication',
-    highlight: 'Featured in VIP paddocks at Nürburgring, Hockenheimring, and Spa-Francorchamps.'
+    weight: '680 kg (Gesamt)',
+    leadTime: '5 Wochen',
+    highlight: 'Mehrfach im Tournee-Einsatz in 6 europäischen Ländern.'
   },
   {
     id: 'remundi-grill',
-    number: '06',
-    title: 'REMUNDI FIRE GRILL',
-    subtitle: 'CUSTOM BRANDED CULINARY EXPERIENCE UNIT',
-    category: 'CUSTOM BUILDS',
-    client: 'Remundi / Premium Hospitality',
+    number: '05',
+    title: 'DAS REMUNDI GRILL-ERLEBNIS',
+    subtitle: 'ARCHITEKTONISCHE GRILL- & GENUSS-STATION',
+    category: 'SONDERANFERTIGUNGEN',
+    client: 'Remundi / Gastronomie & Event',
     year: '2023',
-    summary: 'Architectural Corten steel outdoor fire grill and cooking ring customized with precision laser branding and thermal distribution tuning.',
-    description: 'Developed in partnership with Remundi, this architectural outdoor cooking center turns open-fire grilling into an elite event experience. Heavy Corten steel develops a protective rust patina over time, contrasted against precision CNC laser-etched stainless steel logo accents.',
-    image: 'https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&q=80&w=1600',
+    summary: 'Einzigartiges Outdoorkonzept aus Cortenstahl mit individuellem Laser-Branding für Events, Gastronomie und Hotels.',
+    description: 'Das Remundi Grill-Erlebnis revolutioniert das klassische Grilling. Statt abseits zu stehen, bringt der kreisrunde Cortenstahl-Grill alle Gäste zusammen. Ausgestattet mit präzisem Edelstahl-Laserbranding, verstellbarer Zuluftregelung und extremer Wärmespeicherung.',
+    image: '/images/remundi-grill.jpg',
     secondaryImages: [
-      'https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&q=80&w=1000'
+      '/images/remundi-grill.jpg',
+      'https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&q=80&w=1600'
     ],
     specs: [
-      { label: 'Base Shell', value: '3mm Weathering Corten Steel' },
-      { label: 'Grill Ring', value: '10mm Solid Hot-Rolled Carbon Steel Plate' },
-      { label: 'Air Intake', value: 'Calibrated Mechanical Draught Regulator' },
-      { label: 'Branding Plate', value: 'Laser-Etched 316 Stainless Steel' }
+      { label: 'Korpus', value: '3mm Wetterfester Cortenstahl mit Edel-Rost-Patina' },
+      { label: 'Grillplatte', value: '10mm Massiver Carbonstahl für ideale Hitzeverteilung' },
+      { label: 'Branding', value: 'Laser-gravierte Edelstahl-Logoplatte' },
+      { label: 'Einsatz', value: 'Hotels, Event-Catering, Firmenveranstaltungen' }
     ],
-    materials: ['Corten Steel', 'Carbon Steel Plate', '316 Stainless Steel'],
+    materials: ['Cortenstahl', 'Carbonstahl-Platte', 'Edelstahl 316'],
     dimensions: '1020mm x 1020mm x 880mm',
     weight: '142 kg',
-    leadTime: '3 Weeks',
-    highlight: 'Retains cooking temperature up to 4 hours with minimal wood consumption.'
+    leadTime: '3 Wochen Fertigung',
+    highlight: 'Hält die Grilltemperatur über 4 Stunden mit geringem Holzverbrauch.'
+  },
+  {
+    id: 'coffee-bike',
+    number: '06',
+    title: 'RETRO COFFEE-BIKE & GASTRO MOBIL',
+    subtitle: 'MOBILES GASTRO- & SAMPLING-MOBIL',
+    category: 'FAHRZEUGE',
+    client: 'C-Concepts Premium Line',
+    year: '2023',
+    summary: 'Autarkes Verkaufs- und Sampling-Fahrzeug auf Dreirad-Basis mit edler Holzverkleidung und integrierter Espressotechnik.',
+    description: 'Maßgeschneidertes Retro-Kaffee- und Gastro-Mobil für Promotions, Messen und Outdoor-Events. Ausgestattet mit autarker Strom- und Wasserversorgung, ausklappbaren Systemtheken und hochwertigem Kundenbranding.',
+    image: '/images/coffee-bike.jpg',
+    secondaryImages: [
+      '/images/coffee-bike.jpg',
+      '/images/pepsi-becher.jpg'
+    ],
+    specs: [
+      { label: 'Fahrgestell', value: 'Schwerlast-Lastenrad mit hydraulischen Bremsen' },
+      { label: 'Aufbau', value: 'Massivholz-System mit wetterfester Versiegelung' },
+      { label: 'Technik', value: 'Integrierter Wassertank, Abwasser & 230V Stromanschluss' }
+    ],
+    materials: ['Echtholz', 'Edelstahl', 'Stahlrohrrahmen'],
+    dimensions: '2400mm x 1000mm x 2100mm',
+    weight: '190 kg',
+    leadTime: '4 Wochen',
+    highlight: 'Vollständig autarker Betrieb für bis zu 8 Stunden ohne externen Anschluss.'
   }
 ];
 
 export const CLIENT_LOGOS = [
-  { name: 'PEPSICO', industry: 'Global Beverage & FMCG' },
-  { name: 'PUNICA', industry: 'Fruit Juice & Refreshments' },
-  { name: 'REMUNDI', industry: 'Outdoor Culinary Engineering' },
-  { name: 'FORMULA 1 SPONSORS', industry: 'Global Motorsport Network' },
-  { name: 'RED BULL', industry: 'Extreme Sports & Media' },
-  { name: 'HENKEL', industry: 'Industrial & Consumer Goods' },
-  { name: 'PORSCHE', industry: 'Automotive Engineering' },
-  { name: 'HARIBO', industry: 'Confectionery & POS Promotions' }
+  { name: 'PEPSI COLA', logo: '/images/logo-pepsi.jpg', industry: 'Global Beverage & FMCG' },
+  { name: 'OASIS', logo: '/images/logo-oasis.jpg', industry: 'Beverage & Promotions' },
+  { name: 'PUNICA', logo: '/images/logo-punica.jpg', industry: 'FMCG & Softdrinks' },
+  { name: 'ROCKSTAR', logo: '/images/logo-rockstar.jpg', industry: 'Energy Drinks' },
+  { name: 'LIPTON', logo: '/images/logo-lipton.jpg', industry: 'Refreshments' },
+  { name: 'CHIO', logo: '/images/logo-chio.jpg', industry: 'Snacks & POS' },
+  { name: 'FUNNY-FRISCH', logo: '/images/logo-funny.jpg', industry: 'Consumer Goods' }
 ];
 
-export const PROCESS_STEPS = [
+export const TESTIMONIALS = [
   {
-    number: '01',
-    title: 'CONCEPT',
-    headline: 'FEASIBILITY & STRATEGY',
-    description: 'We translate raw marketing ideas into realistic physical blueprints. Analyzing spatial requirements, structural loads, payload constraints, and brand storytelling.',
-    specs: ['Idea Analysis', 'Budget Optimization', 'Kinematic Studies', 'Material Strategy']
+    quote: "Wir arbeiten seit 15 Jahren mit der Firma C-Concepts erfolgreich auf höchsten Niveau zusammen. Vielen Dank dafür!",
+    author: "Pepsi Cola Germany",
+    role: "Marketing & POS Activation",
+    logo: "/images/logo-pepsi.jpg"
   },
   {
-    number: '02',
-    title: 'DESIGN',
-    headline: 'CAD & INDUSTRIAL STYLING',
-    description: 'Our industrial design team models photorealistic 3D CAD geometry with exact manufacturing tolerances, ergonomic interaction points, and brand styling.',
-    specs: ['SolidWorks 3D CAD', 'Surface Modeling', 'KeyShot Renders', 'Ergonomic Testing']
+    quote: "Vielen Dank für die Zusammenarbeit in den Bereichen Dekoration & Floristik. 12 Jahre absolute Zufriedenheit.",
+    author: "Oasis Refreshments",
+    role: "Event & Decor Management",
+    logo: "/images/logo-oasis.jpg"
+  }
+];
+
+export const SERVICES_LIST = [
+  {
+    id: "01",
+    title: "Planung & Beratung",
+    description: "Sie haben eine Idee für eine spannende Werbemaßnahme? Wir unterstützen Sie gerne von der ersten Skizze bis zur Machbarkeitsanalyse.",
+    image: "/images/service-beratung.jpg"
   },
   {
-    number: '03',
-    title: 'ENGINEERING',
-    headline: 'STRUCTURAL & MECHANICAL',
-    description: 'Calculating mechanical stresses, electrical loads, safety compliance, thermal dispersion, and CNC tooling paths for flawless precision fabrication.',
-    specs: ['FEA Stress Analysis', 'Wiring Schematics', 'Toolpath Generation', 'Safety Certification']
+    id: "02",
+    title: "Logistik & Lagerung",
+    description: "Von der Produktion bis zum Point of Sale. Wir organisieren die weltweite Logistik und Lagerung Ihrer Produkte in unseren Hochregallagern.",
+    image: "/images/service-logistik.jpg"
   },
   {
-    number: '04',
-    title: 'PRODUCTION',
-    headline: 'IN-HOUSE FABRICATION',
-    description: 'Executed in our 5,000m² facility in Simmern. Precision CNC metal milling, laser cutting, composite molding, powder coating, and specialized hand assembly.',
-    specs: ['5-Axis CNC Milling', 'TIG/MIG Welding', 'Composite Layup', 'Quality Assurance']
+    id: "03",
+    title: "Verpackung & Konfektionierung",
+    description: "Sichere und praktische Verpackungs-Lösungen. Wir verpacken oder etikettieren Ihre Ware neu und füllen sie nach Gewicht oder Stückzahl ab.",
+    image: "/images/service-konfektion.jpg"
   },
   {
-    number: '05',
-    title: 'LOGISTICS',
-    headline: 'PACKAGING & FREIGHT',
-    description: 'Custom flight cases, euro-pallet packaging, warehousing, inventory management, and reliable global freight directly to event venues or POS locations.',
-    specs: ['Custom Flight Cases', 'Simmern High-Bay Warehouse', 'EU Transport Network', 'Kitting Services']
-  },
-  {
-    number: '06',
-    title: 'EXPERIENCE',
-    headline: 'ACTIVATION & SUPPORT',
-    description: 'On-site technical setup, electrical wiring, operator training, live event monitoring, post-tour maintenance, and long-term storage.',
-    specs: ['On-Site Assembly', 'Live Event Support', 'Teardown & Transport', 'Refurbishment']
+    id: "04",
+    title: "Full-Service Dienstleistung",
+    description: "Alles aus einer Hand. Das volle Spektrum an Betreuung, Konfektionierung, Veredelung und termingerechter POS-Anlieferung.",
+    image: "/images/barrel-prod.jpg"
   }
 ];
