@@ -7,6 +7,7 @@ export interface Project {
   client: string;
   year: string;
   summary: string;
+  shortDescription: string;
   description: string;
   image: string;
   secondaryImages: string[];
@@ -25,11 +26,12 @@ export const REAL_PROJECTS: Project[] = [
   {
     id: 'punica-scooter',
     number: '01',
-    title: 'PUNICA SCOOTER',
+    title: 'PUNICA PROMOTION SCOOTER',
     subtitle: 'SONDERANFERTIGUNG PROMOTION-FAHRZEUG',
     category: 'FAHRZEUGE',
     client: 'Punica (PepsiCo)',
     year: '2022',
+    shortDescription: 'Individuelle Promotion-Lösung für aufmerksamkeitsstarke Markenaktivierung.',
     summary: 'Speziell entwickeltes und gebautes Promotion-Mofa/Scooter-Fahrzeug mit integrierter Kühlung für bundesweite Produkt-Sampling-Touren.',
     description: 'Für bundesweite Werbeaktionen und Sampling-Touren entwickelten wir das Punica Promotion-Fahrzeug. Basierend auf einem hochleistungsfähigen Fahrgestell vereint dieses Retro-Mofa maximale Mobilität mit auffälligem Markenbranding und integrierter Produktkühlung für den direkten Einsatz am Point of Sale.',
     image: '/images/punica-mofa.jpg',
@@ -58,6 +60,7 @@ export const REAL_PROJECTS: Project[] = [
     category: 'GAME-UNITS',
     client: 'PepsiCo Europe',
     year: '2023',
+    shortDescription: 'Ein individuelles Promotion-Produkt für interaktive Markenerlebnisse.',
     summary: 'Massiver, individuell gebrandeter Kicker-Tisch im Pepsi-Design, entwickelt für hochfrequentierte Fan-Zonen und Event-Promotion.',
     description: 'Extrem robuster Profi-Kicker für Sport-Fanzonen und Marken-Promotions. Ausgestattet mit präzisionsgefrästen Seitenwänden, gehärteten Edelstahlstangen, integrierter LED-Spielfeldbeleuchtung und maßgeschneiderten Spielfiguren in den Pepsi-Markenfarben.',
     image: '/images/kicker-table.jpg',
@@ -86,6 +89,7 @@ export const REAL_PROJECTS: Project[] = [
     category: 'SONDERANFERTIGUNGEN',
     client: 'Kino & Event Agentur',
     year: '2023',
+    shortDescription: 'Promotion trifft Erlebnis – individuell umgesetzt für den Point of Sale.',
     summary: 'Event-Popcorn-Maschine im ikonischen Custom-Design mit integrierter Beleuchtung und professioneller Warmhalte-Technologie.',
     description: 'Kombiniert Retro-Design mit deutscher Industriequalität. Das Gehäuse besteht aus schwarz eloxiertem Aluminium, hitzebeständigem Sicherheitsglas und digital gesteuerter Kesselheizung für höchste hygienische Ansprüche bei Großveranstaltungen.',
     image: 'https://images.unsplash.com/photo-1578849278619-e73505e9610f?auto=format&fit=crop&q=80&w=1600',
@@ -112,6 +116,7 @@ export const REAL_PROJECTS: Project[] = [
     category: 'GAME-UNITS',
     client: 'Action Sports Activation',
     year: '2022',
+    shortDescription: 'Interaktive Promotion, die Marken erlebbar macht.',
     summary: 'Modulare Skate-Arena für Contest-Promotions mit integrierter Zeitmessung und robustem Transportsystem.',
     description: 'Entwickelt für rasche Aufbauten bei Festival- und Sportevents. Die Holz-Stahl-Konstruktion bietet extrem hohe Stabilität bei gleichzeitig optimaler Transportierbarkeit auf Standard-Palettenmaß.',
     image: 'https://images.unsplash.com/photo-1520045892732-304bc3ac5d8e?auto=format&fit=crop&q=80&w=1600',
@@ -137,6 +142,7 @@ export const REAL_PROJECTS: Project[] = [
     category: 'SONDERANFERTIGUNGEN',
     client: 'Remundi / Gastronomie & Event',
     year: '2023',
+    shortDescription: 'Kreisrunder Cortenstahl-Grill für gemeinsame Event- und Markenaktivierung.',
     summary: 'Einzigartiges Outdoorkonzept aus Cortenstahl mit individuellem Laser-Branding für Events, Gastronomie und Hotels.',
     description: 'Das Remundi Grill-Erlebnis revolutioniert das klassische Grilling. Statt abseits zu stehen, bringt der kreisrunde Cortenstahl-Grill alle Gäste zusammen. Ausgestattet mit präzisem Edelstahl-Laserbranding, verstellbarer Zuluftregelung und extremer Wärmespeicherung.',
     image: '/images/remundi-grill.jpg',
@@ -155,32 +161,6 @@ export const REAL_PROJECTS: Project[] = [
     weight: '142 kg',
     leadTime: '3 Wochen Fertigung',
     highlight: 'Hält die Grilltemperatur über 4 Stunden mit geringem Holzverbrauch.'
-  },
-  {
-    id: 'coffee-bike',
-    number: '06',
-    title: 'RETRO COFFEE-BIKE & GASTRO MOBIL',
-    subtitle: 'MOBILES GASTRO- & SAMPLING-MOBIL',
-    category: 'FAHRZEUGE',
-    client: 'C-Concepts Premium Line',
-    year: '2023',
-    summary: 'Autarkes Verkaufs- und Sampling-Fahrzeug auf Dreirad-Basis mit edler Holzverkleidung und integrierter Espressotechnik.',
-    description: 'Maßgeschneidertes Retro-Kaffee- und Gastro-Mobil für Promotions, Messen und Outdoor-Events. Ausgestattet mit autarker Strom- und Wasserversorgung, ausklappbaren Systemtheken und hochwertigem Kundenbranding.',
-    image: '/images/coffee-bike.jpg',
-    secondaryImages: [
-      '/images/coffee-bike.jpg',
-      '/images/pepsi-becher.jpg'
-    ],
-    specs: [
-      { label: 'Fahrgestell', value: 'Schwerlast-Lastenrad mit hydraulischen Bremsen' },
-      { label: 'Aufbau', value: 'Massivholz-System mit wetterfester Versiegelung' },
-      { label: 'Technik', value: 'Integrierter Wassertank, Abwasser & 230V Stromanschluss' }
-    ],
-    materials: ['Echtholz', 'Edelstahl', 'Stahlrohrrahmen'],
-    dimensions: '2400mm x 1000mm x 2100mm',
-    weight: '190 kg',
-    leadTime: '4 Wochen',
-    highlight: 'Vollständig autarker Betrieb für bis zu 8 Stunden ohne externen Anschluss.'
   }
 ];
 
@@ -212,26 +192,34 @@ export const TESTIMONIALS = [
 export const SERVICES_LIST = [
   {
     id: "01",
+    category: "BERATUNG",
     title: "Planung & Beratung",
-    description: "Sie haben eine Idee für eine spannende Werbemaßnahme? Wir unterstützen Sie gerne von der ersten Skizze bis zur Machbarkeitsanalyse.",
+    description: "Von der ersten Idee bis zum fertigen Werbekonzept.",
+    longDescription: "Sie haben eine Idee für eine spannende Werbemaßnahme? Wir unterstützen Sie gerne von der ersten Skizze bis zur Machbarkeitsanalyse.",
     image: "/images/service-beratung.jpg"
   },
   {
     id: "02",
+    category: "LOGISTIK",
     title: "Logistik & Lagerung",
-    description: "Von der Produktion bis zum Point of Sale. Wir organisieren die weltweite Logistik und Lagerung Ihrer Produkte in unseren Hochregallagern.",
+    description: "Wir bringen Ihre Produkte zuverlässig zum richtigen Ort.",
+    longDescription: "Von der Produktion bis zum Point of Sale. Wir organisieren die weltweite Logistik und Lagerung Ihrer Produkte in unseren Hochregallagern.",
     image: "/images/service-logistik.jpg"
   },
   {
     id: "03",
+    category: "PRODUKTION",
     title: "Verpackung & Konfektionierung",
-    description: "Sichere und praktische Verpackungs-Lösungen. Wir verpacken oder etikettieren Ihre Ware neu und füllen sie nach Gewicht oder Stückzahl ab.",
+    description: "Individuelle Verpackung und Konfektionierung für Ihre Produkte.",
+    longDescription: "Sichere und praktische Verpackungs-Lösungen. Wir verpacken oder etikettieren Ihre Ware neu und füllen sie nach Gewicht oder Stückzahl ab.",
     image: "/images/service-konfektion.jpg"
   },
   {
     id: "04",
-    title: "Full-Service Dienstleistung",
-    description: "Alles aus einer Hand. Das volle Spektrum an Betreuung, Konfektionierung, Veredelung und termingerechter POS-Anlieferung.",
+    category: "FULL-SERVICE",
+    title: "Full-Service",
+    description: "Von der Idee bis zum Point of Sale – alles aus einer Hand.",
+    longDescription: "Alles aus einer Hand. Das volle Spektrum an Betreuung, Konfektionierung, Veredelung und termingerechter POS-Anlieferung.",
     image: "/images/barrel-prod.jpg"
   }
 ];

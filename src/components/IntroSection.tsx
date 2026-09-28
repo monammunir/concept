@@ -1,4 +1,5 @@
 import React from 'react';
+import { motion } from 'framer-motion';
 import { Sparkles, CheckCircle2 } from 'lucide-react';
 
 export const IntroSection: React.FC = () => {
@@ -12,13 +13,25 @@ export const IntroSection: React.FC = () => {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
           
           {/* Left Column: Text & Value Proposition */}
-          <div className="lg:col-span-7 space-y-8">
+          <motion.div 
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-100px' }}
+            transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+            className="lg:col-span-7 space-y-8"
+          >
             
             {/* Eyebrow Label */}
-            <div className="inline-flex items-center space-x-2 text-xs text-[#0077E6] tracking-widest uppercase font-semibold">
+            <motion.div 
+              initial={{ opacity: 0, x: -15 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.1 }}
+              className="inline-flex items-center space-x-2 text-xs text-[#0077E6] tracking-widest uppercase font-semibold"
+            >
               <Sparkles className="w-3.5 h-3.5" />
               <span>INNOVATIVE MARKETING CONCEPTS</span>
-            </div>
+            </motion.div>
 
             {/* Headline */}
             <h2 className="font-extrabold text-4xl sm:text-6xl text-white tracking-tight uppercase leading-[0.95]">
@@ -42,20 +55,26 @@ export const IntroSection: React.FC = () => {
 
             {/* Feature Bullets */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs text-[#E6E9EE] pt-4 font-medium">
-              <div className="flex items-center space-x-3 p-3.5 bg-white/5 border border-white/10 rounded-xl">
+              <div className="flex items-center space-x-3 p-3.5 bg-white/5 border border-white/10 rounded-xl hover:border-[#005496]/50 transition-colors">
                 <CheckCircle2 className="w-4 h-4 text-[#0077E6] shrink-0" />
                 <span>Individuelles Firmen-Branding</span>
               </div>
-              <div className="flex items-center space-x-3 p-3.5 bg-white/5 border border-white/10 rounded-xl">
+              <div className="flex items-center space-x-3 p-3.5 bg-white/5 border border-white/10 rounded-xl hover:border-[#005496]/50 transition-colors">
                 <CheckCircle2 className="w-4 h-4 text-[#0077E6] shrink-0" />
                 <span>Eigene Fertigung & Verpackung</span>
               </div>
             </div>
 
-          </div>
+          </motion.div>
 
-          {/* Right Column: Large Image Composition */}
-          <div className="lg:col-span-5 relative">
+          {/* Right Column: Large Image Composition with Reveal */}
+          <motion.div 
+            initial={{ opacity: 0, scale: 0.96 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true, margin: '-100px' }}
+            transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+            className="lg:col-span-5 relative"
+          >
             <div className="relative aspect-[4/5] sm:aspect-[4/3] lg:aspect-[4/5] w-full rounded-2xl overflow-hidden border border-white/10 bg-[#121418] shadow-2xl group">
               <img
                 src="/images/perfect-match.jpg"
@@ -69,7 +88,7 @@ export const IntroSection: React.FC = () => {
                 <div className="font-bold text-sm text-white">Full-Service Werbeartikel aus Simmern</div>
               </div>
             </div>
-          </div>
+          </motion.div>
 
         </div>
       </div>

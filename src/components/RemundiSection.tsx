@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { Flame, Play, ArrowUpRight, Sparkles, Check } from 'lucide-react';
+import { motion } from 'framer-motion';
+import { Flame, Play, ArrowRight, Sparkles, Check } from 'lucide-react';
 
 interface RemundiSectionProps {
   onOpenContactModal: () => void;
@@ -18,13 +19,25 @@ export const RemundiSection: React.FC<RemundiSectionProps> = ({ onOpenContactMod
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
           
           {/* Left Column: Story & Content */}
-          <div className="lg:col-span-6 space-y-8">
+          <motion.div 
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-100px' }}
+            transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+            className="lg:col-span-6 space-y-8"
+          >
             
             {/* Small Eyebrow Label */}
-            <div className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-[#005496]/15 border border-[#005496]/30 text-[#0077E6] text-xs font-semibold tracking-widest uppercase">
+            <motion.div 
+              initial={{ opacity: 0, x: -15 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.1 }}
+              className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-[#005496]/15 border border-[#005496]/30 text-[#0077E6] text-xs font-semibold tracking-widest uppercase"
+            >
               <Sparkles className="w-3.5 h-3.5" />
-              <span>EINE KONSTRUKTION AUS UNSEREM HAUSE</span>
-            </div>
+              <span>FEATURED CASE STUDY // REMUNDI</span>
+            </motion.div>
 
             {/* Headline */}
             <h2 className="font-extrabold text-4xl sm:text-6xl text-white tracking-tight uppercase leading-[0.92]">
@@ -70,17 +83,23 @@ export const RemundiSection: React.FC<RemundiSectionProps> = ({ onOpenContactMod
             <div className="pt-4">
               <button
                 onClick={onOpenContactModal}
-                className="inline-flex items-center space-x-3 px-8 py-4 bg-[#005496] hover:bg-[#0066C2] text-white text-xs font-bold tracking-widest uppercase rounded-xl transition-all duration-300 shadow-xl shadow-[#005496]/20 cursor-pointer"
+                className="group inline-flex items-center space-x-3 px-8 py-4 bg-[#005496] hover:bg-[#0066C2] text-white text-xs font-bold tracking-widest uppercase rounded-xl transition-all duration-300 shadow-xl shadow-[#005496]/20 hover:shadow-2xl hover:shadow-[#005496]/40 hover:-translate-y-0.5 active:translate-y-0 cursor-pointer"
               >
                 <span>REMUNDI PROJEKT ANFRAGEN</span>
-                <ArrowUpRight className="w-4 h-4" />
+                <ArrowRight className="w-4 h-4 group-hover:translate-x-1.5 transition-transform" />
               </button>
             </div>
 
-          </div>
+          </motion.div>
 
           {/* Right Column: Visual Showcase & Interactive Video Frame */}
-          <div className="lg:col-span-6 relative">
+          <motion.div 
+            initial={{ opacity: 0, scale: 0.96 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true, margin: '-100px' }}
+            transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+            className="lg:col-span-6 relative"
+          >
             <div className="relative aspect-[16/10] w-full rounded-2xl overflow-hidden border border-white/10 bg-[#0D0F14] shadow-2xl group">
               
               {!isPlaying ? (
@@ -133,7 +152,7 @@ export const RemundiSection: React.FC<RemundiSectionProps> = ({ onOpenContactMod
               )}
 
             </div>
-          </div>
+          </motion.div>
 
         </div>
       </div>
