@@ -3,14 +3,9 @@
 @layer base {
   :root {
     --bg-primary: #0A0B0D;
-    --bg-surface: #121418;
-    --bg-panel: #1A1D24;
-    --border-dark: #242832;
-    --border-light: rgba(255, 255, 255, 0.12);
     --text-primary: #F4F5F6;
     --text-secondary: #8E95A2;
     --brand-accent: #FF4500;
-    --brand-accent-glow: rgba(255, 69, 0, 0.25);
   }
 
   body {
@@ -24,52 +19,16 @@
   }
 }
 
-/* Technical Grid Pattern Backgrounds */
-.bg-tech-grid {
-  background-image: 
-    linear-gradient(to right, rgba(255, 255, 255, 0.04) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
-  background-size: 40px 40px;
-}
-
-.bg-tech-dots {
-  background-image: radial-gradient(rgba(255, 69, 0, 0.2) 1px, transparent 1px);
-  background-size: 24px 24px;
-}
-
-.bg-blueprint-grid {
-  background-image: 
-    linear-gradient(to right, rgba(255, 69, 0, 0.08) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(255, 69, 0, 0.08) 1px, transparent 1px);
-  background-size: 60px 60px;
-}
-
-/* Custom Subtle Mechanical Glows & Borders */
-.border-accent-subtle {
-  border-color: rgba(255, 69, 0, 0.3);
-}
-
-.shadow-accent-glow {
-  box-shadow: 0 0 25px rgba(255, 69, 0, 0.15);
-}
-
-.text-gradient-metallic {
-  background: linear-gradient(180deg, #FFFFFF 0%, #8E95A2 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
 /* Custom Scrollbar */
 ::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
+  width: 5px;
+  height: 5px;
 }
 ::-webkit-scrollbar-track {
   background: #0A0B0D;
 }
 ::-webkit-scrollbar-thumb {
   background: #242832;
-  border-radius: 3px;
 }
 ::-webkit-scrollbar-thumb:hover {
   background: #FF4500;
