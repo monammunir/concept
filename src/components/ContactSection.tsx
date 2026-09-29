@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { motion } from 'framer-motion';
 import { Mail, Phone, MapPin, Send, CheckCircle2 } from 'lucide-react';
 
 export const ContactSection: React.FC = () => {
@@ -22,16 +23,25 @@ export const ContactSection: React.FC = () => {
       <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
           
-          {/* Left Column: Contact Copy & Details */}
-          <div className="lg:col-span-5 space-y-8">
+          {/* Left Column: Contact Copy & Direct Details */}
+          <motion.div 
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-100px' }}
+            transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+            className="lg:col-span-5 space-y-8"
+          >
             <div className="space-y-4">
               <span className="text-xs text-[#0077E6] tracking-widest uppercase font-semibold block">
                 KONTAKT & BERATUNG
               </span>
-              <h2 className="font-extrabold text-4xl sm:text-5xl text-white tracking-tight uppercase leading-[0.95]">
-                SIE HABEN NOCH FRAGEN? <br />
-                <span className="text-[#0077E6]">JETZT TERMIN VEREINBAREN!</span>
+              
+              <h2 className="font-extrabold text-4xl sm:text-5xl lg:text-6xl text-white tracking-tight uppercase leading-[0.95]">
+                LASSEN SIE UNS <br />
+                <span className="text-[#0077E6]">ETWAS BESONDERES </span> <br />
+                UMSETZEN.
               </h2>
+
               <p className="text-base text-[#8E95A2] font-light leading-relaxed pt-2">
                 Gemeinsam klären wir, was Sie mit Ihrer Werbung erreichen wollen. Wir entwickeln außergewöhnliche Konzepte ohne dabei Ihre Kosten aus dem Blick zu verlieren.
               </p>
@@ -39,11 +49,11 @@ export const ContactSection: React.FC = () => {
 
             {/* Direct Contact Cards */}
             <div className="space-y-4 pt-4 border-t border-white/10 text-sm">
-              <div className="p-4 bg-[#111318]/70 border border-white/10 rounded-xl flex items-start space-x-4">
+              <div className="p-4 bg-[#111318]/80 border border-white/10 rounded-xl flex items-start space-x-4">
                 <MapPin className="w-5 h-5 text-[#0077E6] shrink-0 mt-0.5" />
                 <div>
                   <div className="font-bold text-white uppercase text-xs tracking-wider">ANSCHRIFT</div>
-                  <div className="text-[#E6E9EE] pt-1 leading-relaxed">
+                  <div className="text-[#E6E9EE] pt-1 leading-relaxed text-xs">
                     C-Concepts Vertriebs GmbH<br />
                     Im Maerenthal 6a<br />
                     56337 Simmern, Germany
@@ -53,31 +63,37 @@ export const ContactSection: React.FC = () => {
 
               <a
                 href="tel:026309637924"
-                className="p-4 bg-[#111318]/70 border border-white/10 rounded-xl flex items-center space-x-4 hover:border-[#005496]/60 transition-colors block"
+                className="p-4 bg-[#111318]/80 border border-white/10 rounded-xl flex items-center space-x-4 hover:border-[#005496]/70 transition-colors block group"
               >
                 <Phone className="w-5 h-5 text-[#0077E6] shrink-0" />
                 <div>
                   <div className="font-bold text-white uppercase text-xs tracking-wider">TELEFON</div>
-                  <div className="text-[#E6E9EE] text-sm font-semibold">+49 (0) 2630 96379-24</div>
+                  <div className="text-[#E6E9EE] text-sm font-semibold group-hover:text-[#0077E6] transition-colors">+49 (0) 2630 96379-24</div>
                 </div>
               </a>
 
               <a
                 href="mailto:info@cconcepts.de"
-                className="p-4 bg-[#111318]/70 border border-white/10 rounded-xl flex items-center space-x-4 hover:border-[#005496]/60 transition-colors block"
+                className="p-4 bg-[#111318]/80 border border-white/10 rounded-xl flex items-center space-x-4 hover:border-[#005496]/70 transition-colors block group"
               >
                 <Mail className="w-5 h-5 text-[#0077E6] shrink-0" />
                 <div>
                   <div className="font-bold text-white uppercase text-xs tracking-wider">E-MAIL</div>
-                  <div className="text-[#E6E9EE] text-sm font-semibold">info@cconcepts.de</div>
+                  <div className="text-[#E6E9EE] text-sm font-semibold group-hover:text-[#0077E6] transition-colors">info@cconcepts.de</div>
                 </div>
               </a>
             </div>
-          </div>
+          </motion.div>
 
-          {/* Right Column: Contact Form */}
-          <div className="lg:col-span-7">
-            <div className="bg-[#111318]/80 border border-white/10 p-8 sm:p-10 rounded-2xl shadow-2xl space-y-6">
+          {/* Right Column: Premium Form */}
+          <motion.div 
+            initial={{ opacity: 0, scale: 0.96 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true, margin: '-100px' }}
+            transition={{ duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+            className="lg:col-span-7"
+          >
+            <div className="bg-[#111318]/90 border border-white/10 p-8 sm:p-10 rounded-2xl shadow-2xl space-y-6">
               
               {submitted ? (
                 <div className="py-12 text-center space-y-4">
@@ -96,7 +112,7 @@ export const ContactSection: React.FC = () => {
               ) : (
                 <form onSubmit={handleSubmit} className="space-y-6">
                   <h3 className="font-extrabold text-2xl text-white uppercase tracking-tight">
-                    TERMIN & ANFRAGE FORMULAR
+                    TERMIN VEREINBAREN
                   </h3>
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
@@ -172,16 +188,16 @@ export const ContactSection: React.FC = () => {
 
                   <button
                     type="submit"
-                    className="w-full flex items-center justify-center space-x-2 py-4 bg-[#005496] hover:bg-[#0066C2] text-white text-xs font-bold tracking-widest uppercase rounded-xl transition-all duration-300 shadow-lg shadow-[#005496]/20 cursor-pointer"
+                    className="w-full flex items-center justify-center space-x-2 py-4 bg-[#005496] hover:bg-[#0066C2] text-white text-xs font-bold tracking-widest uppercase rounded-xl transition-all duration-300 shadow-lg shadow-[#005496]/20 hover:shadow-2xl hover:shadow-[#005496]/50 cursor-pointer"
                   >
-                    <span>SENDEN</span>
+                    <span>TERMIN VEREINBAREN</span>
                     <Send className="w-4 h-4" />
                   </button>
                 </form>
               )}
 
             </div>
-          </div>
+          </motion.div>
 
         </div>
       </div>

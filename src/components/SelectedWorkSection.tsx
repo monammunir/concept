@@ -11,17 +11,19 @@ interface SelectedWorkProps {
 export const SelectedWorkSection: React.FC<SelectedWorkProps> = ({ onOpenContactModal }) => {
   const [activeProject, setActiveProject] = useState<Project | null>(null);
 
-  // Asymmetric column spans for editorial portfolio balance
-  const getColSpanClass = (index: number) => {
-    switch (index % 4) {
+  // Editorial asymmetric layout mapping
+  const getColSpan = (index: number) => {
+    switch (index) {
       case 0:
-        return 'lg:col-span-7'; // Featured large
+        return 'lg:col-span-12'; // Large featured hero project
       case 1:
-        return 'lg:col-span-5'; // Medium side
+        return 'lg:col-span-6';  // Two smaller side-by-side
       case 2:
-        return 'lg:col-span-5'; // Medium side
+        return 'lg:col-span-6';
       case 3:
-        return 'lg:col-span-7'; // Featured large
+        return 'lg:col-span-6';  // Two supporting side-by-side
+      case 4:
+        return 'lg:col-span-6';
       default:
         return 'lg:col-span-6';
     }
@@ -41,7 +43,7 @@ export const SelectedWorkSection: React.FC<SelectedWorkProps> = ({ onOpenContact
         >
           <div className="inline-flex items-center space-x-2 text-xs text-[#0077E6] tracking-widest uppercase font-semibold">
             <Sparkles className="w-3.5 h-3.5" />
-            <span>SELECTED WORK // INDIVIDUELLE SONDERANFERTIGUNGEN</span>
+            <span>SELECTED WORK // REALE C-CONCEPTS PROJEKTE</span>
           </div>
           <h2 className="font-extrabold text-4xl sm:text-6xl lg:text-7xl text-white tracking-tight uppercase leading-[0.92]">
             INNOVATIVE WERBEPRODUKTE <br />
@@ -52,11 +54,11 @@ export const SelectedWorkSection: React.FC<SelectedWorkProps> = ({ onOpenContact
           </p>
         </motion.div>
 
-        {/* Asymmetric Editorial Portfolio Grid */}
+        {/* Editorial Asymmetric Project Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10">
           {REAL_PROJECTS.map((project, index) => {
-            const colSpan = getColSpanClass(index);
-            const isFeaturedLarge = colSpan === 'lg:col-span-7';
+            const colSpan = getColSpan(index);
+            const isFeatured = index === 0;
 
             return (
               <motion.div
@@ -69,20 +71,20 @@ export const SelectedWorkSection: React.FC<SelectedWorkProps> = ({ onOpenContact
                 className={`${colSpan} col-span-12 group cursor-pointer bg-[#111318]/80 border border-white/10 hover:border-[#005496]/70 rounded-2xl p-6 sm:p-8 transition-all duration-500 hover:-translate-y-1 hover:shadow-[0_15px_35px_-10px_rgba(0,84,150,0.3)] flex flex-col justify-between`}
               >
                 {/* IMAGE Showcase Area */}
-                <div className={`relative ${isFeaturedLarge ? 'aspect-[16/9]' : 'aspect-[16/10]'} w-full rounded-xl overflow-hidden bg-[#0A0B0D]`}>
+                <div className={`relative ${isFeatured ? 'aspect-[21/9] sm:aspect-[21/9]' : 'aspect-[16/10]'} w-full rounded-xl overflow-hidden bg-[#0A0B0D]`}>
                   <img
                     src={project.image}
                     alt={project.title}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out filter contrast-105"
+                    className="w-full h-full object-cover group-hover:scale-[1.04] transition-transform duration-700 ease-out filter contrast-105"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-[#111318] via-transparent to-transparent opacity-60 group-hover:opacity-85 transition-opacity duration-300" />
                   
-                  {/* Eyebrow Editorial Badge */}
+                  {/* Eyebrow Project Type Pill */}
                   <div className="absolute top-4 left-4 flex items-center space-x-2">
-                    <span className="px-3 py-1 bg-[#0A0B0D]/85 backdrop-blur-md border border-white/10 text-[11px] text-[#0077E6] uppercase tracking-wider font-semibold rounded-full">
-                      REALER PROJEKT-BEISPIEL
+                    <span className="px-3.5 py-1 bg-[#0A0B0D]/85 backdrop-blur-md border border-white/10 text-[11px] text-[#0077E6] uppercase tracking-wider font-semibold rounded-full">
+                      {project.subtitle || 'CUSTOM PROMOTION'}
                     </span>
-                    <span className="px-3 py-1 bg-[#0A0B0D]/85 backdrop-blur-md border border-white/10 text-[10px] text-[#8E95A2] uppercase tracking-wider font-medium rounded-full hidden sm:inline-block">
+                    <span className="px-3.5 py-1 bg-[#0A0B0D]/85 backdrop-blur-md border border-white/10 text-[10px] text-[#8E95A2] uppercase tracking-wider font-medium rounded-full hidden sm:inline-block">
                       {project.category}
                     </span>
                   </div>
@@ -99,7 +101,7 @@ export const SelectedWorkSection: React.FC<SelectedWorkProps> = ({ onOpenContact
                     </span>
                   </div>
 
-                  <h3 className="font-extrabold text-2xl sm:text-3xl text-white tracking-tight uppercase group-hover:text-[#0077E6] group-hover:-translate-y-0.5 transition-all duration-300">
+                  <h3 className="font-extrabold text-2xl sm:text-3xl text-white tracking-tight uppercase group-hover:text-[#0077E6] transition-colors">
                     {project.title}
                   </h3>
 
@@ -108,11 +110,11 @@ export const SelectedWorkSection: React.FC<SelectedWorkProps> = ({ onOpenContact
                   </p>
                 </div>
 
-                {/* ACTION: Minimal integrated arrow trigger */}
+                {/* ACTION Trigger Link */}
                 <div className="pt-6 mt-4 border-t border-white/10 flex items-center justify-between text-xs text-[#8E95A2] group-hover:text-white transition-colors">
-                  <span className="font-bold tracking-widest uppercase text-[#E6E9EE]">CASE STUDY ANSEHEN</span>
+                  <span className="font-bold tracking-widest uppercase text-[#E6E9EE]">PROJEKT ANSEHEN</span>
                   <div className="flex items-center space-x-2 text-[#0077E6] group-hover:text-white font-semibold">
-                    <span className="hidden sm:inline-block text-[11px] uppercase tracking-wider">DETAILS</span>
+                    <span className="text-[11px] uppercase tracking-wider">PROJEKT ANSEHEN</span>
                     <ArrowRight className="w-4 h-4 text-[#0077E6] group-hover:text-white transition-transform duration-300 group-hover:translate-x-1.5" />
                   </div>
                 </div>
@@ -122,7 +124,7 @@ export const SelectedWorkSection: React.FC<SelectedWorkProps> = ({ onOpenContact
           })}
         </div>
 
-        {/* Section Bottom CTA */}
+        {/* Section Bottom Action */}
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -134,8 +136,8 @@ export const SelectedWorkSection: React.FC<SelectedWorkProps> = ({ onOpenContact
             onClick={onOpenContactModal}
             className="group inline-flex items-center space-x-3 px-8 py-4 bg-white/5 hover:bg-white/10 border border-white/15 hover:border-white/30 text-white text-xs font-bold tracking-widest uppercase rounded-xl transition-all duration-300 hover:-translate-y-0.5 cursor-pointer"
           >
-            <span>MEHR PRODUKTE & PROJEKTE ENTDECKEN</span>
-            <ArrowRight className="w-4 h-4 text-[#0077E6] group-hover:translate-x-1 transition-transform" />
+            <span>ALLE PRODUKTE & PROJEKTE ENTDECKEN</span>
+            <ArrowRight className="w-4 h-4 text-[#0077E6] group-hover:translate-x-1.5 transition-transform" />
           </button>
         </motion.div>
 

@@ -1,4 +1,5 @@
 import React from 'react';
+import { motion } from 'framer-motion';
 import { MapPin, Calendar, Users, Award } from 'lucide-react';
 
 export const AboutSection: React.FC = () => {
@@ -7,20 +8,32 @@ export const AboutSection: React.FC = () => {
       <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
         
         {/* Editorial Headline */}
-        <div className="max-w-4xl mb-16 sm:mb-20 space-y-4">
+        <motion.div 
+          initial={{ opacity: 0, y: 25 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-100px' }}
+          transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+          className="max-w-4xl mb-16 sm:mb-20 space-y-4"
+        >
           <span className="text-xs text-[#0077E6] tracking-widest uppercase font-semibold block">
-            ÜBER C-CONCEPTS
+            ÜBER C-CONCEPTS // TRADITION & INNOVATION
           </span>
           <h2 className="font-extrabold text-4xl sm:text-6xl lg:text-7xl text-white tracking-tight uppercase leading-[0.92]">
             INNOVATIVE MARKETING CONCEPTS <br />
             <span className="text-[#8E95A2]">– MADE IN GERMANY</span>
           </h2>
-        </div>
+        </motion.div>
 
         {/* Story & Facility Image Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
           
-          <div className="lg:col-span-7 aspect-[16/10] w-full rounded-2xl overflow-hidden border border-white/10 bg-[#121418] relative group">
+          <motion.div 
+            initial={{ opacity: 0, scale: 0.96 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true, margin: '-100px' }}
+            transition={{ duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+            className="lg:col-span-7 aspect-[16/10] w-full rounded-2xl overflow-hidden border border-white/10 bg-[#121418] relative group"
+          >
             <img
               src="/images/barrel-prod.jpg"
               alt="C-Concepts Fertigung & Konfektionierung Simmern"
@@ -31,11 +44,17 @@ export const AboutSection: React.FC = () => {
               <span className="text-[#0077E6] uppercase font-bold block">STANDORT SIMMERN (WESTERWALD)</span>
               <span className="text-[#8E95A2]">Eigene Produktion, Konfektionierung & Hochregallagerung</span>
             </div>
-          </div>
+          </motion.div>
 
-          <div className="lg:col-span-5 space-y-6">
-            <p className="text-lg text-white font-light leading-relaxed">
-              Die Firma <strong className="font-semibold text-white">C-Concepts Vertriebs GmbH</strong> mit Sitz in Simmern wurde im Jahr 1993 von Andreas Sauer und Ralf Weisbrod gegründet.
+          <motion.div 
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-100px' }}
+            transition={{ duration: 0.7, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+            className="lg:col-span-5 space-y-6"
+          >
+            <p className="text-xl sm:text-2xl text-white font-light leading-relaxed">
+              Die Firma <strong className="font-extrabold text-white">C-Concepts Vertriebs GmbH</strong> mit Sitz in Simmern wurde im Jahr 1993 von Andreas Sauer und Ralf Weisbrod gegründet.
             </p>
             <p className="text-base text-[#8E95A2] font-light leading-relaxed">
               Wir haben es uns als Aufgabe gesetzt, individuelle und ganzheitliche Werbeartikel-Lösungen zu entwickeln. Hierzu zählen neben der Beschaffung auch die Konfektionierung Ihrer Ware. Das bedeutet, wir verpacken oder etikettieren Ihre Ware neu und füllen diese nach Gewicht oder Stückzahl — auch von Ihren bestehenden Waren.
@@ -44,7 +63,7 @@ export const AboutSection: React.FC = () => {
               Durch Innovation und qualitativ hochwertige Arbeit ist es uns gelungen, unser Geschäftsmodell stetig weiter zu entwickeln. So haben wir in großen, international agierenden Unternehmen als kompetente und zuverlässige Partner Anerkennung gewonnen.
             </p>
 
-            {/* Verified Facts Grid */}
+            {/* Authentic Verified Facts Grid */}
             <div className="pt-6 border-t border-white/10 grid grid-cols-2 gap-4 text-xs">
               <div className="p-3.5 bg-white/5 border border-white/10 rounded-xl space-y-1">
                 <div className="flex items-center space-x-2 text-[#0077E6]">
@@ -79,7 +98,7 @@ export const AboutSection: React.FC = () => {
               </div>
             </div>
 
-          </div>
+          </motion.div>
 
         </div>
 

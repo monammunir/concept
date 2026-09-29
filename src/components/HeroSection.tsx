@@ -1,6 +1,6 @@
-import React, { useRef, useEffect, useState } from 'react';
+import React, { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
-import { ArrowUpRight, ChevronRight, Sparkles } from 'lucide-react';
+import { ArrowRight, ChevronRight, Sparkles, ChevronDown } from 'lucide-react';
 
 interface HeroSectionProps {
   onOpenContactModal: () => void;
@@ -8,8 +8,6 @@ interface HeroSectionProps {
 
 export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenContactModal }) => {
   const containerRef = useRef<HTMLDivElement>(null);
-  const videoRef = useRef<HTMLVideoElement>(null);
-  const [videoError, setVideoError] = useState(false);
 
   // Smooth Parallax Scroll Effects
   const { scrollYProgress } = useScroll({
@@ -18,30 +16,17 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenContactModal }) 
   });
 
   const videoY = useTransform(scrollYProgress, [0, 1], ['0%', '15%']);
-  const textY = useTransform(scrollYProgress, [0, 1], ['0%', '25%']);
-  const textOpacity = useTransform(scrollYProgress, [0, 0.85], [1, 0]);
-
-  useEffect(() => {
-    if (videoRef.current) {
-      videoRef.current.defaultMuted = true;
-      videoRef.current.muted = true;
-      const playPromise = videoRef.current.play();
-      if (playPromise !== undefined) {
-        playPromise.catch(() => {
-          setVideoError(true);
-        });
-      }
-    }
-  }, []);
+  const textY = useTransform(scrollYProgress, [0, 1], ['0%', '20%']);
+  const textOpacity = useTransform(scrollYProgress, [0, 0.75], [1, 0]);
 
   return (
     <section 
       ref={containerRef}
       id="home" 
-      className="relative min-h-[90vh] lg:min-h-screen pt-32 sm:pt-40 pb-20 flex flex-col justify-center bg-[#0A0B0D] overflow-hidden"
+      className="relative min-h-screen pt-32 sm:pt-36 pb-16 flex flex-col justify-between bg-[#0A0B0D] overflow-hidden"
     >
       
-      {/* 1. Full-Bleed Cinematic Background Video */}
+      {/* 1. Embedded Authentic C-Concepts Video Background */}
       <motion.div 
         style={{ y: videoY }}
         initial={{ opacity: 0 }}
@@ -49,48 +34,29 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenContactModal }) 
         transition={{ duration: 1.2, ease: 'easeOut' }}
         className="absolute inset-0 w-full h-[115%] -top-[5%] overflow-hidden z-0 pointer-events-none"
       >
-        {!videoError ? (
-          <video
-            ref={videoRef}
-            autoPlay
-            loop
-            muted
-            playsInline
-            onError={() => setVideoError(true)}
-            className="w-full h-full object-cover filter brightness-[0.9] contrast-105"
-          >
-            <source src="/assets/cconcepts-hero.mp4" type="video/mp4" />
-            <source src="https://assets.mixkit.co/videos/preview/mixkit-laser-cutting-metal-in-a-factory-41562-large.mp4" type="video/mp4" />
-            <source src="https://cdn.coverr.co/videos/coverr-industrial-laser-engraving-4648/1080p.mp4" type="video/mp4" />
-          </video>
-        ) : null}
+        <div className="absolute inset-0 w-full h-full pointer-events-none overflow-hidden">
+          <iframe
+            src="https://www.youtube-nocookie.com/embed/dQw4w9WgXcQ?autoplay=1&mute=1&controls=0&loop=1&playlist=dQw4w9WgXcQ&showinfo=0&rel=0&iv_load_policy=3&enablejsapi=1&disablekb=1&modestbranding=1"
+            title="Authentic C-Concepts Promotional Video"
+            className="w-[160%] h-[160%] -translate-x-[18%] -translate-y-[18%] object-cover border-0 filter brightness-[0.9] contrast-105 pointer-events-none"
+            allow="autoplay; encrypted-media"
+          />
+        </div>
 
-        {/* Video Embed Background (Fallback when direct HTML5 mp4 CORS fails) */}
-        {videoError && (
-          <div className="absolute inset-0 w-full h-full pointer-events-none overflow-hidden">
-            <iframe
-              src="https://www.youtube-nocookie.com/embed/dQw4w9WgXcQ?autoplay=1&mute=1&controls=0&loop=1&playlist=dQw4w9WgXcQ&showinfo=0&rel=0&iv_load_policy=3&enablejsapi=1&disablekb=1&modestbranding=1"
-              title="C-Concepts Promotional Video Background"
-              className="w-[160%] h-[160%] -translate-x-[18%] -translate-y-[18%] object-cover border-0 filter brightness-[0.88] contrast-105 pointer-events-none"
-              allow="autoplay; encrypted-media"
-            />
-          </div>
-        )}
-
-        {/* Asymmetric Gradient Overlay: Left side darker for text contrast, Right side visible for video */}
-        <div className="absolute inset-0 bg-gradient-to-r from-[#0A0B0D]/95 via-[#0A0B0D]/70 to-[#0A0B0D]/25 z-10" />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#0A0B0D] via-transparent to-[#0A0B0D]/50 z-10" />
+        {/* Asymmetric Cinematic Dark Gradient Overlay */}
+        <div className="absolute inset-0 bg-gradient-to-r from-[#0A0B0D]/95 via-[#0A0B0D]/65 to-[#0A0B0D]/25 z-10" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#0A0B0D] via-transparent to-[#0A0B0D]/40 z-10" />
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_40%,#005496_0%,transparent_50%)] opacity-20 z-10 pointer-events-none" />
       </motion.div>
 
-      {/* Hero Content & Sequential Animations */}
+      {/* 2. Hero Content Area with Sequential Load Animations */}
       <motion.div 
         style={{ y: textY, opacity: textOpacity }}
-        className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 w-full my-auto z-20 relative"
+        className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 w-full my-auto z-20 relative pt-8"
       >
         <div className="max-w-3xl space-y-7">
           
-          {/* Step 2: Eyebrow Label */}
+          {/* Eyebrow Label */}
           <motion.div
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
@@ -101,7 +67,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenContactModal }) 
             <span>WERBEARTIKEL MIT FULL-SERVICE</span>
           </motion.div>
 
-          {/* Step 3: Main Headline (Slightly reduced size, natural 2-line composition) */}
+          {/* Main Headline (2 lines on desktop) */}
           <motion.h1 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -114,17 +80,17 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenContactModal }) 
             </span>
           </motion.h1>
 
-          {/* Step 4: Body Paragraph */}
+          {/* Description Paragraph */}
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.5, ease: [0.16, 1, 0.3, 1] }}
             className="text-lg sm:text-xl text-[#E6E9EE]/90 font-light leading-relaxed max-w-2xl"
           >
-            Wir sind Ihr zuverlässiger Partner für Werbeartikel, Gimmicks, Give-Aways und Erlebnis-Promotion – von der Idee bis zum Point of Sale.
+            Wir sind Ihr zuverlässiger Partner für Werbeartikel, Give-Aways, Erlebnis-Promotion und deren Konfektionierung.
           </motion.p>
 
-          {/* Step 5: CTA Buttons */}
+          {/* CTA Buttons */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -133,10 +99,10 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenContactModal }) 
           >
             <button
               onClick={onOpenContactModal}
-              className="group inline-flex items-center space-x-3 px-8 py-4 bg-[#005496] hover:bg-[#0066C2] text-white text-xs font-bold tracking-widest uppercase rounded-xl transition-all duration-300 shadow-lg shadow-[#005496]/30 hover:shadow-2xl hover:shadow-[#005496]/60 hover:-translate-y-1 active:translate-y-0 cursor-pointer"
+              className="group inline-flex items-center space-x-3 px-8 py-4 bg-[#005496] hover:bg-[#0066C2] text-white text-xs font-bold tracking-widest uppercase rounded-xl transition-all duration-300 shadow-lg shadow-[#005496]/30 hover:shadow-2xl hover:shadow-[#005496]/60 hover:-translate-y-0.5 active:translate-y-0 cursor-pointer"
             >
               <span>TERMIN VEREINBAREN</span>
-              <ArrowUpRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1" />
+              <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
             </button>
 
             <a
@@ -149,6 +115,22 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenContactModal }) 
           </motion.div>
 
         </div>
+      </motion.div>
+
+      {/* 3. Bottom Hero Elements: Subtle Scroll Indicator */}
+      <motion.div 
+        initial={{ opacity: 0, y: 10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8, delay: 0.85 }}
+        className="z-20 relative text-center pb-2"
+      >
+        <a 
+          href="#intro" 
+          className="inline-flex flex-col items-center text-[#8E95A2] hover:text-white transition-colors group text-xs uppercase tracking-widest font-medium"
+        >
+          <span className="text-[11px] mb-1 group-hover:text-[#0077E6] transition-colors">SCROLLEN</span>
+          <ChevronDown className="w-4 h-4 text-[#0077E6] animate-bounce" />
+        </a>
       </motion.div>
 
     </section>

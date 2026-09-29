@@ -13,9 +13,27 @@ export const RemundiSection: React.FC<RemundiSectionProps> = ({ onOpenContactMod
     <section className="py-28 sm:py-36 bg-[#080A0E] text-white border-t border-white/5 relative overflow-hidden">
       
       {/* Ambient lighting background */}
-      <div className="absolute left-1/4 top-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-[#005496]/15 rounded-full blur-[120px] pointer-events-none" />
+      <div className="absolute left-1/4 top-1/2 -translate-y-1/2 w-[550px] h-[550px] bg-[#005496]/15 rounded-full blur-[130px] pointer-events-none" />
 
-      <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 relative z-10">
+      <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 relative z-10 space-y-12">
+        
+        {/* Top Feature Badges */}
+        <motion.div 
+          initial={{ opacity: 0, y: 15 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+          className="flex flex-wrap items-center gap-3"
+        >
+          <div className="inline-flex items-center space-x-2 px-4 py-1.5 rounded-full bg-[#005496]/20 border border-[#005496]/40 text-[#0077E6] text-xs font-semibold tracking-widest uppercase">
+            <Sparkles className="w-3.5 h-3.5" />
+            <span>CUSTOM CONSTRUCTION</span>
+          </div>
+          <div className="inline-flex items-center space-x-2 px-4 py-1.5 rounded-full bg-white/5 border border-white/10 text-[#8E95A2] text-xs font-semibold tracking-widest uppercase">
+            <span>PROMOTION • PRODUCT EXPERIENCE</span>
+          </div>
+        </motion.div>
+
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
           
           {/* Left Column: Story & Content */}
@@ -26,19 +44,6 @@ export const RemundiSection: React.FC<RemundiSectionProps> = ({ onOpenContactMod
             transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
             className="lg:col-span-6 space-y-8"
           >
-            
-            {/* Small Eyebrow Label */}
-            <motion.div 
-              initial={{ opacity: 0, x: -15 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 0.1 }}
-              className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-[#005496]/15 border border-[#005496]/30 text-[#0077E6] text-xs font-semibold tracking-widest uppercase"
-            >
-              <Sparkles className="w-3.5 h-3.5" />
-              <span>FEATURED CASE STUDY // REMUNDI</span>
-            </motion.div>
-
             {/* Headline */}
             <h2 className="font-extrabold text-4xl sm:text-6xl text-white tracking-tight uppercase leading-[0.92]">
               DAS REMUNDI <br />
@@ -85,14 +90,14 @@ export const RemundiSection: React.FC<RemundiSectionProps> = ({ onOpenContactMod
                 onClick={onOpenContactModal}
                 className="group inline-flex items-center space-x-3 px-8 py-4 bg-[#005496] hover:bg-[#0066C2] text-white text-xs font-bold tracking-widest uppercase rounded-xl transition-all duration-300 shadow-xl shadow-[#005496]/20 hover:shadow-2xl hover:shadow-[#005496]/40 hover:-translate-y-0.5 active:translate-y-0 cursor-pointer"
               >
-                <span>REMUNDI PROJEKT ANFRAGEN</span>
+                <span>PROJEKT ENTDECKEN</span>
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1.5 transition-transform" />
               </button>
             </div>
 
           </motion.div>
 
-          {/* Right Column: Visual Showcase & Interactive Video Frame */}
+          {/* Right Column: Prominent Immersive Video Case Study Container */}
           <motion.div 
             initial={{ opacity: 0, scale: 0.96 }}
             whileInView={{ opacity: 1, scale: 1 }}
@@ -100,7 +105,7 @@ export const RemundiSection: React.FC<RemundiSectionProps> = ({ onOpenContactMod
             transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
             className="lg:col-span-6 relative"
           >
-            <div className="relative aspect-[16/10] w-full rounded-2xl overflow-hidden border border-white/10 bg-[#0D0F14] shadow-2xl group">
+            <div className="relative aspect-[16/10] sm:aspect-[16/10] w-full rounded-2xl overflow-hidden border border-white/10 bg-[#0D0F14] shadow-2xl group">
               
               {!isPlaying ? (
                 <>
@@ -125,7 +130,7 @@ export const RemundiSection: React.FC<RemundiSectionProps> = ({ onOpenContactMod
                     </span>
                   </button>
 
-                  <div className="absolute bottom-4 left-4 right-4 p-3 bg-[#0A0B0D]/85 backdrop-blur-md border border-white/10 rounded-xl flex items-center justify-between text-xs text-[#8E95A2]">
+                  <div className="absolute bottom-4 left-4 right-4 p-3.5 bg-[#0A0B0D]/85 backdrop-blur-md border border-white/10 rounded-xl flex items-center justify-between text-xs text-[#8E95A2]">
                     <span className="flex items-center space-x-2 text-white font-medium">
                       <Flame className="w-4 h-4 text-[#0077E6]" />
                       <span>REMUNDI FIRE GRILL</span>

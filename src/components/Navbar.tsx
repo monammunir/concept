@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Menu, X, ArrowUpRight } from 'lucide-react';
+import { Menu, X, ArrowRight } from 'lucide-react';
 
 interface NavbarProps {
   onOpenContactModal: () => void;
@@ -30,7 +30,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenContactModal }) => {
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
         isScrolled
-          ? 'bg-[#0A0B0D]/95 backdrop-blur-md border-b border-white/10 py-3.5 shadow-2xl'
+          ? 'bg-[#0A0B0D]/90 backdrop-blur-md border-b border-white/10 py-3.5 shadow-2xl'
           : 'bg-gradient-to-b from-[#0A0B0D]/90 to-transparent py-5'
       }`}
     >
@@ -46,7 +46,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenContactModal }) => {
             />
           </a>
 
-          {/* Navigation Links */}
+          {/* Center Navigation Links */}
           <nav className="hidden lg:flex items-center space-x-8">
             {navLinks.map((link) => (
               <a
@@ -64,10 +64,10 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenContactModal }) => {
           <div className="hidden md:flex items-center">
             <button
               onClick={onOpenContactModal}
-              className="inline-flex items-center space-x-2.5 px-6 py-3 bg-[#005496] hover:bg-[#0066C2] text-white text-xs font-bold tracking-widest uppercase rounded-xl transition-all duration-300 shadow-lg shadow-[#005496]/20 hover:shadow-[#005496]/40 hover:-translate-y-0.5 cursor-pointer"
+              className="group inline-flex items-center space-x-2.5 px-6 py-3 bg-[#005496] hover:bg-[#0066C2] text-white text-xs font-bold tracking-widest uppercase rounded-xl transition-all duration-300 shadow-lg shadow-[#005496]/20 hover:shadow-2xl hover:shadow-[#005496]/50 hover:-translate-y-0.5 cursor-pointer"
             >
               <span>TERMIN VEREINBAREN</span>
-              <ArrowUpRight className="w-4 h-4" />
+              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </button>
           </div>
 
@@ -114,7 +114,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenContactModal }) => {
                 className="w-full flex items-center justify-center space-x-2 px-6 py-4 bg-[#005496] hover:bg-[#0066C2] text-white text-xs font-bold tracking-widest uppercase rounded-xl shadow-lg shadow-[#005496]/30 cursor-pointer"
               >
                 <span>TERMIN VEREINBAREN</span>
-                <ArrowUpRight className="w-4 h-4" />
+                <ArrowRight className="w-4 h-4" />
               </button>
             </div>
           </div>
