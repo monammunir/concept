@@ -62,10 +62,10 @@ export const TeamSection: React.FC = () => {
   ];
 
   return (
-    <section className="py-28 sm:py-36 bg-[#080A0E] text-white border-t border-white/5 relative overflow-hidden">
+    <section className="py-28 sm:py-36 bg-[#005496] text-white border-t border-[#00467d] relative overflow-hidden shadow-lg">
       
-      {/* Background Glow */}
-      <div className="absolute right-1/3 top-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-[#005496]/10 rounded-full blur-[120px] pointer-events-none" />
+      {/* Background ambient lighting */}
+      <div className="absolute right-1/3 top-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-white/5 rounded-full blur-[120px] pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 relative z-10 space-y-16">
         
@@ -74,23 +74,23 @@ export const TeamSection: React.FC = () => {
           initial={{ opacity: 0, y: 25 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: '-50px' }}
-          transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+          transition={{ duration: 1.3, ease: [0.16, 1, 0.3, 1] }}
           className="max-w-4xl space-y-4"
         >
-          <div className="text-xs text-[#0077E6] tracking-widest uppercase font-semibold block">
+          <div className="text-xs text-white/80 tracking-widest uppercase font-semibold block">
             PROZESS & ABWICKLUNG // FULL-SERVICE PIPELINE
           </div>
           <h2 className="font-extrabold text-4xl sm:text-6xl text-white tracking-tight uppercase leading-[0.95]">
             VON DER IDEE BIS ZUM <br />
-            <span className="text-[#0077E6]">POINT OF SALE</span>
+            <span className="text-slate-100">POINT OF SALE</span>
           </h2>
-          <p className="text-base sm:text-lg text-[#8E95A2] font-light leading-relaxed max-w-3xl pt-2">
+          <p className="text-base sm:text-lg text-slate-100 font-light leading-relaxed max-w-3xl pt-2">
             Unser ganzheitlicher Full-Service begleitet Ihr Werbeprojekt durch alle sechs Phasen der Wertschöpfungskette – verlässlich, transparent und alles aus einer Hand.
           </p>
         </motion.div>
 
-        {/* Modern Horizontal Process Pipeline (Desktop) / Vertical Timeline (Mobile) */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-6 relative">
+        {/* 3-Column Desktop Grid (Wider, shorter, balanced cards) */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {processSteps.map((step, index) => {
             const IconComp = step.icon;
             return (
@@ -99,40 +99,40 @@ export const TeamSection: React.FC = () => {
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: '-50px' }}
-                transition={{ duration: 0.6, delay: index * 0.08, ease: [0.16, 1, 0.3, 1] }}
-                className="group bg-[#111318]/80 border border-white/10 hover:border-[#005496]/70 rounded-2xl p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl flex flex-col justify-between"
+                transition={{ duration: 1.3, delay: index * 0.18, ease: [0.16, 1, 0.3, 1] }}
+                className="group bg-white text-slate-900 border border-white/20 rounded-2xl p-7 transition-all duration-700 hover:-translate-y-1 hover:shadow-2xl shadow-md flex flex-col justify-between"
               >
                 <div className="space-y-4">
                   {/* Step Header */}
                   <div className="flex items-center justify-between">
-                    <span className="text-xs font-bold text-[#0077E6] uppercase tracking-wider">
+                    <span className="text-xs font-bold text-[#005496] uppercase tracking-wider">
                       PHASE {step.id}
                     </span>
-                    <div className="p-2 bg-[#005496]/15 border border-[#005496]/30 rounded-xl text-[#0077E6] group-hover:bg-[#005496] group-hover:text-white transition-colors">
-                      <IconComp className="w-4 h-4" />
+                    <div className="p-3 bg-slate-100 border border-slate-200/80 rounded-xl text-[#005496] group-hover:bg-[#005496] group-hover:text-white transition-colors duration-500">
+                      <IconComp className="w-5 h-5" />
                     </div>
                   </div>
 
                   {/* Title & Subtitle */}
                   <div>
-                    <h3 className="font-extrabold text-lg text-white uppercase group-hover:text-[#0077E6] transition-colors">
+                    <h3 className="font-extrabold text-xl text-slate-900 uppercase group-hover:text-[#005496] transition-colors">
                       {step.title}
                     </h3>
-                    <div className="text-xs text-[#0077E6] font-medium uppercase tracking-wider pt-0.5">
+                    <div className="text-xs text-[#005496] font-semibold uppercase tracking-wider pt-1">
                       {step.subtitle}
                     </div>
                   </div>
 
                   {/* Description */}
-                  <p className="text-xs text-[#8E95A2] font-light leading-relaxed">
+                  <p className="text-sm text-slate-600 font-light leading-relaxed">
                     {step.description}
                   </p>
                 </div>
 
                 {/* Bottom Step Indicator Arrow */}
-                <div className="pt-4 mt-4 border-t border-white/10 text-[10px] text-[#8E95A2] flex items-center justify-between font-semibold uppercase">
+                <div className="pt-5 mt-5 border-t border-slate-200/80 text-xs text-slate-500 flex items-center justify-between font-semibold uppercase">
                   <span>SCHRITT {step.id}</span>
-                  <span className="text-[#0077E6]">→</span>
+                  <span className="text-[#005496] group-hover:translate-x-1.5 transition-transform duration-500">→</span>
                 </div>
               </motion.div>
             );
@@ -144,21 +144,21 @@ export const TeamSection: React.FC = () => {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="pt-8 border-t border-white/10 grid grid-cols-1 md:grid-cols-2 gap-6"
+          transition={{ duration: 1.2 }}
+          className="pt-8 border-t border-white/20 grid grid-cols-1 md:grid-cols-2 gap-6"
         >
           {leadership.map((member) => (
             <div 
               key={member.name}
-              className="p-5 bg-white/5 border border-white/10 rounded-xl flex items-center space-x-4"
+              className="p-6 bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl flex items-center space-x-4 text-white shadow-sm"
             >
-              <div className="w-10 h-10 rounded-full bg-[#005496]/20 border border-[#005496]/40 flex items-center justify-center text-[#0077E6] shrink-0">
-                <UserCheck className="w-5 h-5" />
+              <div className="w-12 h-12 rounded-full bg-white text-[#005496] flex items-center justify-center shrink-0 shadow-md">
+                <UserCheck className="w-6 h-6" />
               </div>
               <div>
-                <div className="font-bold text-sm text-white uppercase">{member.name}</div>
-                <div className="text-xs text-[#0077E6] font-semibold">{member.role}</div>
-                <div className="text-xs text-[#8E95A2] font-light">{member.task}</div>
+                <div className="font-bold text-base text-white uppercase">{member.name}</div>
+                <div className="text-xs text-slate-200 font-semibold">{member.role}</div>
+                <div className="text-xs text-slate-300 font-light">{member.task}</div>
               </div>
             </div>
           ))}

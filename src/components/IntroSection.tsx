@@ -4,10 +4,10 @@ import { Sparkles, CheckCircle2 } from 'lucide-react';
 
 export const IntroSection: React.FC = () => {
   return (
-    <section id="intro" className="py-28 sm:py-36 bg-[#0A0B0D] text-white border-t border-white/5 relative overflow-hidden">
+    <section id="intro" className="py-28 sm:py-36 bg-white text-slate-900 border-t border-slate-200/80 relative overflow-hidden">
       
-      {/* Background ambient lighting */}
-      <div className="absolute right-0 top-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-[#005496]/10 rounded-full blur-[120px] pointer-events-none" />
+      {/* Background ambient light accent */}
+      <div className="absolute right-0 top-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-[#005496]/5 rounded-full blur-[120px] pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 relative z-10 space-y-20">
         
@@ -19,47 +19,77 @@ export const IntroSection: React.FC = () => {
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: '-100px' }}
-            transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+            transition={{ duration: 1.3, ease: [0.16, 1, 0.3, 1] }}
             className="lg:col-span-6 space-y-8"
           >
             
             {/* Eyebrow Label */}
-            <div className="inline-flex items-center space-x-2 text-xs text-[#0077E6] tracking-widest uppercase font-semibold">
-              <Sparkles className="w-3.5 h-3.5" />
+            <motion.div 
+              initial={{ opacity: 0, x: -15 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 1.1, delay: 0.15 }}
+              className="inline-flex items-center space-x-2 text-xs text-[#005496] tracking-widest uppercase font-semibold"
+            >
+              <Sparkles className="w-3.5 h-3.5 text-[#005496]" />
               <span>INNOVATIVE MARKETING CONCEPTS</span>
-            </div>
+            </motion.div>
 
             {/* Headline */}
-            <h2 className="font-extrabold text-4xl sm:text-5xl lg:text-6xl text-white tracking-tight uppercase leading-[0.95]">
+            <motion.h2 
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 1.2, delay: 0.25 }}
+              className="font-extrabold text-4xl sm:text-5xl lg:text-6xl text-slate-900 tracking-tight uppercase leading-[0.95]"
+            >
               GIVEAWAYS, GIMMICKS, <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#0077E6] via-white to-[#8E95A2]">
+              <span className="text-[#005496]">
                 PROMOTION FÜR EVENTS
               </span>
-            </h2>
+            </motion.h2>
 
             {/* Main Body */}
-            <p className="text-lg sm:text-xl text-[#E6E9EE] font-light leading-relaxed">
+            <motion.p 
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 1.3, delay: 0.4 }}
+              className="text-lg sm:text-xl text-slate-700 font-light leading-relaxed"
+            >
               Sie haben eine Idee für eine spannende Werbemaßnahme? Dann sind Sie bei uns in den richtigen Händen. 
-              <strong className="font-semibold text-white"> C-Concepts ist Ihr Partner vom Anfang bis zum Ende. </strong>
+              <strong className="font-semibold text-slate-900"> C-Concepts ist Ihr Partner vom Anfang bis zum Ende. </strong>
               Egal ob Entwurf, Design oder Produktion, wir organisieren die Produktion und Organisation Ihrer Werbeartikel mit individuellem Branding – von der Idee bis zu Ihren Kunden an den Point of Sale.
-            </p>
+            </motion.p>
 
             {/* Additional Text */}
-            <p className="text-base text-[#8E95A2] font-light leading-relaxed pt-2 border-t border-white/10">
+            <motion.p 
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 1.3, delay: 0.55 }}
+              className="text-base text-slate-600 font-light leading-relaxed pt-2 border-t border-slate-200/80"
+            >
               Dank unserer langjährigen Erfahrung und umfassenden Organisationsstruktur sind wir in der Lage, auch Projekte flexibel, verlässlich und zeitnah umzusetzen.
-            </p>
+            </motion.p>
 
             {/* Feature Bullets */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs text-[#E6E9EE] pt-2 font-medium">
-              <div className="flex items-center space-x-3 p-3.5 bg-white/5 border border-white/10 rounded-xl hover:border-[#005496]/50 transition-colors">
-                <CheckCircle2 className="w-4 h-4 text-[#0077E6] shrink-0" />
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 1.3, delay: 0.7 }}
+              className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs text-slate-800 pt-2 font-medium"
+            >
+              <div className="flex items-center space-x-3 p-4 bg-slate-50 border border-slate-200/80 rounded-xl shadow-xs hover:border-[#005496]/40 transition-colors">
+                <CheckCircle2 className="w-4 h-4 text-[#005496] shrink-0" />
                 <span>Individuelles Firmen-Branding</span>
               </div>
-              <div className="flex items-center space-x-3 p-3.5 bg-white/5 border border-white/10 rounded-xl hover:border-[#005496]/50 transition-colors">
-                <CheckCircle2 className="w-4 h-4 text-[#0077E6] shrink-0" />
+              <div className="flex items-center space-x-3 p-4 bg-slate-50 border border-slate-200/80 rounded-xl shadow-xs hover:border-[#005496]/40 transition-colors">
+                <CheckCircle2 className="w-4 h-4 text-[#005496] shrink-0" />
                 <span>Eigene Fertigung & Verpackung</span>
               </div>
-            </div>
+            </motion.div>
 
           </motion.div>
 
@@ -68,20 +98,20 @@ export const IntroSection: React.FC = () => {
             initial={{ opacity: 0, scale: 0.96 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true, margin: '-100px' }}
-            transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+            transition={{ duration: 1.4, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
             className="lg:col-span-6 relative"
           >
-            <div className="relative aspect-[4/3] lg:aspect-[16/11] w-full rounded-2xl overflow-hidden border border-white/10 bg-[#121418] shadow-2xl group">
+            <div className="relative aspect-[4/3] lg:aspect-[16/11] w-full rounded-2xl overflow-hidden border border-slate-200/80 bg-white shadow-xl group">
               <img
                 src="/images/perfect-match.jpg"
                 alt="C-Concepts Produktion & Werbeartikel Konfektionierung"
-                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 filter brightness-95 contrast-105"
+                className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-[1.03] filter brightness-[0.98] contrast-105"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#0A0B0D] via-transparent to-transparent opacity-80" />
+              <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent opacity-80" />
               
-              <div className="absolute bottom-6 left-6 right-6 p-4 bg-[#0A0B0D]/85 backdrop-blur-md border border-white/10 rounded-xl">
-                <div className="text-xs text-[#0077E6] uppercase tracking-widest font-semibold">MADE IN GERMANY</div>
-                <div className="font-bold text-sm text-white">Full-Service Werbeartikel aus Simmern</div>
+              <div className="absolute bottom-6 left-6 right-6 p-4 bg-white/90 backdrop-blur-md border border-slate-200/80 rounded-xl shadow-lg">
+                <div className="text-xs text-[#005496] uppercase tracking-widest font-semibold">MADE IN GERMANY</div>
+                <div className="font-bold text-sm text-slate-900">Full-Service Werbeartikel aus Simmern</div>
               </div>
             </div>
           </motion.div>
@@ -93,15 +123,15 @@ export const IntroSection: React.FC = () => {
           initial={{ opacity: 0, y: 25 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: '-50px' }}
-          transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-          className="pt-12 border-t border-white/10 text-center space-y-3"
+          transition={{ duration: 1.3, ease: [0.16, 1, 0.3, 1] }}
+          className="pt-12 border-t border-slate-200/80 text-center space-y-3"
         >
-          <div className="text-xs text-[#0077E6] tracking-widest uppercase font-semibold">
+          <div className="text-xs text-[#005496] tracking-widest uppercase font-semibold">
             UNSERE PHILOSOPHIE // FULL-SERVICE
           </div>
-          <h3 className="font-extrabold text-3xl sm:text-5xl lg:text-6xl text-white tracking-tight uppercase leading-[0.95] max-w-5xl mx-auto">
+          <h3 className="font-extrabold text-3xl sm:text-5xl lg:text-6xl text-slate-900 tracking-tight uppercase leading-[0.95] max-w-5xl mx-auto">
             VON DER IDEE BIS ZUM <br />
-            <span className="text-[#0077E6]">POINT OF SALE.</span>
+            <span className="text-[#005496]">POINT OF SALE.</span>
           </h3>
         </motion.div>
 

@@ -2,9 +2,10 @@
 
 @layer base {
   :root {
-    --bg-primary: #0A0B0D;
-    --text-primary: #F4F5F6;
-    --text-secondary: #8E95A2;
+    --bg-primary: #F7F8FA;
+    --bg-secondary: #FFFFFF;
+    --text-primary: #0F172A;
+    --text-secondary: #64748B;
     --brand-accent: #005496;
     --brand-accent-hover: #0066C2;
     --brand-light-blue: #0077E6;
@@ -19,14 +20,15 @@
 
 /* Custom Scrollbar */
 ::-webkit-scrollbar {
-  width: 5px;
-  height: 5px;
+  width: 6px;
+  height: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: #0A0B0D;
+  background: #F1F5F9;
 }
 ::-webkit-scrollbar-thumb {
-  background: #1A2333;
+  background: #CBD5E1;
+  border-radius: 9999px;
 }
 ::-webkit-scrollbar-thumb:hover {
   background: #005496;
