@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>C-Concepts Vertriebs GmbH – Innovative Marketing Concepts – Made in Germany</title>
-  <meta name="description" content="C-Concepts entwickelt und realisiert seit 1993 exklusive Werbeartikel, Sonderanfertigungen, Event-Promotions und Full-Service POS-Marketing für führende Marken.">
+  <meta name="description" content="C-Concepts entwickelt und fertigt maßgeschneiderte Werbeartikel, Sonderanfertigungen und Full-Service POS-Logistik für Marken und Werbeagenturen seit 1993.">
   <link rel="icon" type="image/png" href="images/cconcepts-logo-2.png">
 
   <!-- Google Fonts: Plus Jakarta Sans -->
@@ -57,6 +57,18 @@
       overflow-x: hidden;
     }
 
+    /* Scroll Progress Bar at top */
+    #scroll-progress {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 3px;
+      background: linear-gradient(90deg, #1250B0, #38BDF8, #2E7BF6);
+      z-index: 100;
+      width: 0%;
+      transition: width 0.1s ease-out;
+    }
+
     /* Fixed Header Styles & Transition */
     #header {
       position: fixed;
@@ -64,13 +76,13 @@
       left: 0;
       right: 0;
       z-index: 50;
-      transition: background-color 300ms ease, backdrop-filter 300ms ease, box-shadow 300ms ease, border-color 300ms ease;
+      transition: background-color 350ms cubic-bezier(0.16, 1, 0.3, 1), backdrop-filter 350ms ease, box-shadow 350ms ease, border-color 350ms ease;
       background-color: transparent;
     }
     #header.is-scrolled {
-      background-color: rgba(255, 255, 255, 0.95);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
+      background-color: rgba(255, 255, 255, 0.96);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
       box-shadow: 0 4px 20px -5px rgba(10, 31, 68, 0.08);
       border-bottom: 1px solid rgba(226, 232, 240, 0.8);
     }
@@ -90,50 +102,89 @@
       color: var(--primary);
     }
 
-    #header .logo-light {
-      display: block;
-    }
-    #header .logo-dark {
-      display: none;
-    }
-    #header.is-scrolled .logo-light {
-      display: none;
-    }
-    #header.is-scrolled .logo-dark {
-      display: block;
-    }
+    #header .logo-light { display: block; }
+    #header .logo-dark { display: none; }
+    #header.is-scrolled .logo-light { display: none; }
+    #header.is-scrolled .logo-dark { display: block; }
 
-    /* Glassmorphism Floating Cards */
-    .glass-card {
-      background: rgba(255, 255, 255, 0.12);
-      backdrop-filter: blur(14px);
-      -webkit-backdrop-filter: blur(14px);
-      border: 1px solid rgba(255, 255, 255, 0.25);
-      border-radius: 16px;
-      animation: float 6s ease-in-out infinite;
-    }
-    .glass-card:nth-child(2) { animation-delay: 2s; }
-    .glass-card:nth-child(3) { animation-delay: 4s; }
-
-    @keyframes float {
-      0%, 100% { transform: translateY(0px); }
-      50% { transform: translateY(-8px); }
-    }
-
-    /* Scroll Reveal Animations */
+    /* Slow & Dramatic Scroll Reveal Animations (Smooth Cubic Bezier) */
     .reveal {
       opacity: 0;
-      transform: translateY(28px);
-      transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+      transform: translateY(40px);
+      transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1), transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
       will-change: opacity, transform;
     }
-    .reveal.active {
+    .reveal-left {
+      opacity: 0;
+      transform: translateX(-50px);
+      transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1), transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+      will-change: opacity, transform;
+    }
+    .reveal-right {
+      opacity: 0;
+      transform: translateX(50px);
+      transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1), transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+      will-change: opacity, transform;
+    }
+    .reveal-scale {
+      opacity: 0;
+      transform: scale(0.92) translateY(35px);
+      transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1), transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+      will-change: opacity, transform;
+    }
+
+    .reveal.active,
+    .reveal-left.active,
+    .reveal-right.active,
+    .reveal-scale.active {
       opacity: 1;
+      transform: translateY(0) translateX(0) scale(1);
+    }
+
+    /* Stagger Delays for Cards & Sequences */
+    .reveal-delay-1 { transition-delay: 0.15s; }
+    .reveal-delay-2 { transition-delay: 0.30s; }
+    .reveal-delay-3 { transition-delay: 0.45s; }
+    .reveal-delay-4 { transition-delay: 0.60s; }
+    .reveal-delay-5 { transition-delay: 0.75s; }
+
+    /* Text Word/Line Reveal Animation */
+    .word-reveal-wrapper {
+      overflow: hidden;
+      display: inline-block;
+      vertical-align: bottom;
+    }
+    .word-reveal-inner {
+      display: inline-block;
+      transform: translateY(115%);
+      transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .reveal.active .word-reveal-inner {
       transform: translateY(0);
     }
-    .reveal-delay-1 { transition-delay: 0.15s; }
-    .reveal-delay-2 { transition-delay: 0.3s; }
-    .reveal-delay-3 { transition-delay: 0.45s; }
+
+    /* Hero Glow Pulse Background */
+    @keyframes pulseGlow {
+      0%, 100% { opacity: 0.25; transform: scale(1); }
+      50% { opacity: 0.55; transform: scale(1.12); }
+    }
+    .hero-glow-pulse {
+      animation: pulseGlow 6s ease-in-out infinite;
+    }
+
+    /* Continuous Marquee Ticker Track */
+    @keyframes marquee {
+      0% { transform: translateX(0%); }
+      100% { transform: translateX(-50%); }
+    }
+    .animate-marquee {
+      display: flex;
+      width: max-content;
+      animation: marquee 35s linear infinite;
+    }
+    .animate-marquee:hover {
+      animation-play-state: paused;
+    }
 
     /* Centered Sky Underline for H2 headings */
     .sky-underline-center {
@@ -143,7 +194,7 @@
     .sky-underline-center::after {
       content: '';
       position: absolute;
-      bottom: -8px;
+      bottom: -10px;
       left: 50%;
       transform: translateX(-50%);
       width: 56px;
@@ -152,68 +203,80 @@
       border-radius: 2px;
     }
 
-    /* Card Hover Lift & Border Effect */
+    /* Card Hover Lift & Zoom Effect */
     .card-hover {
-      transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s ease, border-color 0.35s ease;
+      transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.5s ease, border-color 0.5s ease;
       border: 1px solid rgba(18, 80, 176, 0.10);
     }
     .card-hover:hover {
-      transform: translateY(-6px);
+      transform: translateY(-8px);
       border-color: var(--sky);
-      box-shadow: 0 20px 40px -15px rgba(18, 80, 176, 0.15);
+      box-shadow: 0 22px 45px -15px rgba(18, 80, 176, 0.20);
+    }
+    .card-hover .img-frame-tint img {
+      transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1), filter 0.5s ease;
+    }
+    .card-hover:hover .img-frame-tint img {
+      transform: scale(1.06);
+      filter: saturate(1.05) contrast(1.05);
     }
 
     /* Glowing Button Effects */
     .btn-glow {
       position: relative;
       box-shadow: 0 4px 14px 0 rgba(18, 80, 176, 0.35);
-      transition: all 0.3s ease;
+      transition: all 0.35s ease;
     }
     .btn-glow:hover {
       box-shadow: 0 6px 22px 0 rgba(46, 123, 246, 0.55);
-      transform: translateY(-1px);
+      transform: translateY(-2px);
     }
 
-    /* Light Blue Tint Overlay on Images */
-    .img-tint-container {
+    /* Image Unity Styling */
+    .img-frame-tint {
       position: relative;
       overflow: hidden;
+      background-color: var(--mist);
+      border-radius: 20px;
     }
-    .img-tint-container::after {
+    .img-frame-tint img {
+      filter: saturate(0.92) contrast(1.03);
+      border-radius: 20px;
+    }
+    .img-frame-tint::after {
       content: '';
       position: absolute;
       inset: 0;
-      background-color: rgba(18, 80, 176, 0.06);
+      background-color: rgba(18, 80, 176, 0.08);
       pointer-events: none;
-      transition: opacity 0.3s ease;
-    }
-    .img-tint-container:hover::after {
-      opacity: 0;
+      border-radius: inherit;
     }
 
-    /* Clean Logos without background pills */
-    .logo-clean {
-      filter: grayscale(100%) opacity(0.8);
-      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    /* Image Fallback Handler */
+    .bg-ice-fallback {
+      background-color: var(--ice) !important;
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      min-height: 180px;
     }
-    .logo-clean:hover {
-      filter: grayscale(0%) opacity(1);
-      transform: scale(1.05);
-    }
-
-    .text-gradient-sky {
-      background: linear-gradient(135deg, #FFFFFF 0%, #38BDF8 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
+    .bg-ice-fallback::before {
+      content: '';
+      width: 48px;
+      height: 48px;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%231250B0'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z'/%3E%3C/svg%3E");
+      background-size: contain;
+      background-repeat: no-repeat;
+      opacity: 0.6;
     }
 
     @media (prefers-reduced-motion: reduce) {
-      .reveal {
+      .reveal, .reveal-left, .reveal-right, .reveal-scale, .word-reveal-inner {
         transition: none !important;
         opacity: 1 !important;
         transform: none !important;
       }
-      .glass-card {
+      .animate-marquee {
         animation: none !important;
       }
     }
@@ -221,35 +284,37 @@
 </head>
 <body class="antialiased text-ink">
 
+  <!-- Scroll Progress Indicator -->
+  <div id="scroll-progress"></div>
+
   <!-- ==========================================
-       SECTION 1: NAVBAR (Position Fixed, Transparent to Solid White on Scroll)
+       SECTION 1: HEADER / NAVBAR
        ========================================== -->
   <header id="header" class="h-20 flex items-center">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full flex items-center justify-between">
       
-      <!-- Logo (Switches light/dark on scroll) -->
-      <a href="#" class="flex items-center gap-3 focus:outline-none focus:ring-2 focus:ring-bright rounded-lg">
-        <img src="images/cconcepts-logo-light.png" alt="C-Concepts Logo Light" class="logo-light h-10 w-auto object-contain" onerror="this.onerror=null; this.src='images/cconcepts-logo.png';">
-        <img src="images/cconcepts-logo.png" alt="C-Concepts Logo Dark" class="logo-dark h-10 w-auto object-contain">
+      <!-- Logo -->
+      <a href="#" class="flex items-center gap-3 focus:outline-none focus:ring-2 focus:ring-bright rounded-lg" aria-label="C-Concepts Startseite">
+        <img src="images/cconcepts-logo-light.png" alt="C-Concepts Vertriebs GmbH Logo" class="logo-light h-10 w-auto object-contain" onerror="this.onerror=null; this.src='images/cconcepts-logo.png';">
+        <img src="images/cconcepts-logo.png" alt="C-Concepts Vertriebs GmbH Logo" class="logo-dark h-10 w-auto object-contain">
       </a>
 
-      <!-- Desktop Navigation Links -->
+      <!-- Navigation Links -->
       <nav class="hidden md:flex items-center gap-8 text-[15px] font-bold tracking-wide">
-        <a href="#services" class="nav-link py-2">Leistungen</a>
-        <a href="#process" class="nav-link py-2">Ablauf</a>
-        <a href="#projects" class="nav-link py-2">Projekte & Werbemittel</a>
-        <a href="#remundi" class="nav-link py-2">Remundi Grill</a>
-        <a href="#about" class="nav-link py-2">Über Uns</a>
+        <a href="#fullservice" class="nav-link py-2">Full-Service</a>
+        <a href="#sonderfertigung" class="nav-link py-2">Sonderanfertigung</a>
+        <a href="#agenturen" class="nav-link py-2">Für Agenturen</a>
+        <a href="#projekte" class="nav-link py-2">Projekte</a>
+        <a href="#ueber-uns" class="nav-link py-2">Über Uns</a>
       </nav>
 
-      <!-- CTA Button & Mobile Toggle -->
+      <!-- CTA Button & Mobile Menu Toggle -->
       <div class="flex items-center gap-4">
         <button onclick="toggleModal(true)" class="hidden sm:inline-flex items-center justify-center px-5 py-2.5 rounded-xl font-bold text-[15px] text-white bg-primary hover:bg-bright btn-glow transition-all">
-          <span>Projekt Anfragen</span>
+          <span>Kostenloses Erstgespräch</span>
           <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
         </button>
 
-        <!-- Mobile Menu Toggle Button -->
         <button id="menu-btn" onclick="toggleMobileMenu()" class="md:hidden p-2 rounded-lg text-white hover:bg-white/10 focus:outline-none" aria-label="Menü öffnen">
           <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
         </button>
@@ -258,13 +323,13 @@
 
     <!-- Mobile Dropdown Menu -->
     <div id="mobile-menu" class="hidden md:hidden fixed top-20 inset-x-0 bg-white border-b border-slate-200 px-6 py-6 space-y-4 shadow-2xl z-50">
-      <a href="#services" onclick="toggleMobileMenu()" class="block py-2 text-navy font-bold text-base border-b border-slate-100">Leistungen</a>
-      <a href="#process" onclick="toggleMobileMenu()" class="block py-2 text-navy font-bold text-base border-b border-slate-100">Ablauf</a>
-      <a href="#projects" onclick="toggleMobileMenu()" class="block py-2 text-navy font-bold text-base border-b border-slate-100">Projekte & Werbemittel</a>
-      <a href="#remundi" onclick="toggleMobileMenu()" class="block py-2 text-navy font-bold text-base border-b border-slate-100">Remundi Grill</a>
-      <a href="#about" onclick="toggleMobileMenu()" class="block py-2 text-navy font-bold text-base border-b border-slate-100">Über Uns</a>
-      <button onclick="toggleMobileMenu(); toggleModal(true)" class="w-full text-center px-5 py-3.5 rounded-xl font-bold text-white bg-primary hover:bg-bright transition-all text-base">
-        Projekt Anfragen
+      <a href="#fullservice" onclick="toggleMobileMenu()" class="block py-2 text-navy font-bold text-[15px] border-b border-slate-100">Full-Service</a>
+      <a href="#sonderfertigung" onclick="toggleMobileMenu()" class="block py-2 text-navy font-bold text-[15px] border-b border-slate-100">Sonderanfertigung</a>
+      <a href="#agenturen" onclick="toggleMobileMenu()" class="block py-2 text-navy font-bold text-[15px] border-b border-slate-100">Für Agenturen</a>
+      <a href="#projekte" onclick="toggleMobileMenu()" class="block py-2 text-navy font-bold text-[15px] border-b border-slate-100">Projekte</a>
+      <a href="#ueber-uns" onclick="toggleMobileMenu()" class="block py-2 text-navy font-bold text-[15px] border-b border-slate-100">Über Uns</a>
+      <button onclick="toggleMobileMenu(); toggleModal(true)" class="w-full text-center px-5 py-3.5 rounded-xl font-bold text-white bg-primary hover:bg-bright transition-all text-[15px] mt-2">
+        Kostenloses Erstgespräch
       </button>
     </div>
   </header>
@@ -272,190 +337,186 @@
 
   <!-- ==========================================
        SECTION 2: HERO SECTION
-       Photo Attribution: Photo by Alexandre Pellaes on Unsplash (https://unsplash.com/photos/178a50c2df87)
-       Commercial License: Free commercial use via Unsplash License
+       Min-height 90vh. Full-bleed right image ~55%, brightness 1.08.
+       Subtle sky glow pulse behind H1 with dramatic word reveal.
        ========================================== -->
-  <section class="relative bg-navy text-white min-h-screen min-h-[680px] flex items-center overflow-hidden pt-20">
+  <section class="relative bg-navy text-white min-h-[90vh] flex items-center pt-20 overflow-hidden">
     
-    <!-- Full-Bleed High-Res Unsplash Hero Image -->
-    <!-- Photo by Alexandre Pellaes on Unsplash: https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&w=2000&q=80 -->
-    <div class="absolute inset-0 z-0">
+    <!-- Full-Bleed Right Image Container (~55% width, Brightness 1.08) -->
+    <div data-replace="true" class="absolute inset-y-0 right-0 w-full lg:w-[55%] z-0 overflow-hidden">
       <img 
-        src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&w=2000&q=80" 
-        alt="C-Concepts Brand Activation & Trade Show Event Display" 
-        width="2000" 
-        height="1125" 
+        src="images/herobackground.jpg" 
+        alt="C-Concepts Marken-Event Display und Produktionshalle" 
+        width="1600" 
+        height="900" 
         fetchpriority="high"
-        class="w-full h-full object-cover object-right"
-        onerror="this.onerror=null; this.parentElement.style.background='linear-gradient(135deg, #0A1F44 0%, #1250B0 100%)'; this.style.display='none';"
+        class="w-full h-full object-cover filter brightness-[1.08] saturate-[0.92] contrast-[1.03] transform scale-105 transition-transform duration-[10s] ease-out"
+        onerror="this.onerror=null; this.src='images/hero-prototype.jpg'; this.onerror=function(){ this.parentElement.classList.add('bg-ice-fallback'); this.style.display='none'; };"
       >
-      <!-- Single Left Gradient Overlay: linear-gradient(90deg, rgba(10,31,68,0.92) 0%, rgba(10,31,68,0.70) 40%, rgba(10,31,68,0.15) 75%, rgba(10,31,68,0.05) 100%) -->
-      <div class="absolute inset-0 pointer-events-none" style="background: linear-gradient(90deg, rgba(10,31,68,0.92) 0%, rgba(10,31,68,0.70) 40%, rgba(10,31,68,0.15) 75%, rgba(10,31,68,0.05) 100%);"></div>
-      
-      <!-- Light Blue Tint Overlay: rgba(18,80,176,0.10) -->
-      <div class="absolute inset-0 pointer-events-none" style="background-color: rgba(18,80,176,0.10);"></div>
-      
-      <!-- Bottom Fade: linear-gradient(to top, rgba(10,31,68,0.5), transparent 30%) -->
-      <div class="absolute inset-0 pointer-events-none" style="background: linear-gradient(to top, rgba(10,31,68,0.5), transparent 30%);"></div>
+      <!-- Gradient Fade behind Left Text only -->
+      <div class="absolute inset-0 bg-gradient-to-r from-navy via-navy/90 to-transparent pointer-events-none"></div>
+      <!-- Light Blue Tint Overlay -->
+      <div class="absolute inset-0 bg-primary/10 pointer-events-none"></div>
     </div>
 
     <!-- Main Hero Content -->
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-24 relative z-20 w-full grid lg:grid-cols-12 gap-12 items-center">
-      
-      <!-- Left Hero Column -->
-      <div class="lg:col-span-7 space-y-8 relative">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-24 relative z-10 w-full">
+      <div class="grid lg:grid-cols-12 gap-8 items-center">
         
-        <!-- Sky-Blue Radial Glow behind headline -->
-        <div class="absolute -top-12 -left-12 w-96 h-96 bg-sky/20 blur-3xl rounded-full pointer-events-none"></div>
-
-        <!-- Eyebrow Label -->
-        <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-[13px] font-bold text-sky uppercase tracking-[0.12em] shadow-sm">
-          <svg class="w-4 h-4 text-sky" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
-          <span>Innovative Marketing Concepts</span>
-        </div>
-
-        <!-- Main Headline -->
-        <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight leading-none text-white">
-          STARKE WERBUNG FÜR IHR <span class="text-gradient-sky">UNTERNEHMEN</span>
-        </h1>
-
-        <!-- Subline -->
-        <p class="text-lg sm:text-xl text-ice/90 max-w-xl font-normal leading-[1.65]">
-          Von der ersten kreativen Idee über meisterhafte Sonderanfertigungen bis hin zur weltweiten POS-Logistik. Wir schaffen emotionale Markenmomente, die nachhaltig im Gedächtnis bleiben.
-        </p>
-
-        <!-- CTA Action Buttons -->
-        <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 pt-2">
-          <button onclick="toggleModal(true)" class="px-8 py-4 rounded-xl font-bold text-[15px] text-white bg-primary hover:bg-bright btn-glow transition-all flex items-center justify-center gap-2">
-            <span>Kostenloses Erstgespräch</span>
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
-          </button>
+        <!-- Left Hero Content Column (~45%) -->
+        <div class="lg:col-span-6 space-y-6 relative reveal active">
           
-          <a href="#projects" class="px-8 py-4 rounded-xl font-bold text-[15px] text-white border-2 border-white/30 hover:border-white hover:bg-white/10 transition-all text-center">
-            Projekte Entdecken
-          </a>
+          <!-- Subtle Sky Glow behind H1 with gentle pulse -->
+          <div class="absolute -top-12 -left-12 w-96 h-96 bg-sky/20 blur-3xl rounded-full pointer-events-none hero-glow-pulse"></div>
+
+          <!-- Eyebrow Label -->
+          <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-[14px] font-bold text-sky uppercase tracking-[0.12em] shadow-sm">
+            <span>Innovative Marketing Concepts</span>
+          </div>
+
+          <!-- Main Headline with Dramatic Line/Word Reveals -->
+          <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight leading-tight text-white relative z-10">
+            <span class="word-reveal-wrapper">
+              <span class="word-reveal-inner">Von der Idee zum</span>
+            </span>
+            <span class="word-reveal-wrapper">
+              <span class="word-reveal-inner">fertigen Werbemittel.</span>
+            </span>
+            <br class="hidden sm:inline" />
+            <span class="word-reveal-wrapper">
+              <span class="word-reveal-inner text-transparent bg-clip-text bg-gradient-to-r from-white via-ice to-sky">Alles aus einer Hand.</span>
+            </span>
+          </h1>
+
+          <!-- Subline -->
+          <p class="text-base sm:text-[18px] text-ice/90 font-normal leading-relaxed max-w-xl">
+            Wir konzipieren, fertigen und liefern maßgeschneiderte Werbeartikel & POS-Installationen für Marken und Agenturen – präzise, zuverlässig und komplett ohne Aufwand.
+          </p>
+
+          <!-- CTA Buttons -->
+          <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 pt-2">
+            <button onclick="toggleModal(true)" class="px-7 py-3.5 rounded-xl font-bold text-[15px] text-white bg-primary hover:bg-bright btn-glow transition-all flex items-center justify-center gap-2">
+              <span>Kostenloses Erstgespräch</span>
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+            </button>
+            
+            <a href="#agenturen" class="px-7 py-3.5 rounded-xl font-bold text-[15px] text-white border border-white/30 hover:border-white hover:bg-white/10 transition-all text-center">
+              Für Agenturen
+            </a>
+          </div>
+
+          <!-- Two Small Badges -->
+          <div class="flex items-center gap-6 pt-4 text-[14px] font-semibold text-ice/80">
+            <div class="flex items-center gap-2">
+              <svg class="w-4 h-4 text-sky" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+              <span>Seit 1993</span>
+            </div>
+            <div class="w-1.5 h-1.5 rounded-full bg-sky/40"></div>
+            <div class="flex items-center gap-2">
+              <svg class="w-4 h-4 text-sky" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+              <span>Made in Germany</span>
+            </div>
+          </div>
+
         </div>
 
       </div>
-
-      <!-- Right Floating Glassmorphism Cards -->
-      <!-- Glass cards: background rgba(10,31,68,0.35), backdrop-filter blur(16px), border 1px solid rgba(255,255,255,0.25), pure white text -->
-      <div class="lg:col-span-5 grid sm:grid-cols-1 gap-4 lg:gap-6 justify-end">
-        
-        <!-- Glass Card 1 -->
-        <div class="glass-card p-5 flex items-center gap-4 shadow-xl max-w-md ml-auto" style="background: rgba(10, 31, 68, 0.35); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border: 1px solid rgba(255, 255, 255, 0.25);">
-          <div class="w-12 h-12 rounded-xl bg-bright/25 border border-sky/40 flex items-center justify-center text-sky shrink-0">
-            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
-          </div>
-          <div>
-            <div class="text-lg font-extrabold text-white">Seit 1993 in Neuss</div>
-            <div class="text-xs text-white/90 font-medium">30+ Jahre Markt- & Produktionskompetenz</div>
-          </div>
-        </div>
-
-        <!-- Glass Card 2 -->
-        <div class="glass-card p-5 flex items-center gap-4 shadow-xl max-w-md ml-auto" style="background: rgba(10, 31, 68, 0.35); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border: 1px solid rgba(255, 255, 255, 0.25);">
-          <div class="w-12 h-12 rounded-xl bg-bright/25 border border-sky/40 flex items-center justify-center text-sky shrink-0">
-            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
-          </div>
-          <div>
-            <div class="text-lg font-extrabold text-white">Made in Germany</div>
-            <div class="text-xs text-white/90 font-medium">Höchste Qualitäts- & Sedex-Zertifizierung</div>
-          </div>
-        </div>
-
-        <!-- Glass Card 3 -->
-        <div class="glass-card p-5 flex items-center gap-4 shadow-xl max-w-md ml-auto" style="background: rgba(10, 31, 68, 0.35); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border: 1px solid rgba(255, 255, 255, 0.25);">
-          <div class="w-12 h-12 rounded-xl bg-bright/25 border border-sky/40 flex items-center justify-center text-sky shrink-0">
-            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"/></svg>
-          </div>
-          <div>
-            <div class="text-lg font-extrabold text-white">5.000+ Projekte</div>
-            <div class="text-xs text-white/90 font-medium">Erfolgreich realisierte Marken-Promotions</div>
-          </div>
-        </div>
-
-      </div>
-
     </div>
 
-    <!-- Animated Scroll-Down Indicator -->
-    <a href="#intro" class="absolute bottom-6 left-1/2 -translate-x-1/2 z-20 text-white/70 hover:text-white transition-colors flex flex-col items-center gap-2">
-      <span class="text-[11px] font-extrabold tracking-widest uppercase">Scrollen</span>
-      <svg class="w-5 h-5 animate-bounce text-sky" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"/></svg>
+    <!-- Floating Smooth Scroll Down Indicator -->
+    <a href="#fullservice" class="absolute bottom-6 left-1/2 transform -translate-x-1/2 z-10 flex flex-col items-center gap-1 text-xs text-ice/60 hover:text-sky transition-colors group">
+      <span class="tracking-widest uppercase font-semibold text-[11px]">Scrollen</span>
+      <svg class="w-5 h-5 text-sky animate-bounce group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"/>
+      </svg>
     </a>
   </section>
 
 
   <!-- ==========================================
-       SECTION 3: INTRO / VALUE PROPOSITION (Centered Header)
+       SECTION: PARTNER LOGOS ("Vertraut von führenden Marken")
+       Single Horizontal Row Continuous Scrolling Marquee Cards
        ========================================== -->
-  <section id="intro" class="py-16 lg:py-24 bg-white">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      
-      <!-- Center-Aligned Section Header -->
-      <div class="text-center max-w-[640px] mx-auto mb-16 reveal">
-        <span class="text-[13px] font-bold tracking-[0.12em] text-primary uppercase">Kreative Werbemittel & Promotions</span>
-        <h2 class="text-3xl sm:text-4xl font-extrabold text-navy mt-2 sky-underline-center">
-          Werbeartikel, die Begeisterung wecken
-        </h2>
-        <p class="text-slate text-[17px] leading-[1.65] mt-5">
-          Standard-Werbeartikel landen schnell in der Schublade. Wir gestalten Werbemittel und POS-Installationen, die haptisch überzeugen.
-        </p>
-      </div>
+  <section class="py-12 bg-mist border-b border-slate-200 overflow-hidden relative">
+    <div class="max-w-7xl mx-auto px-4 mb-6 text-center">
+      <h3 class="text-xs font-bold text-slate uppercase tracking-widest">Vertraut von führenden Marken & Partnern</h3>
+    </div>
 
-      <div class="grid lg:grid-cols-12 gap-12 items-center">
+    <!-- Horizontal Continuous Scrolling Card Track -->
+    <div class="relative w-full overflow-hidden flex items-center py-2">
+      <!-- Gradient Fades on edges -->
+      <div class="absolute left-0 top-0 bottom-0 w-20 bg-gradient-to-r from-mist to-transparent z-10 pointer-events-none"></div>
+      <div class="absolute right-0 top-0 bottom-0 w-20 bg-gradient-to-l from-mist to-transparent z-10 pointer-events-none"></div>
+
+      <div class="animate-marquee flex items-center gap-6">
         
-        <!-- Text Column -->
-        <div class="lg:col-span-6 space-y-6 reveal">
-          <p class="text-ink text-[16px] leading-[1.65]">
-            Wir bei <strong class="text-navy font-semibold">C-Concepts Vertriebs GmbH</strong> entwickeln exklusive Sonderanfertigungen, Marken-Gimmicks und komplette Handelsaktionen, die nachhaltige Kundenbindung schaffen.
-          </p>
-          <p class="text-ink text-[16px] leading-[1.65]">
-            Ob maßgeschneiderter Artikel für bundesweite Aktionen, limitierte VIP-Incentives oder Event-Promotions: Wir begleiten Sie mit Erfahrung, technischem Know-how und absoluter Zuverlässigkeit.
-          </p>
-
-          <!-- Feature Bullets -->
-          <div class="space-y-3 pt-2">
-            <div class="flex items-start gap-3">
-              <div class="w-6 h-6 rounded-full bg-ice flex items-center justify-center text-bright font-bold shrink-0 mt-0.5">✓</div>
-              <div class="text-navy font-semibold text-[16px]">Eigene Sonderanfertigungen nach Corporate Design Vorgaben</div>
-            </div>
-            <div class="flex items-start gap-3">
-              <div class="w-6 h-6 rounded-full bg-ice flex items-center justify-center text-bright font-bold shrink-0 mt-0.5">✓</div>
-              <div class="text-navy font-semibold text-[16px]">Höchste Qualitätsprüfungen und nachhaltige Materialauswahl</div>
-            </div>
-            <div class="flex items-start gap-3">
-              <div class="w-6 h-6 rounded-full bg-ice flex items-center justify-center text-bright font-bold shrink-0 mt-0.5">✓</div>
-              <div class="text-navy font-semibold text-[16px]">Termingenaue Direktbelieferung an Filialen, Events oder Kunden</div>
-            </div>
+        <!-- Logo Cards Set 1 (All 8 logos in one single row) -->
+        <div class="flex items-center gap-6 shrink-0">
+          <div class="w-32 sm:w-36 h-16 bg-white rounded-xl border border-slate-200/80 shadow-sm flex items-center justify-center p-2 hover:border-sky hover:shadow-md transition-all overflow-hidden shrink-0">
+            <img src="images/logo-chio.jpg" alt="Chio Chips Logo" class="max-h-12 max-w-[88%] object-contain mix-blend-multiply grayscale opacity-85 hover:grayscale-0 hover:opacity-100 transition-all transform scale-110">
           </div>
 
-          <div class="pt-4">
-            <button onclick="toggleModal(true)" class="inline-flex items-center text-primary font-bold hover:text-bright transition-colors text-[15px]">
-              <span>Jetzt Beratung anfordern</span>
-              <svg class="w-5 h-5 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
-            </button>
+          <div class="w-32 sm:w-36 h-16 bg-white rounded-xl border border-slate-200/80 shadow-sm flex items-center justify-center p-2 hover:border-sky hover:shadow-md transition-all overflow-hidden shrink-0">
+            <img src="images/logo-funny.jpg" alt="Funny-Frisch Logo" class="max-h-12 max-w-[88%] object-contain mix-blend-multiply grayscale opacity-85 hover:grayscale-0 hover:opacity-100 transition-all transform scale-110">
+          </div>
+
+          <div class="w-32 sm:w-36 h-16 bg-white rounded-xl border border-slate-200/80 shadow-sm flex items-center justify-center p-2 hover:border-sky hover:shadow-md transition-all overflow-hidden shrink-0">
+            <img src="images/logo-lipton.jpg" alt="Lipton Logo" class="max-h-12 max-w-[88%] object-contain mix-blend-multiply grayscale opacity-85 hover:grayscale-0 hover:opacity-100 transition-all transform scale-110">
+          </div>
+
+          <div class="w-32 sm:w-36 h-16 bg-white rounded-xl border border-slate-200/80 shadow-sm flex items-center justify-center p-2 hover:border-sky hover:shadow-md transition-all overflow-hidden shrink-0">
+            <img src="images/logo-pepsi.jpg" alt="Pepsi Logo" class="max-h-12 max-w-[88%] object-contain mix-blend-multiply grayscale opacity-85 hover:grayscale-0 hover:opacity-100 transition-all transform scale-110">
+          </div>
+
+          <div class="w-32 sm:w-36 h-16 bg-white rounded-xl border border-slate-200/80 shadow-sm flex items-center justify-center p-2 hover:border-sky hover:shadow-md transition-all overflow-hidden shrink-0">
+            <img src="images/logo-punica.jpg" alt="Punica Logo" class="max-h-12 max-w-[88%] object-contain mix-blend-multiply grayscale opacity-85 hover:grayscale-0 hover:opacity-100 transition-all transform scale-110">
+          </div>
+
+          <div class="w-32 sm:w-36 h-16 bg-white rounded-xl border border-slate-200/80 shadow-sm flex items-center justify-center p-2 hover:border-sky hover:shadow-md transition-all overflow-hidden shrink-0">
+            <img src="images/logo-rockstar.jpg" alt="Rockstar Energy Logo" class="max-h-12 max-w-[88%] object-contain mix-blend-multiply grayscale opacity-85 hover:grayscale-0 hover:opacity-100 transition-all transform scale-110">
+          </div>
+
+          <div class="w-32 sm:w-36 h-16 bg-white rounded-xl border border-slate-200/80 shadow-sm flex items-center justify-center p-2 hover:border-sky hover:shadow-md transition-all overflow-hidden shrink-0">
+            <img src="images/logo-oasis.jpg" alt="Oasis Logo" class="max-h-12 max-w-[88%] object-contain mix-blend-multiply grayscale opacity-85 hover:grayscale-0 hover:opacity-100 transition-all transform scale-110">
+          </div>
+
+          <div class="w-32 sm:w-36 h-16 bg-white rounded-xl border border-slate-200/80 shadow-sm flex items-center justify-center p-2 hover:border-sky hover:shadow-md transition-all overflow-hidden shrink-0">
+            <img src="images/sedex-logo.png" alt="Sedex Certified Logo" class="max-h-8 max-w-[88%] object-contain mix-blend-multiply grayscale opacity-85 hover:grayscale-0 hover:opacity-100 transition-all transform scale-105">
           </div>
         </div>
 
-        <!-- Image Showcase Column -->
-        <div class="lg:col-span-6 reveal reveal-delay-1">
-          <div class="relative">
-            <div class="img-tint-container rounded-2xl shadow-xl">
-              <img src="images/service-beratung.jpg" alt="C-Concepts Beratung und Planung" class="w-full h-[420px] object-cover rounded-2xl">
-            </div>
-            <div class="absolute -bottom-6 -left-6 bg-white p-6 rounded-2xl shadow-xl border border-slate-100 max-w-xs hidden sm:block">
-              <div class="flex items-center gap-4">
-                <div class="w-12 h-12 rounded-xl bg-primary flex items-center justify-center text-white font-extrabold text-xl">
-                  30+
-                </div>
-                <div>
-                  <div class="text-navy font-bold text-sm">Jahre POS-Erfahrung</div>
-                  <div class="text-slate text-xs">Made in Germany</div>
-                </div>
-              </div>
-            </div>
+        <!-- Logo Cards Set 2 (Duplicate for Continuous Loop) -->
+        <div class="flex items-center gap-6 shrink-0">
+          <div class="w-32 sm:w-36 h-16 bg-white rounded-xl border border-slate-200/80 shadow-sm flex items-center justify-center p-2 hover:border-sky hover:shadow-md transition-all overflow-hidden shrink-0">
+            <img src="images/logo-chio.jpg" alt="Chio Chips Logo" class="max-h-12 max-w-[88%] object-contain mix-blend-multiply grayscale opacity-85 hover:grayscale-0 hover:opacity-100 transition-all transform scale-110">
+          </div>
+
+          <div class="w-32 sm:w-36 h-16 bg-white rounded-xl border border-slate-200/80 shadow-sm flex items-center justify-center p-2 hover:border-sky hover:shadow-md transition-all overflow-hidden shrink-0">
+            <img src="images/logo-funny.jpg" alt="Funny-Frisch Logo" class="max-h-12 max-w-[88%] object-contain mix-blend-multiply grayscale opacity-85 hover:grayscale-0 hover:opacity-100 transition-all transform scale-110">
+          </div>
+
+          <div class="w-32 sm:w-36 h-16 bg-white rounded-xl border border-slate-200/80 shadow-sm flex items-center justify-center p-2 hover:border-sky hover:shadow-md transition-all overflow-hidden shrink-0">
+            <img src="images/logo-lipton.jpg" alt="Lipton Logo" class="max-h-12 max-w-[88%] object-contain mix-blend-multiply grayscale opacity-85 hover:grayscale-0 hover:opacity-100 transition-all transform scale-110">
+          </div>
+
+          <div class="w-32 sm:w-36 h-16 bg-white rounded-xl border border-slate-200/80 shadow-sm flex items-center justify-center p-2 hover:border-sky hover:shadow-md transition-all overflow-hidden shrink-0">
+            <img src="images/logo-pepsi.jpg" alt="Pepsi Logo" class="max-h-12 max-w-[88%] object-contain mix-blend-multiply grayscale opacity-85 hover:grayscale-0 hover:opacity-100 transition-all transform scale-110">
+          </div>
+
+          <div class="w-32 sm:w-36 h-16 bg-white rounded-xl border border-slate-200/80 shadow-sm flex items-center justify-center p-2 hover:border-sky hover:shadow-md transition-all overflow-hidden shrink-0">
+            <img src="images/logo-punica.jpg" alt="Punica Logo" class="max-h-12 max-w-[88%] object-contain mix-blend-multiply grayscale opacity-85 hover:grayscale-0 hover:opacity-100 transition-all transform scale-110">
+          </div>
+
+          <div class="w-32 sm:w-36 h-16 bg-white rounded-xl border border-slate-200/80 shadow-sm flex items-center justify-center p-2 hover:border-sky hover:shadow-md transition-all overflow-hidden shrink-0">
+            <img src="images/logo-rockstar.jpg" alt="Rockstar Energy Logo" class="max-h-12 max-w-[88%] object-contain mix-blend-multiply grayscale opacity-85 hover:grayscale-0 hover:opacity-100 transition-all transform scale-110">
+          </div>
+
+          <div class="w-32 sm:w-36 h-16 bg-white rounded-xl border border-slate-200/80 shadow-sm flex items-center justify-center p-2 hover:border-sky hover:shadow-md transition-all overflow-hidden shrink-0">
+            <img src="images/logo-oasis.jpg" alt="Oasis Logo" class="max-h-12 max-w-[88%] object-contain mix-blend-multiply grayscale opacity-85 hover:grayscale-0 hover:opacity-100 transition-all transform scale-110">
+          </div>
+
+          <div class="w-32 sm:w-36 h-16 bg-white rounded-xl border border-slate-200/80 shadow-sm flex items-center justify-center p-2 hover:border-sky hover:shadow-md transition-all overflow-hidden shrink-0">
+            <img src="images/sedex-logo.png" alt="Sedex Certified Logo" class="max-h-8 max-w-[88%] object-contain mix-blend-multiply grayscale opacity-85 hover:grayscale-0 hover:opacity-100 transition-all transform scale-105">
           </div>
         </div>
 
@@ -464,357 +525,140 @@
   </section>
 
 
+
+
+
+
   <!-- ==========================================
-       SECTION 4: PROCESS STRIP ("Von der Idee bis zum Point of Sale")
+       SECTION 3: FULL-SERVICE ("Alles aus einer Hand")
+       Horizontal 3-Step Connected Flow Grid
+       Dashed connector line 3px thick, clearly visible in --sky on desktop.
+       Slow stagger scroll reveal.
        ========================================== -->
-  <section id="process" class="py-16 lg:py-24 bg-mist border-y border-slate-100 relative">
+  <section id="fullservice" class="py-16 md:py-24 bg-white border-b border-slate-100">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       
-      <!-- Center-Aligned Section Header -->
-      <div class="text-center max-w-[640px] mx-auto mb-16 reveal">
-        <span class="text-[13px] font-bold tracking-[0.12em] text-primary uppercase">Nahtloser Workflow</span>
-        <h2 class="text-3xl sm:text-4xl font-extrabold text-navy mt-2 sky-underline-center">
-          Von der Idee bis zum Point of Sale
+      <!-- Centered Section Header -->
+      <div class="text-center max-w-3xl mx-auto mb-16 reveal">
+        <span class="text-[14px] font-bold tracking-widest text-primary uppercase">Full-Service Kompetenz</span>
+        <h2 class="text-3xl sm:text-4xl font-extrabold text-navy mt-2 mb-4 sky-underline-center">
+          Ein Ansprechpartner. Ein Paket. Kein Aufwand.
         </h2>
-        <p class="text-slate mt-5 text-[17px] leading-[1.65]">
-          Ein strukturierter 5-Stufen-Prozess garantiert erstklassige Ergebnisse ohne unerwartete Überraschungen.
+        <p class="text-slate text-base sm:text-lg mt-6 leading-relaxed">
+          Von der sicheren Einlagerung über die präzise Handkonfektionierung bis hin zur filialscharfen Logistik übernehmen wir den kompletten Prozess für Sie.
         </p>
       </div>
 
-      <!-- Process Steps Grid with Desktop Connecting Line -->
-      <div class="grid md:grid-cols-5 gap-6 relative">
+      <!-- Horizontal 3-Step Connected Flow Grid -->
+      <div class="grid md:grid-cols-3 gap-8 relative">
         
-        <!-- Connecting Line for Desktop -->
-        <div class="hidden md:block absolute top-[140px] left-8 right-8 h-0.5 bg-slate-200/80 -z-0 pointer-events-none"></div>
+        <!-- 3px Thick Dashed Connector Line in --sky on Desktop -->
+        <div class="hidden md:block absolute top-[110px] left-[15%] right-[15%] border-t-[3px] border-dashed border-sky -z-0 pointer-events-none"></div>
 
-        <!-- Step 1 -->
-        <div class="bg-white p-8 rounded-2xl shadow-md card-hover reveal flex flex-col justify-between relative z-10 border border-primary/10">
-          <div>
-            <!-- Number 52px gradient text -->
-            <div class="text-[52px] font-extrabold leading-none bg-gradient-to-r from-primary to-sky bg-clip-text text-transparent mb-3">01</div>
-            <!-- Lucide Icon in bright blue -->
-            <div class="w-11 h-11 rounded-xl bg-ice flex items-center justify-center text-bright mb-4">
-              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>
-            </div>
-            <h3 class="text-lg font-bold text-navy mb-2">Beratung & Idee</h3>
-            <p class="text-slate text-[16px] leading-[1.65] line-clamp-3">Analysieren Ihrer Zielgruppe, Budgets und Kampagnenziele für maßgeschneiderte Werbeideen.</p>
-          </div>
-        </div>
-
-        <!-- Step 2 -->
-        <div class="bg-white p-8 rounded-2xl shadow-md card-hover reveal reveal-delay-1 flex flex-col justify-between relative z-10 border border-primary/10">
-          <div>
-            <div class="text-[52px] font-extrabold leading-none bg-gradient-to-r from-primary to-sky bg-clip-text text-transparent mb-3">02</div>
-            <div class="w-11 h-11 rounded-xl bg-ice flex items-center justify-center text-bright mb-4">
-              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></svg>
-            </div>
-            <h3 class="text-lg font-bold text-navy mb-2">Design & Muster</h3>
-            <p class="text-slate text-[16px] leading-[1.65] line-clamp-3">Visualisierung in 3D, Materialmuster und Freigabeprotokoll vor Serienstart.</p>
-          </div>
-        </div>
-
-        <!-- Step 3 -->
-        <div class="bg-white p-8 rounded-2xl shadow-md card-hover reveal reveal-delay-2 flex flex-col justify-between relative z-10 border border-primary/10">
-          <div>
-            <div class="text-[52px] font-extrabold leading-none bg-gradient-to-r from-primary to-sky bg-clip-text text-transparent mb-3">03</div>
-            <div class="w-11 h-11 rounded-xl bg-ice flex items-center justify-center text-bright mb-4">
-              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"/></svg>
-            </div>
-            <h3 class="text-lg font-bold text-navy mb-2">Produktion</h3>
-            <p class="text-slate text-[16px] leading-[1.65] line-clamp-3">Präzise Fertigung und Veredelung unter Einhaltung strenger Qualitätsvorgaben.</p>
-          </div>
-        </div>
-
-        <!-- Step 4 -->
-        <div class="bg-white p-8 rounded-2xl shadow-md card-hover reveal reveal-delay-3 flex flex-col justify-between relative z-10 border border-primary/10">
-          <div>
-            <div class="text-[52px] font-extrabold leading-none bg-gradient-to-r from-primary to-sky bg-clip-text text-transparent mb-3">04</div>
-            <div class="w-11 h-11 rounded-xl bg-ice flex items-center justify-center text-bright mb-4">
-              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/></svg>
-            </div>
-            <h3 class="text-lg font-bold text-navy mb-2">Konfektion</h3>
-            <p class="text-slate text-[16px] leading-[1.65] line-clamp-3">Individuelle Set-Zusammenstellung, Branding der Verpackungen und Beilagen.</p>
-          </div>
-        </div>
-
-        <!-- Step 5 -->
-        <div class="bg-white p-8 rounded-2xl shadow-md card-hover reveal flex flex-col justify-between relative z-10 border border-primary/10">
-          <div>
-            <div class="text-[52px] font-extrabold leading-none bg-gradient-to-r from-primary to-sky bg-clip-text text-transparent mb-3">05</div>
-            <div class="w-11 h-11 rounded-xl bg-ice flex items-center justify-center text-bright mb-4">
-              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
-            </div>
-            <h3 class="text-lg font-bold text-navy mb-2">POS-Logistik</h3>
-            <p class="text-slate text-[16px] leading-[1.65] line-clamp-3">Termingerechter Transport und Verteilung direkt an den Point of Sale.</p>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-
-  <!-- ==========================================
-       SECTION 5: FULL-SERVICE (Centered Header, 4 Cards)
-       ========================================== -->
-  <section id="services" class="py-16 lg:py-24 bg-ice">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      
-      <!-- Center-Aligned Section Header -->
-      <div class="text-center max-w-[640px] mx-auto mb-16 reveal">
-        <span class="text-[13px] font-bold tracking-[0.12em] text-primary uppercase">Rundum-Sorglos-Paket</span>
-        <h2 class="text-3xl sm:text-4xl font-extrabold text-navy mt-2 sky-underline-center">
-          Unsere 4 Säulen des Werbemittel-Erfolgs
-        </h2>
-        <p class="text-slate mt-5 text-[17px] leading-[1.65]">
-          Alles aus einer Hand – von der strategischen Planung bis zur weltweiten Lager- und Versandlogistik.
-        </p>
-      </div>
-
-      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-        
-        <div class="bg-white p-8 rounded-2xl shadow-md card-hover flex flex-col justify-between reveal">
-          <div>
-            <div class="w-12 h-12 rounded-xl bg-ice text-bright flex items-center justify-center mb-6">
-              <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>
-            </div>
-            <h3 class="text-xl font-bold text-navy mb-3">Planung & Beratung</h3>
-            <p class="text-slate text-[16px] leading-[1.65] line-clamp-3">
-              Persönliche Betreuung von der ersten Konzeption über Machbarkeitsprüfungen bis hin zur Auswahl der optimalen Veredelungstechniken.
-            </p>
-          </div>
-          <div class="mt-8 pt-4 border-t border-slate-100">
-            <span class="text-xs font-bold text-bright uppercase tracking-wider">Kreative Strategie</span>
-          </div>
-        </div>
-
-        <div class="bg-white p-8 rounded-2xl shadow-md card-hover flex flex-col justify-between reveal reveal-delay-1">
-          <div>
-            <div class="w-12 h-12 rounded-xl bg-ice text-bright flex items-center justify-center mb-6">
-              <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 4H6a2 2 0 00-2 2v12a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-2m-4-1v8m0 0l3-3m-3 3L9 8m-5 5h2.586a1 1 0 01.707.293l2.414 2.414a1 1 0 00.707.293h3.172a1 1 0 00.707-.293l2.414-2.414a1 1 0 01.707-.293H20"/></svg>
-            </div>
-            <h3 class="text-xl font-bold text-navy mb-3">Logistik & Lagerung</h3>
-            <p class="text-slate text-[16px] leading-[1.65] line-clamp-3">
-              Moderne Hochregallager in Deutschland für flexible Abrufkontingente, Zwischenlagerung und punktgenauen Filialversand.
-            </p>
-          </div>
-          <div class="mt-8 pt-4 border-t border-slate-100">
-            <span class="text-xs font-bold text-bright uppercase tracking-wider">Effiziente Abläufe</span>
-          </div>
-        </div>
-
-        <div class="bg-white p-8 rounded-2xl shadow-md card-hover flex flex-col justify-between reveal reveal-delay-2">
-          <div>
-            <div class="w-12 h-12 rounded-xl bg-ice text-bright flex items-center justify-center mb-6">
-              <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/></svg>
-            </div>
-            <h3 class="text-xl font-bold text-navy mb-3">Verpackung & Konfektion</h3>
-            <p class="text-slate text-[16px] leading-[1.65] line-clamp-3">
-              Manuelle und maschinelle Konfektionierung vielteiliger Sets, individuelle Geschenkverpackungen und gebrandete Mailings.
-            </p>
-          </div>
-          <div class="mt-8 pt-4 border-t border-slate-100">
-            <span class="text-xs font-bold text-bright uppercase tracking-wider">Perfekt Verpackt</span>
-          </div>
-        </div>
-
-        <!-- FEATURED CARD IN NAVY -->
-        <div class="bg-navy text-white p-8 rounded-2xl shadow-2xl relative overflow-hidden flex flex-col justify-between reveal reveal-delay-3 border-2 border-bright">
-          <div class="absolute top-4 right-4 bg-sky text-navy text-[10px] font-extrabold uppercase px-2.5 py-1 rounded-full">
-            FEATURED
-          </div>
-          <div>
-            <div class="w-12 h-12 rounded-xl bg-white/10 text-sky flex items-center justify-center mb-6">
-              <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"/></svg>
-            </div>
-            <h3 class="text-xl font-bold text-white mb-3">Full-Service Abwicklung</h3>
-            <p class="text-ice/90 text-[16px] leading-[1.65] line-clamp-3">
-              Wir übernehmen das komplette Projektmanagement von A bis Z. Ein fester Ansprechpartner sorgt für reibungslose Übergänge, Termin- und Budgettreue.
-            </p>
-          </div>
-          <div class="mt-8 pt-4 border-t border-white/10">
-            <button onclick="toggleModal(true)" class="w-full py-3.5 bg-primary hover:bg-bright text-white font-bold rounded-xl text-[15px] transition-all btn-glow text-center">
-              Full-Service Anfragen
-            </button>
-          </div>
-        </div>
-
-      </div>
-
-    </div>
-  </section>
-
-
-  <!-- ==========================================
-       SECTION 6: CTA STRIP ("Ihre Idee. Unsere Umsetzung.")
-       ========================================== -->
-  <section class="py-16 bg-gradient-to-r from-primary via-bright to-primary text-white relative overflow-hidden">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10 space-y-6">
-      <h2 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight">
-        Ihre Idee. Unsere Umsetzung.
-      </h2>
-      <p class="text-lg sm:text-xl text-ice/90 max-w-2xl mx-auto font-normal">
-        Lassen Sie uns gemeinsam ein Werbemittel entwickeln, das aus der Masse heraussticht.
-      </p>
-      <div class="pt-4">
-        <button onclick="toggleModal(true)" class="px-9 py-4 rounded-xl font-extrabold text-[15px] text-navy bg-white hover:bg-ice shadow-xl transition-all hover:scale-105 inline-flex items-center gap-2">
-          <span>Jetzt unverbindlich anfragen</span>
-          <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
-        </button>
-      </div>
-    </div>
-  </section>
-
-
-  <!-- ==========================================
-       SECTION 7: INNOVATIVE WERBEPRODUKTE & PROJEKTE (Strict CSS Grid Layout, Pepsi 16/9, 6 cards below 4/3)
-       ========================================== -->
-  <section id="projects" class="py-16 lg:py-24 bg-white">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      
-      <!-- Center-Aligned Section Header -->
-      <div class="text-center max-w-[640px] mx-auto mb-16 reveal">
-        <span class="text-[13px] font-bold tracking-[0.12em] text-primary uppercase">Portfolio & Referenzen</span>
-        <h2 class="text-3xl sm:text-4xl font-extrabold text-navy mt-2 sky-underline-center">
-          Innovative Werbeprodukte & Projekte
-        </h2>
-        <p class="text-slate mt-5 text-[17px] leading-[1.65]">
-          Ein Einblick in herausragende Kundenprojekte und maßgeschneiderte Sonderanfertigungen.
-        </p>
-      </div>
-
-      <!-- STRICT PROJECTS GRID -->
-      <div class="space-y-8">
-        
-        <!-- FEATURED PEPSI CARD: Full Width, 2 Columns (Text 45% / Image 55%), Aspect 16/9, min-height 380px -->
-        <div class="bg-mist rounded-[20px] overflow-hidden shadow-md card-hover border border-slate-200 grid lg:grid-cols-12 items-center min-h-[380px] reveal">
-          <div class="lg:col-span-5 p-8 lg:p-10 space-y-5">
-            <div class="inline-flex items-center gap-2 bg-primary/10 text-primary font-bold text-xs px-3 py-1 rounded-full uppercase">
-              ★ HERO CASE STUDY: PEPSI PROMOTION
-            </div>
-            <h3 class="text-2xl sm:text-3xl font-extrabold text-navy">
-              Punica & Pepsi Promotion-Scooter & Mofa Branding
-            </h3>
-            <p class="text-slate text-[16px] leading-[1.65] line-clamp-3">
-              Vollständige Konzeption und Veredelung von Retro-Mofas für bundesweite POS-Gewinnspiele und Event-Promotions. Inklusive maßgeschneidertem Transport-Setup und Filialauslieferung.
-            </p>
-            <a href="#contact" onclick="toggleModal(true)" class="inline-flex items-center gap-1.5 text-primary font-bold text-[15px] hover:text-bright pt-2">
-              <span>Mehr erfahren</span>
-              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
-            </a>
-          </div>
-          <div class="lg:col-span-7 aspect-[16/9] h-full relative img-tint-container">
-            <img src="images/punica-mofa.jpg" alt="Punica Promotion Mofa" class="w-full h-full object-cover">
-          </div>
-        </div>
-
-        <!-- 3-COLUMN GRID BELOW (2 cols tablet, 1 mobile, equal height cards, aspect 4/3 images, 6 cards total) -->
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <!-- Step 1: Lagerung & Bestände -->
+        <div class="bg-mist rounded-[20px] p-6 border border-slate-200/80 shadow-sm card-hover reveal flex flex-col h-full relative z-10">
           
-          <!-- Card 1 -->
-          <div class="bg-mist rounded-[20px] p-6 shadow-md card-hover border border-slate-200 flex flex-col justify-between h-full reveal">
-            <div>
-              <div class="aspect-[4/3] rounded-xl overflow-hidden mb-5 img-tint-container relative">
-                <img src="images/rockstar-snowboard.jpg" alt="Rockstar Energy Snowboard Edition" class="w-full h-full object-cover">
-              </div>
-              <h3 class="text-[20px] font-bold text-navy mb-2">Rockstar Energy Snowboard Edition</h3>
-              <p class="text-slate text-[16px] leading-[1.65] line-clamp-3">
-                Exklusiv gebrandete High-Performance Snowboards für Wintersport-Aktionen und Event-Sponsoring in den Alpen.
-              </p>
-            </div>
-            <a href="#contact" onclick="toggleModal(true)" class="inline-flex items-center gap-1.5 text-primary font-bold text-[15px] hover:text-bright pt-4 mt-auto">
-              <span>Mehr erfahren</span>
-              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
-            </a>
+          <!-- Numbered Circle Badge -->
+          <div class="w-10 h-10 rounded-full bg-primary text-white font-extrabold text-sm flex items-center justify-center shadow-md mb-4 border-2 border-white">
+            01
           </div>
 
-          <!-- Card 2 -->
-          <div class="bg-mist rounded-[20px] p-6 shadow-md card-hover border border-slate-200 flex flex-col justify-between h-full reveal reveal-delay-1">
-            <div>
-              <div class="aspect-[4/3] rounded-xl overflow-hidden mb-5 img-tint-container relative">
-                <img src="images/kicker-table.jpg" alt="Chio Chips Kicker Tisch" class="w-full h-full object-cover">
-              </div>
-              <h3 class="text-[20px] font-bold text-navy mb-2">Chio Chips Kicker-Tisch</h3>
-              <p class="text-slate text-[16px] leading-[1.65] line-clamp-3">
-                Robustes Gastro-Tischkicker-System im vollen Markenbranding für WM/EM-Aktionen und POS-Gewinnspiele.
-              </p>
-            </div>
-            <a href="#contact" onclick="toggleModal(true)" class="inline-flex items-center gap-1.5 text-primary font-bold text-[15px] hover:text-bright pt-4 mt-auto">
-              <span>Mehr erfahren</span>
-              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
-            </a>
+          <!-- Photo Frame 4/3 -->
+          <div data-replace="true" class="aspect-[4/3] rounded-[20px] bg-white overflow-hidden relative border border-slate-200/60 shadow-sm img-frame-tint flex items-center justify-center mb-4">
+            <img 
+              src="images/fullservice/lager.jpg" 
+              alt="Moderner Logistik-Hochregallagerraum mit Paletten" 
+              width="1600" 
+              height="1200" 
+              loading="lazy"
+              class="w-full h-full object-cover rounded-[20px]"
+              onerror="this.onerror=null; this.src='images/service-logistik.jpg'; this.onerror=function(){ this.parentElement.classList.add('bg-ice-fallback'); this.style.display='none'; };"
+            >
           </div>
 
-          <!-- Card 3 -->
-          <div class="bg-mist rounded-[20px] p-6 shadow-md card-hover border border-slate-200 flex flex-col justify-between h-full reveal reveal-delay-2">
-            <div>
-              <div class="aspect-[4/3] rounded-xl overflow-hidden mb-5 img-tint-container relative">
-                <img src="images/coffee-bike.jpg" alt="Mobile Bar Coffee Bike" class="w-full h-full object-cover">
-              </div>
-              <h3 class="text-[20px] font-bold text-navy mb-2">Mobile Coffee Bar Bike</h3>
-              <p class="text-slate text-[16px] leading-[1.65] line-clamp-3">
-                Mobiles Barista-Fahrrad mit gebrandeten Bechern & Schirmen für Messeauftritte und Roadshows.
-              </p>
-            </div>
-            <a href="#contact" onclick="toggleModal(true)" class="inline-flex items-center gap-1.5 text-primary font-bold text-[15px] hover:text-bright pt-4 mt-auto">
-              <span>Mehr erfahren</span>
-              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
-            </a>
-          </div>
-
-          <!-- Card 4 -->
-          <div class="bg-mist rounded-[20px] p-6 shadow-md card-hover border border-slate-200 flex flex-col justify-between h-full reveal">
-            <div>
-              <div class="aspect-[4/3] rounded-xl overflow-hidden mb-5 img-tint-container relative">
-                <img src="images/barrel-prod.jpg" alt="Holzfass-Kühler Display" class="w-full h-full object-cover">
-              </div>
-              <h3 class="text-[20px] font-bold text-navy mb-2">Holzfass-Kühler POS Installation</h3>
-              <p class="text-slate text-[16px] leading-[1.65] line-clamp-3">
-                Authentische Echtholz-Fässer mit integrierter Kühlung für Premium-Getränkemarken am Point of Sale.
-              </p>
-            </div>
-            <a href="#contact" onclick="toggleModal(true)" class="inline-flex items-center gap-1.5 text-primary font-bold text-[15px] hover:text-bright pt-4 mt-auto">
-              <span>Mehr erfahren</span>
-              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
-            </a>
-          </div>
-
-          <!-- Card 5 -->
-          <div class="bg-mist rounded-[20px] p-6 shadow-md card-hover border border-slate-200 flex flex-col justify-between h-full reveal reveal-delay-1">
-            <div>
-              <div class="aspect-[4/3] rounded-xl overflow-hidden mb-5 img-tint-container relative">
-                <img src="images/pepsi-becher.jpg" alt="Pepsi Event Becher Serie" class="w-full h-full object-cover">
-              </div>
-              <h3 class="text-[20px] font-bold text-navy mb-2">Pepsi Event Becher-Serie</h3>
-              <p class="text-slate text-[16px] leading-[1.65] line-clamp-3">
-                Hochwertige Mehrweg-Becherserie mit 360-Grad IML-Druck für Festivals und Stadion-Events.
-              </p>
-            </div>
-            <a href="#contact" onclick="toggleModal(true)" class="inline-flex items-center gap-1.5 text-primary font-bold text-[15px] hover:text-bright pt-4 mt-auto">
-              <span>Mehr erfahren</span>
-              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
-            </a>
-          </div>
-
-          <!-- Card 6 -->
-          <div class="bg-mist rounded-[20px] p-6 shadow-md card-hover border border-slate-200 flex flex-col justify-between h-full reveal reveal-delay-2">
-            <div>
-              <div class="aspect-[4/3] rounded-xl overflow-hidden mb-5 img-tint-container relative">
-                <img src="images/service-konfektion.jpg" alt="Custom POS Promotion Set" class="w-full h-full object-cover">
-              </div>
-              <h3 class="text-[20px] font-bold text-navy mb-2">Custom POS Promotion Set</h3>
-              <p class="text-slate text-[16px] leading-[1.65] line-clamp-3">
-                Vollständig konfektionierte Promotion-Pakete inklusive Displays, Flyern und Werbegeschenken.
-              </p>
-            </div>
-            <a href="#contact" onclick="toggleModal(true)" class="inline-flex items-center gap-1.5 text-primary font-bold text-[15px] hover:text-bright pt-4 mt-auto">
-              <span>Mehr erfahren</span>
-              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
-            </a>
-          </div>
-
+          <h3 class="text-[20px] font-bold text-navy mb-2">Lagerung & Bestände</h3>
+          <p class="text-[16px] text-slate leading-relaxed mb-4">
+            Sichere Einlagerung Ihrer Werbemittel in eigenen Hochregallagern mit digitaler Bestandsführung.
+          </p>
+          <button onclick="toggleModal(true)" class="mt-auto text-[15px] font-semibold text-primary hover:text-bright inline-flex items-center gap-1 pt-2">
+            <span>Mehr erfahren</span>
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+          </button>
         </div>
 
+        <!-- Step 2: Konfektion & Montage -->
+        <div class="bg-mist rounded-[20px] p-6 border border-slate-200/80 shadow-sm card-hover reveal reveal-delay-1 flex flex-col h-full relative z-10">
+          
+          <!-- Numbered Circle Badge -->
+          <div class="w-10 h-10 rounded-full bg-bright text-white font-extrabold text-sm flex items-center justify-center shadow-md mb-4 border-2 border-white">
+            02
+          </div>
+
+          <!-- Photo Frame 4/3 -->
+          <div data-replace="true" class="aspect-[4/3] rounded-[20px] bg-white overflow-hidden relative border border-slate-200/60 shadow-sm img-frame-tint flex items-center justify-center mb-4">
+            <img 
+              src="images/service-konfektion.jpg" 
+              alt="Hände verpacken Werbeartikel präzise in Kartons am Tisch" 
+              width="1600" 
+              height="1200" 
+              loading="lazy"
+              class="w-full h-full object-cover rounded-[20px]"
+              onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=1600&q=80'; this.onerror=function(){ this.parentElement.classList.add('bg-ice-fallback'); this.style.display='none'; };"
+            >
+          </div>
+
+          <h3 class="text-[20px] font-bold text-navy mb-2">Konfektion & Montage</h3>
+          <p class="text-[16px] text-slate leading-relaxed mb-4">
+            Individuelle Banderolierung, Set-Zusammenstellung und präzise Handmontage nach exakten Kundenvorgaben.
+          </p>
+          <button onclick="toggleModal(true)" class="mt-auto text-[15px] font-semibold text-primary hover:text-bright inline-flex items-center gap-1 pt-2">
+            <span>Mehr erfahren</span>
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+          </button>
+        </div>
+
+        <!-- Step 3: Versand & Logistik -->
+        <div class="bg-mist rounded-[20px] p-6 border border-slate-200/80 shadow-sm card-hover reveal reveal-delay-2 flex flex-col h-full relative z-10">
+          
+          <!-- Numbered Circle Badge -->
+          <div class="w-10 h-10 rounded-full bg-sky text-navy font-extrabold text-sm flex items-center justify-center shadow-md mb-4 border-2 border-white">
+            03
+          </div>
+
+          <!-- Photo Frame 4/3 -->
+          <div data-replace="true" class="aspect-[4/3] rounded-[20px] bg-white overflow-hidden relative border border-slate-200/60 shadow-sm img-frame-tint flex items-center justify-center mb-4">
+            <img 
+              src="images/fullservice/versand.jpg" 
+              alt="Logistik-Lieferwagen Beladung mit Kartons für Filialen" 
+              width="1600" 
+              height="1200" 
+              loading="lazy"
+              class="w-full h-full object-cover rounded-[20px]"
+              onerror="this.onerror=null; this.src='images/service-logistik.jpg'; this.onerror=function(){ this.parentElement.classList.add('bg-ice-fallback'); this.style.display='none'; };"
+            >
+          </div>
+
+          <h3 class="text-[20px] font-bold text-navy mb-2">Versand & Logistik</h3>
+          <p class="text-[16px] text-slate leading-relaxed mb-4">
+            Punktgenaue Direktbelieferung an Tausende Filialen, Events oder Aktionsstandorte aus einer Hand.
+          </p>
+          <button onclick="toggleModal(true)" class="mt-auto text-[15px] font-semibold text-primary hover:text-bright inline-flex items-center gap-1 pt-2">
+            <span>Mehr erfahren</span>
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+          </button>
+        </div>
+
+      </div>
+
+      <!-- Highlighted Strip Below -->
+      <div class="mt-12 bg-gradient-to-r from-navy via-primary to-navy rounded-[20px] p-6 sm:p-8 text-white shadow-xl flex flex-col md:flex-row items-center justify-between gap-6 reveal">
+        <div class="space-y-1 text-center md:text-left">
+          <div class="text-sky font-bold text-xs uppercase tracking-widest">Sorglos-Paket</div>
+          <p class="text-lg sm:text-xl font-bold">Wir lagern, konfektionieren und liefern direkt an Ihre Filialen.</p>
+        </div>
+        <button onclick="toggleModal(true)" class="px-6 py-3 rounded-xl font-bold text-[15px] text-navy bg-white hover:bg-ice transition-all shrink-0 shadow-md">
+          Full-Service anfragen
+        </button>
       </div>
 
     </div>
@@ -822,177 +666,80 @@
 
 
   <!-- ==========================================
-       SECTION 8: CLIENTS / LOGOS (Directly on white, height 44-56px, no pills) & TESTIMONIALS (36px padding, 18px quote in ink, 40px sky quote icon)
+       SECTION 4: "PRODUKTE, DIE ES NOCH NICHT GIBT" (Eigenentwicklung)
+       Background: Ice (#EAF2FF)
+       Overlapping text container & floating "Made in Germany" badge on photo frame.
        ========================================== -->
-  <section class="py-16 lg:py-24 bg-mist border-y border-slate-100">
+  <section id="sonderfertigung" class="py-16 md:py-24 bg-ice border-b border-slate-200/60 overflow-hidden">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      
-      <!-- Center-Aligned Section Header -->
-      <div class="text-center max-w-[640px] mx-auto mb-14 reveal">
-        <span class="text-[13px] font-bold tracking-[0.12em] text-primary uppercase">Vertrauen führender Marken</span>
-        <h2 class="text-3xl sm:text-4xl font-extrabold text-navy mt-2 sky-underline-center">
-          Unsere Partner & Auftraggeber
-        </h2>
-      </div>
-
-      <!-- Clean Logos Row Directly on White Background (No Pills/Boxes, Height 44-56px / h-12 to h-14, Grayscale 0.8) -->
-      <div class="flex flex-wrap items-center justify-center gap-10 md:gap-14 py-10 reveal">
-        <img src="images/logo-pepsi.jpg" alt="Pepsi" class="logo-clean h-12 md:h-14 w-auto object-contain">
-        <img src="images/logo-lipton.jpg" alt="Lipton" class="logo-clean h-12 md:h-14 w-auto object-contain">
-        <img src="images/logo-chio.jpg" alt="Chio" class="logo-clean h-12 md:h-14 w-auto object-contain">
-        <img src="images/logo-funny.jpg" alt="funny-frisch" class="logo-clean h-12 md:h-14 w-auto object-contain">
-        <img src="images/logo-rockstar.jpg" alt="Rockstar Energy" class="logo-clean h-12 md:h-14 w-auto object-contain">
-        <img src="images/logo-punica.jpg" alt="Punica" class="logo-clean h-12 md:h-14 w-auto object-contain">
-        <img src="images/logo-oasis.jpg" alt="Oasis" class="logo-clean h-12 md:h-14 w-auto object-contain">
-      </div>
-
-      <!-- Testimonials Grid (Padding 36px / p-9, Quote 18px/1.7 in ink, Sky quote icon 40px) -->
-      <div class="grid md:grid-cols-3 gap-8 mt-16">
+      <div class="grid lg:grid-cols-12 gap-8 items-center">
         
-        <!-- Card 1 -->
-        <div class="bg-white p-9 rounded-2xl shadow-md border border-slate-100 flex flex-col justify-between card-hover reveal h-full">
-          <div>
-            <!-- Sky-colored quote icon 40px -->
-            <div class="text-sky mb-5">
-              <svg class="w-10 h-10 text-sky" fill="currentColor" viewBox="0 0 24 24"><path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/></svg>
-            </div>
-            <p class="text-ink text-[18px] leading-[1.7] italic mb-8">
-              „C-Concepts setzt unsere Werbeartikel-Ideen seit Jahren punktgenau um. Selbst bei extrem knappen Terminen für unsere bundesweiten Handelsaktionen bleibt die Qualität erstklassig.“
-            </p>
-          </div>
-          <div class="flex items-center justify-between pt-6 border-t border-slate-100">
-            <div class="flex items-center gap-4">
-              <!-- Avatar Circle 48px -->
-              <div class="w-12 h-12 rounded-full bg-primary text-white font-extrabold flex items-center justify-center text-base shadow-sm">
-                MK
-              </div>
-              <div>
-                <div class="text-base font-bold text-navy">Marketing & Brand Lead</div>
-                <div class="text-xs text-slate-500">Getränkekonzern Deutschland</div>
-              </div>
-            </div>
-            <img src="images/logo-pepsi.jpg" alt="Pepsi Partner" class="h-8 w-auto object-contain opacity-70">
-          </div>
-        </div>
-
-        <!-- Card 2 -->
-        <div class="bg-white p-9 rounded-2xl shadow-md border border-slate-100 flex flex-col justify-between card-hover reveal reveal-delay-1 h-full">
-          <div>
-            <div class="text-sky mb-5">
-              <svg class="w-10 h-10 text-sky" fill="currentColor" viewBox="0 0 24 24"><path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/></svg>
-            </div>
-            <p class="text-ink text-[18px] leading-[1.7] italic mb-8">
-              „Die Flexibilität in der Konfektionierung und die professionelle Lagerlogistik entlasten unser eigenes Team enorm. Ein Partner, auf den man sich zu 100% verlassen kann.“
-            </p>
-          </div>
-          <div class="flex items-center justify-between pt-6 border-t border-slate-100">
-            <div class="flex items-center gap-4">
-              <div class="w-12 h-12 rounded-full bg-bright text-white font-extrabold flex items-center justify-center text-base shadow-sm">
-                TL
-              </div>
-              <div>
-                <div class="text-base font-bold text-navy">Trade Logistics Director</div>
-                <div class="text-xs text-slate-500">Snack & FMCG Brand</div>
-              </div>
-            </div>
-            <img src="images/logo-chio.jpg" alt="Chio Partner" class="h-8 w-auto object-contain opacity-70">
-          </div>
-        </div>
-
-        <!-- Card 3 -->
-        <div class="bg-white p-9 rounded-2xl shadow-md border border-slate-100 flex flex-col justify-between card-hover reveal reveal-delay-2 h-full">
-          <div>
-            <div class="text-sky mb-5">
-              <svg class="w-10 h-10 text-sky" fill="currentColor" viewBox="0 0 24 24"><path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/></svg>
-            </div>
-            <p class="text-ink text-[18px] leading-[1.7] italic mb-8">
-              „Vom Remundi-Grill Incentive bis zu den gebrandeten Merchandise-Sets: Die Qualität spricht für sich. Made in Germany ist bei C-Concepts ein echtes Versprechen.“
-            </p>
-          </div>
-          <div class="flex items-center justify-between pt-6 border-t border-slate-100">
-            <div class="flex items-center gap-4">
-              <div class="w-12 h-12 rounded-full bg-navy text-white font-extrabold flex items-center justify-center text-base shadow-sm">
-                SB
-              </div>
-              <div>
-                <div class="text-base font-bold text-navy">Senior Event Manager</div>
-                <div class="text-xs text-slate-500">Promotion Agency</div>
-              </div>
-            </div>
-            <img src="images/logo-funny.jpg" alt="funny-frisch Partner" class="h-8 w-auto object-contain opacity-70">
-          </div>
-        </div>
-
-      </div>
-
-    </div>
-  </section>
-
-
-  <!-- ==========================================
-       SECTION 9: REMUNDI GRILL-ERLEBNIS
-       ========================================== -->
-  <section id="remundi" class="py-16 lg:py-24 bg-gradient-to-br from-navy via-navy to-primary text-white relative overflow-hidden">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="grid lg:grid-cols-12 gap-12 items-center">
-        
-        <!-- Text & Bullet Points -->
-        <div class="lg:col-span-6 space-y-6 reveal">
-          <div class="inline-flex items-center gap-2 bg-bright/20 text-sky px-3.5 py-1 rounded-full text-xs font-extrabold uppercase tracking-wider">
-            EXKLUSIVES PREMIUM-HIGHLIGHT
-          </div>
-          <h2 class="text-3xl sm:text-4xl font-extrabold leading-tight">
-            Remundi Grill-Erlebnis – Das ultimative Outdoor-Incentive
+        <!-- Left Text Column (Overlapping photo column with glassmorphism card) -->
+        <div class="lg:col-span-6 space-y-6 reveal-left lg:z-10 lg:-mr-8 bg-white/90 backdrop-blur-md p-8 sm:p-10 rounded-[24px] border border-slate-200/80 shadow-xl">
+          <span class="text-[14px] font-bold tracking-widest text-primary uppercase">Exklusive Sonderanfertigungen</span>
+          <h2 class="text-3xl sm:text-4xl font-extrabold text-navy leading-tight">
+            Wir entwickeln und fertigen, was es noch nicht gibt.
           </h2>
-          <p class="text-ice/90 text-[17px] leading-[1.65]">
-            Feuer, Genuss und Markenpräsenz in meisterhafter Vollendung. Wir veredeln die legendären Remundi Feuer- und Grillstellen als emotionale VIP-Geschenke und POS-Highlights.
+          <p class="text-slate text-base sm:text-lg leading-relaxed">
+            Standard-Werbeartikel reichen für außergewöhnliche Markenauftritte oft nicht aus. Wir konzipieren und produzieren einzigartige Werbemittel komplett neu – exakt nach Ihren Vorgaben und Kampagnenzielen.
           </p>
 
-          <!-- 3 Bullet Points with Sky Check Icons -->
+          <!-- 3 Checkpoints -->
           <div class="space-y-4 pt-2">
-            <div class="flex items-start gap-4">
-              <div class="w-8 h-8 rounded-full bg-sky/20 border border-sky/40 flex items-center justify-center text-sky font-bold shrink-0 mt-1">
-                ✓
-              </div>
+            <div class="flex items-start gap-3">
+              <div class="w-6 h-6 rounded-full bg-primary text-white flex items-center justify-center font-bold text-xs shrink-0 mt-0.5">✓</div>
               <div>
-                <h4 class="text-base font-bold text-white">Exklusive Outdoor-Veredelung</h4>
-                <p class="text-[16px] text-ice/80 mt-1 leading-[1.65]">Spezielle Hitzebeständige Laser-Gravuren und Branding-Plaketten für extrem lange Lebensdauer.</p>
+                <strong class="text-navy font-bold block text-[16px]">Entwicklung & CAD-Konstruktion</strong>
+                <span class="text-slate text-[15px]">Eigenes Design und technische Produktentwicklung für unverwechselbare Markenprodukte.</span>
               </div>
             </div>
 
-            <div class="flex items-start gap-4">
-              <div class="w-8 h-8 rounded-full bg-sky/20 border border-sky/40 flex items-center justify-center text-sky font-bold shrink-0 mt-1">
-                ✓
-              </div>
+            <div class="flex items-start gap-3">
+              <div class="w-6 h-6 rounded-full bg-primary text-white flex items-center justify-center font-bold text-xs shrink-0 mt-0.5">✓</div>
               <div>
-                <h4 class="text-base font-bold text-white">Skalierbare Serienfertigung</h4>
-                <p class="text-[16px] text-ice/80 mt-1 leading-[1.65]">Ob Einzelstück als Vorstandspräsent oder hunderte Einheiten für deutschlandweite Kunden-Incentives.</p>
+                <strong class="text-navy font-bold block text-[16px]">Prototyping & Musterbau</strong>
+                <span class="text-slate text-[15px]">Physische 3D-Muster vor Serienstart zur vollkommenen haptischen Freigabe.</span>
               </div>
             </div>
 
-            <div class="flex items-start gap-4">
-              <div class="w-8 h-8 rounded-full bg-sky/20 border border-sky/40 flex items-center justify-center text-sky font-bold shrink-0 mt-1">
-                ✓
-              </div>
+            <div class="flex items-start gap-3">
+              <div class="w-6 h-6 rounded-full bg-primary text-white flex items-center justify-center font-bold text-xs shrink-0 mt-0.5">✓</div>
               <div>
-                <h4 class="text-base font-bold text-white">Komplette POS-Logistik & Einzelversand</h4>
-                <p class="text-[16px] text-ice/80 mt-1 leading-[1.65]">Sichere Palettierung und Direktlieferung bis an die Haustür des Gewinners oder Kunden.</p>
+                <strong class="text-navy font-bold block text-[16px]">Präzise Serienfertigung</strong>
+                <span class="text-slate text-[15px]">Zuverlässige Großserienproduktion in zertifizierten Werken unter strenger Qualitätskontrolle.</span>
               </div>
             </div>
-          </div>
-
-          <div class="pt-4">
-            <button onclick="toggleModal(true)" class="px-7 py-3.5 bg-primary hover:bg-bright text-white font-bold rounded-xl text-[15px] transition-all btn-glow">
-              Remundi Incentive Anfragen
-            </button>
           </div>
         </div>
 
-        <!-- Image Showcase -->
-        <div class="lg:col-span-6 reveal reveal-delay-1">
-          <div class="img-tint-container rounded-2xl border-2 border-white/20 shadow-2xl">
-            <img src="images/remundi-grill.jpg" alt="Remundi Outdoor Grill Highlight" class="w-full h-[450px] object-cover rounded-2xl">
-          </div>
+        <!-- Right Photo Column with Floating "Made in Germany" Badge -->
+        <div class="lg:col-span-6 reveal-right relative z-0">
+          <figure class="relative">
+            <!-- Consistent Image Frame 16/9 -->
+            <div data-replace="true" class="aspect-[16/9] rounded-[20px] bg-white overflow-hidden relative border border-slate-200/80 shadow-md img-frame-tint flex items-center justify-center">
+              
+              <!-- Floating "Made in Germany" Badge on Photo -->
+              <div class="absolute top-4 right-4 bg-white/95 backdrop-blur-sm text-primary text-[14px] font-bold px-3.5 py-1 rounded-full border border-sky/30 shadow-md flex items-center gap-2 z-10">
+                <svg class="w-4 h-4 text-sky" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+                <span>Made in Germany</span>
+              </div>
+
+              <img 
+                src="https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=1600&q=80" 
+                alt="Nahaufnahme eines 3D-gedruckten Produkt-Prototypen auf dem Schreibtisch" 
+                width="1600" 
+                height="900" 
+                loading="lazy"
+                class="w-full h-full object-cover rounded-[20px]"
+                onerror="this.onerror=null; this.src='images/physicalproduct.jpg'; this.onerror=function(){ this.parentElement.classList.add('bg-ice-fallback'); this.style.display='none'; };"
+              >
+            </div>
+
+            <!-- Visible Caption -->
+            <figcaption class="mt-3 text-center text-[15px] text-slate font-medium">
+              3D-Prototyping & Serienentwicklung für neuartige Markenprodukte.
+            </figcaption>
+          </figure>
         </div>
 
       </div>
@@ -1001,69 +748,426 @@
 
 
   <!-- ==========================================
-       SECTION 10: ABOUT "Innovative Marketing Concepts – Made in Germany" (Centered Header)
+       SECTION 5: "FÜR AGENTUREN (B2B)"
+       Background: Navy Gradient
+       Digital -> Stages Arrow -> Physisch
        ========================================== -->
-  <section id="about" class="py-16 lg:py-24 bg-ice">
+  <section id="agenturen" class="py-16 md:py-24 bg-gradient-to-br from-navy via-[#0B2550] to-primary text-white border-b border-white/10">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       
-      <!-- Center-Aligned Section Header -->
-      <div class="text-center max-w-[640px] mx-auto mb-16 reveal">
-        <span class="text-[13px] font-bold tracking-[0.12em] text-primary uppercase">Tradition & Innovation</span>
-        <h2 class="text-3xl sm:text-4xl font-extrabold text-navy mt-2 sky-underline-center">
-          Innovative Marketing Concepts
+      <!-- Section Header -->
+      <div class="text-center max-w-3xl mx-auto mb-16 reveal">
+        <span class="text-[14px] font-bold tracking-widest text-sky uppercase">B2B Agentur-Partnerschaft</span>
+        <h2 class="text-3xl sm:text-4xl font-extrabold text-white mt-2 mb-4 sky-underline-center">
+          Ihre digitale Idee. Unsere physische Umsetzung.
         </h2>
-        <p class="text-slate mt-5 text-[17px] leading-[1.65]">
-          Seit 1993 Ihr zuverlässiger Partner für Markenwerbung und POS-Marketing in Neuss.
+        <p class="text-ice/90 text-base sm:text-lg mt-6 leading-relaxed">
+          Sie entwickeln das Konzept, wir bauen es. Wir verwandeln Ihre digitalen Entwürfe in reale, funktionierende Werbemittel: entwickelt, gefertigt und geliefert aus einer Hand.
         </p>
       </div>
 
-      <div class="grid lg:grid-cols-12 gap-12 items-center">
+      <!-- Split Visual: Left (Digital) -> Stages Arrow -> Right (Physisch) -->
+      <div class="grid lg:grid-cols-12 gap-8 items-center mb-12">
         
-        <!-- Image & Badges -->
-        <div class="lg:col-span-6 order-2 lg:order-1 reveal">
-          <div class="relative">
-            <div class="img-tint-container rounded-2xl shadow-xl">
-              <img src="images/service-logistik.jpg" alt="C-Concepts Logistikzentrum Neuss" class="w-full h-[420px] object-cover rounded-2xl">
-            </div>
-            <div class="absolute top-6 left-6 bg-white p-4 rounded-xl shadow-lg flex items-center gap-3 border border-slate-100">
-              <img src="images/sedex-logo.png" alt="Sedex Certified" class="h-10 w-auto object-contain">
-              <div>
-                <div class="text-xs font-bold text-navy">Sedex Zertifiziert</div>
-                <div class="text-[11px] text-slate">Ethische Standards & Nachhaltigkeit</div>
+        <!-- Left: Digital Photo Card -->
+        <div class="lg:col-span-5 reveal-left">
+          <figure>
+            <div data-replace="true" class="aspect-[4/3] rounded-[20px] bg-white/10 overflow-hidden relative border border-white/20 shadow-xl img-frame-tint flex items-center justify-center">
+              <img 
+                src="https://images.unsplash.com/photo-1531403009284-440f080d1e12?auto=format&fit=crop&w=1600&q=80" 
+                alt="Nahaufnahme eines digitalen Wireframe 3D-Entwurfs auf dem Monitor" 
+                width="1600" 
+                height="1200" 
+                loading="lazy"
+                class="w-full h-full object-cover rounded-[20px]"
+                onerror="this.onerror=null; this.parentElement.classList.add('bg-ice-fallback'); this.style.display='none';"
+              >
+              <div class="absolute top-3 left-3 bg-navy/80 backdrop-blur-md text-sky font-extrabold text-[14px] px-3.5 py-1 rounded-full border border-sky/30">
+                1. DIGITAL
               </div>
             </div>
+            <figcaption class="mt-3 text-[15px] text-ice/80 text-center font-medium">
+              Digitaler Entwurf: Ihre Agentur liefert die kreative Idee & 3D-Visualisierung.
+            </figcaption>
+          </figure>
+        </div>
+
+        <!-- Center: Stages Connector -->
+        <div class="lg:col-span-2 flex flex-col items-center justify-center gap-3 py-4 lg:py-0 reveal">
+          <div class="hidden lg:flex flex-col items-center gap-3">
+            <span class="text-[14px] font-bold text-sky uppercase tracking-wider bg-white/10 px-4 py-1.5 rounded-full border border-white/10">Zeichnung</span>
+            <svg class="w-6 h-6 text-sky animate-bounce my-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 14l-7 7m0 0l-7-7m7 7V3"/></svg>
+            <span class="text-[14px] font-bold text-sky uppercase tracking-wider bg-white/10 px-4 py-1.5 rounded-full border border-white/10">Prototyp</span>
+            <svg class="w-6 h-6 text-sky animate-bounce my-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 14l-7 7m0 0l-7-7m7 7V3"/></svg>
+            <span class="text-[14px] font-bold text-sky uppercase tracking-wider bg-white/10 px-4 py-1.5 rounded-full border border-white/10">Serie</span>
+          </div>
+          <!-- Mobile Horizontal Connector -->
+          <div class="flex lg:hidden items-center justify-center gap-2 flex-wrap text-[14px] font-bold text-sky">
+            <span class="bg-white/10 px-3 py-1 rounded-full">Zeichnung</span>
+            <span class="text-[18px]">→</span>
+            <span class="bg-white/10 px-3 py-1 rounded-full">Prototyp</span>
+            <span class="text-[18px]">→</span>
+            <span class="bg-white/10 px-3 py-1 rounded-full">Serie</span>
           </div>
         </div>
 
-        <!-- Text & Animated Stat Counters -->
-        <div class="lg:col-span-6 order-1 lg:order-2 space-y-6 reveal">
-          <p class="text-ink text-[16px] leading-[1.65]">
-            Seit der Gründung im Jahr 1993 steht <strong class="text-navy">C-Concepts Vertriebs GmbH</strong> in Neuss für absolute Verlässlichkeit, Erfindungsreichtum und erstklassige Abwicklung im Werbemittel- und Marketing-Sektor.
-          </p>
-          <p class="text-ink text-[16px] leading-[1.65]">
-            Wir verbinden traditionelle Hanseatische Kaufmannstugenden mit moderner Logistik und kreativen Produktideen. Unser engagiertes Team aus Experten sorgt dafür, dass jede Kampagne pünktlich und in höchster Güte am Zielort ankommt.
-          </p>
+        <!-- Right: Physisch Photo Card -->
+        <div class="lg:col-span-5 reveal-right">
+          <figure>
+            <div data-replace="true" class="aspect-[4/3] rounded-[20px] bg-white/10 overflow-hidden relative border border-white/20 shadow-xl img-frame-tint flex items-center justify-center">
+              <img 
+                src="images/agency/physical-product.jpg" 
+                alt="Fertig produziertes physisches Werbemittel-Display im Einsatz" 
+                width="1600" 
+                height="1200" 
+                loading="lazy"
+                class="w-full h-full object-cover rounded-[20px]"
+                onerror="this.onerror=null; this.src='images/physicalproduct.jpg'; this.onerror=function(){ this.parentElement.classList.add('bg-ice-fallback'); this.style.display='none'; };"
+              >
+              <div class="absolute top-3 left-3 bg-navy/80 backdrop-blur-md text-sky font-extrabold text-[14px] px-3.5 py-1 rounded-full border border-sky/30">
+                2. PHYSISCH
+              </div>
+            </div>
+            <figcaption class="mt-3 text-[15px] text-ice/80 text-center font-medium">
+              Reale Umsetzung: Wir bauen und fertigen das funktionierende Endprodukt.
+            </figcaption>
+          </figure>
+        </div>
 
-          <!-- Animated Stat Counters -->
-          <div class="grid grid-cols-2 sm:grid-cols-4 gap-6 pt-6 border-t border-slate-200">
-            <div>
-              <div class="text-3xl sm:text-4xl font-extrabold text-sky font-sans" data-target="30">0</div>
-              <div class="text-xs font-bold text-navy mt-1">Jahre Erfahrung</div>
-            </div>
-            <div>
-              <div class="text-3xl sm:text-4xl font-extrabold text-sky font-sans" data-target="5000">0</div>
-              <div class="text-xs font-bold text-navy mt-1">Projekte Realisiert</div>
-            </div>
-            <div>
-              <div class="text-3xl sm:text-4xl font-extrabold text-sky font-sans" data-target="100">0</div>
-              <div class="text-xs font-bold text-navy mt-1">% Termintreue</div>
-            </div>
-            <div>
-              <div class="text-3xl sm:text-4xl font-extrabold text-sky font-sans" data-target="150">0</div>
-              <div class="text-xs font-bold text-navy mt-1">Starke Marken</div>
-            </div>
+      </div>
+
+      <!-- Agency Benefits -->
+      <div class="grid md:grid-cols-3 gap-6 pt-6 border-t border-white/10 items-center">
+        <div class="flex items-center gap-3 reveal reveal-delay-1">
+          <div class="w-10 h-10 rounded-xl bg-white/10 text-sky flex items-center justify-center font-bold text-[16px] shrink-0">01</div>
+          <div>
+            <h5 class="text-[16px] font-bold text-white">Ein Ansprechpartner</h5>
+            <p class="text-[16px] text-ice/90">Direkte technische Projektleitung.</p>
           </div>
+        </div>
 
+        <div class="flex items-center gap-3 reveal reveal-delay-2">
+          <div class="w-10 h-10 rounded-xl bg-white/10 text-sky flex items-center justify-center font-bold text-[16px] shrink-0">02</div>
+          <div>
+            <h5 class="text-[16px] font-bold text-white">Schnelle Prototypen</h5>
+            <p class="text-[16px] text-ice/90">Musterbau für Kundentermine & Pitches.</p>
+          </div>
+        </div>
+
+        <div class="flex items-center gap-3 reveal reveal-delay-3">
+          <div class="w-10 h-10 rounded-xl bg-white/10 text-sky flex items-center justify-center font-bold text-[16px] shrink-0">03</div>
+          <div>
+            <h5 class="text-[16px] font-bold text-white">Verlässliche Serienfertigung</h5>
+            <p class="text-[16px] text-ice/90">Fristgerecht mit voller Budgetkontrolle.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="text-center mt-10 reveal">
+        <button onclick="toggleModal(true)" class="px-8 py-3.5 rounded-xl font-bold text-[15px] text-navy bg-white hover:bg-ice transition-all shadow-lg">
+          Partner werden
+        </button>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ==========================================
+       SECTION 6: PROJEKTE & SONDERANFERTIGUNGEN (Matching Reference Site)
+       Showcase of Real Client Projects from Reference Website
+       Slow Stagger Reveal & Scale Zoom FX
+       ========================================== -->
+  <section id="projekte" class="py-16 md:py-24 bg-white border-b border-slate-100">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <!-- Section Header -->
+      <div class="text-center max-w-3xl mx-auto mb-16 reveal">
+        <span class="text-[14px] font-bold tracking-widest text-primary uppercase">Portfolio & Referenzen</span>
+        <h2 class="text-3xl sm:text-4xl font-extrabold text-navy mt-2 mb-4 sky-underline-center">
+          Ausgewählte Sonderanfertigungen
+        </h2>
+        <p class="text-slate text-base sm:text-lg mt-6 leading-relaxed">
+          Entdecken Sie eine Auswahl unserer maßgeschneiderten Werbemittel, Marken-Promotions und POS-Installationen.
+        </p>
+      </div>
+
+      <!-- Grid of Real Projects from Reference Site -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        
+        <!-- Project 1: Perfect Match POS Display (Chio Chips) -->
+        <article class="bg-white rounded-[20px] p-6 border border-slate-200/80 shadow-sm card-hover reveal-scale flex flex-col h-full">
+          <div data-replace="true" class="aspect-[4/3] rounded-[20px] bg-mist overflow-hidden relative border border-slate-200/60 shadow-sm img-frame-tint flex items-center justify-center mb-4">
+            <span class="absolute top-3 left-3 bg-navy/80 backdrop-blur-md text-sky font-bold text-xs px-3 py-1 rounded-full z-10 uppercase tracking-wider">POS-Display</span>
+            <img 
+              src="images/perfect-match.jpg" 
+              alt="Chio Chips - Perfect Match POS Display Sonderanfertigung" 
+              width="1600" 
+              height="1200" 
+              loading="lazy"
+              class="w-full h-full object-cover rounded-[20px]"
+              onerror="this.onerror=null; this.src='images/projects/scooter.jpg'; this.onerror=function(){ this.parentElement.classList.add('bg-ice-fallback'); this.style.display='none'; };"
+            >
+          </div>
+          <h3 class="text-[20px] font-bold text-navy mb-2">Chio Chips – Perfect Match</h3>
+          <p class="text-[16px] text-slate leading-relaxed mb-4">
+            Interaktiver POS-Aufsteller und Sonderdisplay für bundesweite Handels-Promotions mit hoher Fernwirkung.
+          </p>
+          <button onclick="toggleModal(true)" class="mt-auto text-[15px] font-semibold text-primary hover:text-bright inline-flex items-center gap-1 pt-2">
+            <span>Projekt anfragen</span>
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+          </button>
+        </article>
+
+        <!-- Project 2: Punica Custom Mofa Promotion -->
+        <article class="bg-white rounded-[20px] p-6 border border-slate-200/80 shadow-sm card-hover reveal-scale reveal-delay-1 flex flex-col h-full">
+          <div data-replace="true" class="aspect-[4/3] rounded-[20px] bg-mist overflow-hidden relative border border-slate-200/60 shadow-sm img-frame-tint flex items-center justify-center mb-4">
+            <span class="absolute top-3 left-3 bg-navy/80 backdrop-blur-md text-sky font-bold text-xs px-3 py-1 rounded-full z-10 uppercase tracking-wider">Event Vehicle</span>
+            <img 
+              src="images/punica-mofa.jpg" 
+              alt="Punica Custom Mofa Sonderanfertigung" 
+              width="1600" 
+              height="1200" 
+              loading="lazy"
+              class="w-full h-full object-cover rounded-[20px]"
+              onerror="this.onerror=null; this.src='images/scooter.jpg'; this.onerror=function(){ this.parentElement.classList.add('bg-ice-fallback'); this.style.display='none'; };"
+            >
+          </div>
+          <h3 class="text-[20px] font-bold text-navy mb-2">Punica – Custom Mofa</h3>
+          <p class="text-[16px] text-slate leading-relaxed mb-4">
+            Custom-Mofa mit Speziallackierung und integrierter Kühlbox als Highlight für Summer-Promotions.
+          </p>
+          <button onclick="toggleModal(true)" class="mt-auto text-[15px] font-semibold text-primary hover:text-bright inline-flex items-center gap-1 pt-2">
+            <span>Projekt anfragen</span>
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+          </button>
+        </article>
+
+        <!-- Project 3: Rockstar Energy Branding Kicker -->
+        <article class="bg-white rounded-[20px] p-6 border border-slate-200/80 shadow-sm card-hover reveal-scale reveal-delay-2 flex flex-col h-full">
+          <div data-replace="true" class="aspect-[4/3] rounded-[20px] bg-mist overflow-hidden relative border border-slate-200/60 shadow-sm img-frame-tint flex items-center justify-center mb-4">
+            <span class="absolute top-3 left-3 bg-navy/80 backdrop-blur-md text-sky font-bold text-xs px-3 py-1 rounded-full z-10 uppercase tracking-wider">Branding Tisch</span>
+            <img 
+              src="images/kicker-table.jpg" 
+              alt="Rockstar Energy Turniertisch Kicker" 
+              width="1600" 
+              height="1200" 
+              loading="lazy"
+              class="w-full h-full object-cover rounded-[20px]"
+              onerror="this.onerror=null; this.src='images/kicker.jpg'; this.onerror=function(){ this.parentElement.classList.add('bg-ice-fallback'); this.style.display='none'; };"
+            >
+          </div>
+          <h3 class="text-[20px] font-bold text-navy mb-2">Rockstar Energy – Turniertisch Kicker</h3>
+          <p class="text-[16px] text-slate leading-relaxed mb-4">
+            Profi-Kickertisch mit vollflächigem Digitaldruck und individuellem Spielfelddesign für Gastronomie & Events.
+          </p>
+          <button onclick="toggleModal(true)" class="mt-auto text-[15px] font-semibold text-primary hover:text-bright inline-flex items-center gap-1 pt-2">
+            <span>Projekt anfragen</span>
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+          </button>
+        </article>
+
+        <!-- Project 4: Lipton Mobile Coffee-Bike -->
+        <article class="bg-white rounded-[20px] p-6 border border-slate-200/80 shadow-sm card-hover reveal-scale flex flex-col h-full">
+          <div data-replace="true" class="aspect-[4/3] rounded-[20px] bg-mist overflow-hidden relative border border-slate-200/60 shadow-sm img-frame-tint flex items-center justify-center mb-4">
+            <span class="absolute top-3 left-3 bg-navy/80 backdrop-blur-md text-sky font-bold text-xs px-3 py-1 rounded-full z-10 uppercase tracking-wider">Mobile Bar</span>
+            <img 
+              src="images/coffee-bike.jpg" 
+              alt="Lipton Mobile Coffee-Bike" 
+              width="1600" 
+              height="1200" 
+              loading="lazy"
+              class="w-full h-full object-cover rounded-[20px]"
+              onerror="this.onerror=null; this.src='images/coffeebike.jpg'; this.onerror=function(){ this.parentElement.classList.add('bg-ice-fallback'); this.style.display='none'; };"
+            >
+          </div>
+          <h3 class="text-[20px] font-bold text-navy mb-2">Lipton – Mobile Coffee & Tea Bar</h3>
+          <p class="text-[16px] text-slate leading-relaxed mb-4">
+            Autarkes E-Lastenrad mit maßgeschneidertem Ausbau für mobiles Sampling auf Festival- & City-Tourneen.
+          </p>
+          <button onclick="toggleModal(true)" class="mt-auto text-[15px] font-semibold text-primary hover:text-bright inline-flex items-center gap-1 pt-2">
+            <span>Projekt anfragen</span>
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+          </button>
+        </article>
+
+        <!-- Project 5: Pepsi Custom Barrel Production -->
+        <article class="bg-white rounded-[20px] p-6 border border-slate-200/80 shadow-sm card-hover reveal-scale reveal-delay-1 flex flex-col h-full">
+          <div data-replace="true" class="aspect-[4/3] rounded-[20px] bg-mist overflow-hidden relative border border-slate-200/60 shadow-sm img-frame-tint flex items-center justify-center mb-4">
+            <span class="absolute top-3 left-3 bg-navy/80 backdrop-blur-md text-sky font-bold text-xs px-3 py-1 rounded-full z-10 uppercase tracking-wider">Sonderbau</span>
+            <img 
+              src="images/barrel-prod.jpg" 
+              alt="Pepsi Custom Barrel Production Event Display" 
+              width="1600" 
+              height="1200" 
+              loading="lazy"
+              class="w-full h-full object-cover rounded-[20px]"
+              onerror="this.onerror=null; this.src='images/cooler.jpg'; this.onerror=function(){ this.parentElement.classList.add('bg-ice-fallback'); this.style.display='none'; };"
+            >
+          </div>
+          <h3 class="text-[20px] font-bold text-navy mb-2">Pepsi – Custom Event Barrels</h3>
+          <p class="text-[16px] text-slate leading-relaxed mb-4">
+            Handgefertigte Stehtisch-Fässer aus Metall mit wetterfester Pulverbeschichtung & Siebdruck.
+          </p>
+          <button onclick="toggleModal(true)" class="mt-auto text-[15px] font-semibold text-primary hover:text-bright inline-flex items-center gap-1 pt-2">
+            <span>Projekt anfragen</span>
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+          </button>
+        </article>
+
+        <!-- Project 6: Remundi Custom Fire Pit Grill -->
+        <article class="bg-white rounded-[20px] p-6 border border-slate-200/80 shadow-sm card-hover reveal-scale reveal-delay-2 flex flex-col h-full">
+          <div data-replace="true" class="aspect-[4/3] rounded-[20px] bg-mist overflow-hidden relative border border-slate-200/60 shadow-sm img-frame-tint flex items-center justify-center mb-4">
+            <span class="absolute top-3 left-3 bg-navy/80 backdrop-blur-md text-sky font-bold text-xs px-3 py-1 rounded-full z-10 uppercase tracking-wider">Premium Prämie</span>
+            <img 
+              src="images/remundi-grill.jpg" 
+              alt="Remundi Custom Fire Pit Outdoor Grill" 
+              width="1600" 
+              height="1200" 
+              loading="lazy"
+              class="w-full h-full object-cover rounded-[20px]"
+              onerror="this.onerror=null; this.src='images/giftset.jpg'; this.onerror=function(){ this.parentElement.classList.add('bg-ice-fallback'); this.style.display='none'; };"
+            >
+          </div>
+          <h3 class="text-[20px] font-bold text-navy mb-2">Remundi – Custom Fire Pit Grill</h3>
+          <p class="text-[16px] text-slate leading-relaxed mb-4">
+            Hochwertiger Outdoor-Feuerstellen-Grill als maßgeschneiderte Incentive-Prämie für Händleraktionen.
+          </p>
+          <button onclick="toggleModal(true)" class="mt-auto text-[15px] font-semibold text-primary hover:text-bright inline-flex items-center gap-1 pt-2">
+            <span>Projekt anfragen</span>
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+          </button>
+        </article>
+
+        <!-- Project 7: Pepsi Stadium Becher Series -->
+        <article class="bg-white rounded-[20px] p-6 border border-slate-200/80 shadow-sm card-hover reveal-scale flex flex-col h-full">
+          <div data-replace="true" class="aspect-[4/3] rounded-[20px] bg-mist overflow-hidden relative border border-slate-200/60 shadow-sm img-frame-tint flex items-center justify-center mb-4">
+            <span class="absolute top-3 left-3 bg-navy/80 backdrop-blur-md text-sky font-bold text-xs px-3 py-1 rounded-full z-10 uppercase tracking-wider">Event Mehrweg</span>
+            <img 
+              src="images/pepsi-becher.jpg" 
+              alt="Pepsi Stadium Becher Series Sonderauflage" 
+              width="1600" 
+              height="1200" 
+              loading="lazy"
+              class="w-full h-full object-cover rounded-[20px]"
+              onerror="this.onerror=null; this.src='images/cups.jpg'; this.onerror=function(){ this.parentElement.classList.add('bg-ice-fallback'); this.style.display='none'; };"
+            >
+          </div>
+          <h3 class="text-[20px] font-bold text-navy mb-2">Pepsi – Stadion Becher Serie</h3>
+          <p class="text-[16px] text-slate leading-relaxed mb-4">
+            Nachhaltige Stadion-Mehrwegbecher mit 360°-In-Mould-Labelling für Großveranstaltungen und Arenen.
+          </p>
+          <button onclick="toggleModal(true)" class="mt-auto text-[15px] font-semibold text-primary hover:text-bright inline-flex items-center gap-1 pt-2">
+            <span>Projekt anfragen</span>
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+          </button>
+        </article>
+
+        <!-- Project 8: Rockstar Energy Custom Snowboard -->
+        <article class="bg-white rounded-[20px] p-6 border border-slate-200/80 shadow-sm card-hover reveal-scale reveal-delay-1 flex flex-col h-full">
+          <div data-replace="true" class="aspect-[4/3] rounded-[20px] bg-mist overflow-hidden relative border border-slate-200/60 shadow-sm img-frame-tint flex items-center justify-center mb-4">
+            <span class="absolute top-3 left-3 bg-navy/80 backdrop-blur-md text-sky font-bold text-xs px-3 py-1 rounded-full z-10 uppercase tracking-wider">Winter Special</span>
+            <img 
+              src="images/rockstar-snowboard.jpg" 
+              alt="Rockstar Energy Custom Snowboard Edition" 
+              width="1600" 
+              height="1200" 
+              loading="lazy"
+              class="w-full h-full object-cover rounded-[20px]"
+              onerror="this.onerror=null; this.src='images/physicalproduct.jpg'; this.onerror=function(){ this.parentElement.classList.add('bg-ice-fallback'); this.style.display='none'; };"
+            >
+          </div>
+          <h3 class="text-[20px] font-bold text-navy mb-2">Rockstar Energy – Custom Snowboard</h3>
+          <p class="text-[16px] text-slate leading-relaxed mb-4">
+            Exklusives Marken-Snowboard in limitierter Auflage für Winter-Promotions und Social-Media Gewinne.
+          </p>
+          <button onclick="toggleModal(true)" class="mt-auto text-[15px] font-semibold text-primary hover:text-bright inline-flex items-center gap-1 pt-2">
+            <span>Projekt anfragen</span>
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+          </button>
+        </article>
+
+        <!-- Project 9: Promotion-Fahrzeug Retro Scooter -->
+        <article class="bg-white rounded-[20px] p-6 border border-slate-200/80 shadow-sm card-hover reveal-scale reveal-delay-2 flex flex-col h-full">
+          <div data-replace="true" class="aspect-[4/3] rounded-[20px] bg-mist overflow-hidden relative border border-slate-200/60 shadow-sm img-frame-tint flex items-center justify-center mb-4">
+            <span class="absolute top-3 left-3 bg-navy/80 backdrop-blur-md text-sky font-bold text-xs px-3 py-1 rounded-full z-10 uppercase tracking-wider">Eyecatcher</span>
+            <img 
+              src="images/scooter.jpg" 
+              alt="Promotion-Fahrzeug Retro Scooter Sonderanfertigung" 
+              width="1600" 
+              height="1200" 
+              loading="lazy"
+              class="w-full h-full object-cover rounded-[20px]"
+              onerror="this.onerror=null; this.src='images/projects/scooter.jpg'; this.onerror=function(){ this.parentElement.classList.add('bg-ice-fallback'); this.style.display='none'; };"
+            >
+          </div>
+          <h3 class="text-[20px] font-bold text-navy mb-2">Promotion-Scooter Sonderbau</h3>
+          <p class="text-[16px] text-slate leading-relaxed mb-4">
+            Retro-Scooter mit custom Transportbox und auffälligem Brand-Branding für Messeauftritte.
+          </p>
+          <button onclick="toggleModal(true)" class="mt-auto text-[15px] font-semibold text-primary hover:text-bright inline-flex items-center gap-1 pt-2">
+            <span>Projekt anfragen</span>
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+          </button>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ==========================================
+       SECTION 7: ÜBER UNS & STATS
+       Centered Eyebrow Label above H2
+       4 Animated Counters (Stat sub-labels 15px)
+       ========================================== -->
+  <section id="ueber-uns" class="py-16 md:py-24 bg-ice border-b border-slate-200/60">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <!-- Centered Section Header with Eyebrow Label -->
+      <div class="max-w-3xl mx-auto text-center mb-16 reveal">
+        <span class="text-[14px] font-bold tracking-widest text-primary uppercase">Über Uns</span>
+        <h2 class="text-3xl sm:text-4xl font-extrabold text-navy mt-2 mb-4 sky-underline-center">
+          Erfahrung & Leidenschaft für Marken
+        </h2>
+        <p class="text-slate text-base sm:text-lg mt-6 leading-relaxed">
+          Seit 1993 entwickeln und fertigen wir außergewöhnliche Werbemittel, Marken-Promotions und komplexe Sonderanfertigungen für führende Unternehmen und Agenturen in ganz Europa. Mit eigenen Hochregallagern, erfahrener Handkonfektionierung und direkter Werksanbindung bieten wir das komplette Rundum-Sorglos-Paket aus einer Hand.
+        </p>
+      </div>
+
+      <!-- 4 Animated Counters (Stat sub-labels 15px) -->
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+        
+        <div class="bg-white rounded-[20px] p-6 border border-slate-200/80 shadow-sm text-center reveal">
+          <div class="text-4xl sm:text-5xl font-extrabold text-primary mb-2">
+            <span class="counter" data-target="30">0</span>+
+          </div>
+          <div class="text-[15px] font-bold text-navy">Jahre Erfahrung</div>
+          <div class="text-[15px] text-slate mt-1">Seit 1993 am Markt</div>
+        </div>
+
+        <div class="bg-white rounded-[20px] p-6 border border-slate-200/80 shadow-sm text-center reveal reveal-delay-1">
+          <div class="text-4xl sm:text-5xl font-extrabold text-primary mb-2">
+            <span class="counter" data-target="5000">0</span>+
+          </div>
+          <div class="text-[15px] font-bold text-navy">Umgesetzte Projekte</div>
+          <div class="text-[15px] text-slate mt-1">Erfolgreiche Promotions</div>
+        </div>
+
+        <div class="bg-white rounded-[20px] p-6 border border-slate-200/80 shadow-sm text-center reveal reveal-delay-2">
+          <div class="text-4xl sm:text-5xl font-extrabold text-sky mb-2">
+            <span class="counter" data-target="100">0</span>%
+          </div>
+          <div class="text-[15px] font-bold text-navy">Termintreue</div>
+          <div class="text-[15px] text-slate mt-1">Pünktliche Auslieferung</div>
+        </div>
+
+        <div class="bg-white rounded-[20px] p-6 border border-slate-200/80 shadow-sm text-center reveal reveal-delay-3">
+          <div class="text-4xl sm:text-5xl font-extrabold text-primary mb-2">
+            <span class="counter" data-target="150">0</span>+
+          </div>
+          <div class="text-[15px] font-bold text-navy">Betreute Marken</div>
+          <div class="text-[15px] text-slate mt-1">Industrie & Agenturen</div>
         </div>
 
       </div>
@@ -1073,26 +1177,30 @@
 
 
   <!-- ==========================================
-       SECTION 11: FINAL CTA
+       SECTION 8: FINAL CTA
+       Radial Glow background effect
        ========================================== -->
-  <section class="py-16 lg:py-24 bg-gradient-to-r from-primary via-bright to-primary text-white text-center relative overflow-hidden">
+  <section class="py-16 md:py-24 bg-gradient-to-r from-primary via-bright to-primary text-white relative overflow-hidden">
     
-    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[350px] bg-bright/40 blur-[110px] rounded-full pointer-events-none"></div>
-    <div class="absolute inset-0 opacity-10 pointer-events-none" style="background-image: radial-gradient(rgba(255,255,255,0.4) 1px, transparent 1px); background-size: 24px 24px;"></div>
+    <!-- Radial Glow Background -->
+    <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-sky/30 via-transparent to-transparent pointer-events-none"></div>
 
-    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8 relative z-10">
-      <h2 class="text-4xl sm:text-5xl font-extrabold tracking-tight drop-shadow-sm">
-        BEREIT FÜR IHRE NÄCHSTE ERFOLGREICHE PROMOTION?
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10 space-y-8 reveal">
+      <h2 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight leading-tight">
+        Bereit für Ihre nächste erfolgreiche Promotion?
       </h2>
-      <p class="text-lg sm:text-xl text-ice/90 max-w-2xl mx-auto font-normal leading-[1.65]">
-        Senden Sie uns jetzt Ihre Anfrage oder rufen Sie uns direkt an. Wir erstellen Ihnen innerhalb von 24 Stunden ein unverbindliches Konzeptangebot.
+      <p class="text-lg sm:text-xl text-ice/90 max-w-2xl mx-auto font-normal leading-relaxed">
+        Lassen Sie uns gemeinsam Werbemittel und POS-Lösungen entwickeln, die Ihre Marke unvergesslich machen.
       </p>
-      <div class="flex flex-col sm:flex-row justify-center items-center gap-5 pt-4">
-        <button onclick="toggleModal(true)" class="w-full sm:w-auto px-10 py-5 rounded-xl font-extrabold text-lg text-navy bg-white hover:bg-ice shadow-2xl transition-all hover:scale-105">
-          Jetzt Projekt Anfragen
+
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
+        <button onclick="toggleModal(true)" class="w-full sm:w-auto px-8 py-4 rounded-xl font-bold text-[16px] text-navy bg-white hover:bg-ice transition-all shadow-xl">
+          Kostenloses Erstgespräch vereinbaren
         </button>
-        <a href="tel:+49213192680" class="w-full sm:w-auto px-8 py-5 rounded-xl font-bold text-lg text-white border-2 border-white/40 hover:border-white hover:bg-white/10 transition-all">
-          ☎ +49 (0) 2131 92 68 0
+        
+        <a href="tel:+494012345678" class="w-full sm:w-auto px-8 py-4 rounded-xl font-bold text-[16px] text-white border-2 border-white/40 hover:border-white hover:bg-white/10 transition-all flex items-center justify-center gap-2">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
+          <span>+49 (0) 40 123 456 78</span>
         </a>
       </div>
     </div>
@@ -1100,136 +1208,112 @@
 
 
   <!-- ==========================================
-       SECTION 12: FOOTER (Top padding 80px, column headings 16px/700, link spacing 14px, top border rgba)
+       SECTION 9: FOOTER
+       Spacious columns, links & text 15px
        ========================================== -->
-  <footer class="bg-navy text-white pt-20 pb-12 border-t border-white/10">
+  <footer class="bg-navy text-white pt-16 pb-12 border-t border-white/10">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 pb-14 border-b border-white/10">
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
         
-        <!-- Col 1: About & Logo -->
-        <div class="lg:col-span-2 space-y-5">
-          <div class="h-10 w-auto flex items-center font-bold text-white text-2xl">
-            <img src="images/cconcepts-logo-light.png" alt="C-Concepts Logo Light" class="h-10 w-auto object-contain" onerror="this.onerror=null; this.src='images/cconcepts-logo.png';">
-          </div>
-          <p class="text-slate-300 text-[15px] leading-[1.65] max-w-sm">
-            C-Concepts Vertriebs GmbH – Ihr Spezialist für emotionale Markenwerbung, Sonderanfertigungen und bundesweiten POS-Full-Service seit 1993.
+        <!-- Column 1: Brand Info -->
+        <div class="space-y-4">
+          <img src="images/cconcepts-logo-light.png" alt="C-Concepts Logo" class="h-9 w-auto" onerror="this.onerror=null; this.src='images/cconcepts-logo.png';">
+          <p class="text-slate-300 text-[15px] leading-relaxed">
+            C-Concepts Vertriebs GmbH – Ihr Spezialist für Sonderanfertigungen, Werbeartikel und POS-Marketing seit 1993.
           </p>
-          <div class="flex items-center gap-3 pt-2">
-            <img src="images/sedex-logo.png" alt="Sedex Audit Member" class="h-8 w-auto bg-white/10 p-1.5 rounded">
-            <span class="text-xs text-slate-400">Geprüfte Qualität & Ethische Standards</span>
-          </div>
         </div>
 
-        <!-- Col 2: Navigation -->
+        <!-- Column 2: Quick Links (15px) -->
         <div>
-          <h4 class="text-[16px] font-bold text-white uppercase tracking-wider mb-6">Navigation</h4>
-          <ul class="space-y-3.5 text-[15px] text-slate-300">
-            <li><a href="#services" class="hover:text-white transition-colors">Leistungen</a></li>
-            <li><a href="#process" class="hover:text-white transition-colors">Ablauf & Prozess</a></li>
-            <li><a href="#projects" class="hover:text-white transition-colors">Projekte & Bento</a></li>
-            <li><a href="#remundi" class="hover:text-white transition-colors">Remundi Outdoor Grill</a></li>
-            <li><a href="#about" class="hover:text-white transition-colors">Über Uns</a></li>
+          <h4 class="text-white font-bold text-[16px] mb-4">Leistungen</h4>
+          <ul class="space-y-2 text-slate-300">
+            <li><a href="#fullservice" class="hover:text-sky transition-colors text-[15px]">Full-Service Logistik</a></li>
+            <li><a href="#sonderfertigung" class="hover:text-sky transition-colors text-[15px]">Sonderanfertigungen</a></li>
+            <li><a href="#agenturen" class="hover:text-sky transition-colors text-[15px]">Für Agenturen</a></li>
+            <li><a href="#projekte" class="hover:text-sky transition-colors text-[15px]">Projekte & Portfolio</a></li>
+            <li><a href="#ueber-uns" class="hover:text-sky transition-colors text-[15px]">Über Uns</a></li>
           </ul>
         </div>
 
-        <!-- Col 3: Services -->
+        <!-- Column 3: Contact Info (15px) -->
         <div>
-          <h4 class="text-[16px] font-bold text-white uppercase tracking-wider mb-6">Leistungen</h4>
-          <ul class="space-y-3.5 text-[15px] text-slate-300">
-            <li>Planung & Design</li>
-            <li>Sonderanfertigungen</li>
-            <li>Event-Promotions</li>
-            <li>Konfektionierung</li>
-            <li>POS-Lager & Logistik</li>
-          </ul>
-        </div>
-
-        <!-- Col 4: Contact info -->
-        <div>
-          <h4 class="text-[16px] font-bold text-white uppercase tracking-wider mb-6">Kontakt</h4>
-          <address class="not-italic space-y-3.5 text-[15px] text-slate-300">
-            <p class="font-bold text-white text-[16px]">C-Concepts Vertriebs GmbH</p>
-            <p>Jägerstraße 46</p>
-            <p>41464 Neuss / Germany</p>
-            <p class="pt-1">Tel: <a href="tel:+49213192680" class="hover:text-sky font-bold text-white">+49 (0) 2131 92 68 0</a></p>
-            <p>Mail: <a href="mailto:info@c-concepts.de" class="hover:text-sky font-bold text-white">info@c-concepts.de</a></p>
+          <h4 class="text-white font-bold text-[16px] mb-4">Kontakt</h4>
+          <address class="not-italic text-[15px] text-slate-300 space-y-2">
+            <p class="font-semibold text-white">C-Concepts Vertriebs GmbH</p>
+            <p>Straße 123</p>
+            <p>20095 Hamburg, Deutschland</p>
+            <p class="pt-2">Tel: +49 (0) 40 123 456 78</p>
+            <p>E-Mail: <a href="mailto:info@cconcepts.eu" class="hover:text-sky transition-colors">info@cconcepts.eu</a></p>
           </address>
+        </div>
+
+        <!-- Column 4: Badges -->
+        <div>
+          <h4 class="text-white font-bold text-[16px] mb-4">Qualität & Standards</h4>
+          <div class="space-y-3">
+            <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-white/10 text-[14px] font-semibold text-sky">
+              <span>Made in Germany</span>
+            </div>
+            <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-white/10 text-[14px] font-semibold text-sky">
+              <span>Seit 1993 am Markt</span>
+            </div>
+            <div class="text-[15px] text-slate-400 pt-2 leading-normal">
+              Zertifizierte Qualitäts- und Umweltstandards in der Werbemittelproduktion.
+            </div>
+          </div>
         </div>
 
       </div>
 
-      <!-- Bottom Legal Row -->
-      <div class="pt-8 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-400 gap-4">
-        <div>
-          © 1993 - 2026 C-Concepts Vertriebs GmbH. Alle Rechte vorbehalten. Made in Germany.
-        </div>
+      <div class="pt-8 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4 text-[15px] text-slate-400">
+        <p>© 2026 C-Concepts Vertriebs GmbH. Alle Rechte vorbehalten.</p>
         <div class="flex items-center gap-6">
           <a href="#" class="hover:text-white transition-colors">Impressum</a>
           <a href="#" class="hover:text-white transition-colors">Datenschutz</a>
           <a href="#" class="hover:text-white transition-colors">AGB</a>
         </div>
       </div>
+
     </div>
   </footer>
 
 
   <!-- ==========================================
-       INTERACTIVE INQUIRY MODAL
+       CONTACT MODAL DIALOG
        ========================================== -->
-  <div id="inquiry-modal" class="fixed inset-0 z-50 bg-navy/80 backdrop-blur-sm hidden flex items-center justify-center p-4">
-    <div class="bg-white rounded-3xl max-w-xl w-full p-8 shadow-2xl relative border border-slate-200">
+  <div id="contact-modal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-navy/80 backdrop-blur-sm">
+    <div class="bg-white rounded-[24px] max-w-lg w-full p-6 sm:p-8 shadow-2xl relative border border-slate-100">
       
-      <!-- Close Button -->
-      <button onclick="toggleModal(false)" class="absolute top-6 right-6 text-slate-400 hover:text-navy focus:outline-none" aria-label="Schließen">
+      <button onclick="toggleModal(false)" class="absolute top-5 right-5 text-slate hover:text-navy p-2 rounded-lg" aria-label="Schließen">
         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
       </button>
 
-      <div class="mb-6">
-        <span class="text-xs font-extrabold text-bright uppercase tracking-wider">Unverbindlich & Schnelle Antwort</span>
-        <h3 class="text-2xl font-extrabold text-navy mt-1">Ihr Projekt Anfragen</h3>
-        <p class="text-slate text-xs sm:text-sm mt-1">Teilen Sie uns erste Details mit. Wir melden uns innerhalb eines Werktages.</p>
-      </div>
+      <h3 class="text-2xl font-extrabold text-navy mb-2">Kostenloses Erstgespräch</h3>
+      <p class="text-slate text-[15px] mb-6">Sprechen Sie direkt mit unseren Produktexperten über Ihre geplante Promotion.</p>
 
-      <form onsubmit="handleFormSubmit(event)" class="space-y-4">
+      <form onsubmit="event.preventDefault(); alert('Vielen Dank für Ihre Anfrage! Wir melden uns umgehend bei Ihnen.'); toggleModal(false);" class="space-y-4">
         <div>
-          <label class="block text-xs font-bold text-navy uppercase mb-1">Gewünschte Leistung</label>
-          <select required class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:ring-2 focus:ring-primary focus:outline-none text-sm text-navy bg-slate-50">
-            <option value="">Bitte wählen...</option>
-            <option value="sonderanfertigung">Sonderanfertigung & Gimmicks</option>
-            <option value="event">Event-Promotion & POS Displays</option>
-            <option value="remundi">Remundi Grill Incentive</option>
-            <option value="fullservice">Full-Service Logistik & Konfektion</option>
-          </select>
-        </div>
-
-        <div class="grid grid-cols-2 gap-4">
-          <div>
-            <label class="block text-xs font-bold text-navy uppercase mb-1">Vorname / Name *</label>
-            <input type="text" required placeholder="Max Mustermann" class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:ring-2 focus:ring-primary focus:outline-none text-sm text-navy bg-slate-50">
-          </div>
-          <div>
-            <label class="block text-xs font-bold text-navy uppercase mb-1">Firma</label>
-            <input type="text" placeholder="Muster GmbH" class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:ring-2 focus:ring-primary focus:outline-none text-sm text-navy bg-slate-50">
-          </div>
-        </div>
-
-        <div class="grid grid-cols-2 gap-4">
-          <div>
-            <label class="block text-xs font-bold text-navy uppercase mb-1">E-Mail Adresse *</label>
-            <input type="email" required placeholder="name@firma.de" class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:ring-2 focus:ring-primary focus:outline-none text-sm text-navy bg-slate-50">
-          </div>
-          <div>
-            <label class="block text-xs font-bold text-navy uppercase mb-1">Telefon</label>
-            <input type="tel" placeholder="+49 123 45678" class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:ring-2 focus:ring-primary focus:outline-none text-sm text-navy bg-slate-50">
-          </div>
+          <label class="block text-[14px] font-bold text-navy uppercase tracking-wider mb-1">Ihr Name *</label>
+          <input type="text" required placeholder="Vor- und Nachname" class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-primary focus:ring-2 focus:ring-sky/20 text-[15px] outline-none transition-all">
         </div>
 
         <div>
-          <label class="block text-xs font-bold text-navy uppercase mb-1">Projektbeschreibung & Wünsche</label>
-          <textarea rows="3" placeholder="Menge, Zeitraum, Zielgruppe..." class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:ring-2 focus:ring-primary focus:outline-none text-sm text-navy bg-slate-50"></textarea>
+          <label class="block text-[14px] font-bold text-navy uppercase tracking-wider mb-1">E-Mail Adresse *</label>
+          <input type="email" required placeholder="name@firma.de" class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-primary focus:ring-2 focus:ring-sky/20 text-[15px] outline-none transition-all">
         </div>
 
-        <button type="submit" class="w-full py-4 bg-primary hover:bg-bright text-white font-bold rounded-xl text-base transition-all btn-glow">
+        <div>
+          <label class="block text-[14px] font-bold text-navy uppercase tracking-wider mb-1">Telefonnummer</label>
+          <input type="tel" placeholder="+49 ..." class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-primary focus:ring-2 focus:ring-sky/20 text-[15px] outline-none transition-all">
+        </div>
+
+        <div>
+          <label class="block text-[14px] font-bold text-navy uppercase tracking-wider mb-1">Ihre Nachricht / Projektidee</label>
+          <textarea rows="3" placeholder="Kurze Beschreibung Ihrer Anforderung..." class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-primary focus:ring-2 focus:ring-sky/20 text-[15px] outline-none transition-all"></textarea>
+        </div>
+
+        <button type="submit" class="w-full py-4 rounded-xl font-bold text-white bg-primary hover:bg-bright btn-glow transition-all text-[16px] mt-2">
           Anfrage Jetzt Absenden
         </button>
       </form>
@@ -1238,87 +1322,95 @@
 
 
   <!-- ==========================================
-       JAVASCRIPT LOGIC
+       JAVASCRIPT INTERACTIVITY & ANIMATIONS
        ========================================== -->
   <script>
-    // Navbar Scroll Listener for Fixed Transparent -> Solid White + Blur
+    // 1. Top Scroll Progress Indicator
+    const progressBar = document.getElementById('scroll-progress');
     window.addEventListener('scroll', () => {
-      const header = document.getElementById('header');
-      if (window.scrollY > 40) {
+      const totalScroll = document.documentElement.scrollHeight - window.innerHeight;
+      if (totalScroll > 0) {
+        const progress = (window.scrollY / totalScroll) * 100;
+        progressBar.style.width = progress + '%';
+      }
+    });
+
+    // 2. Header Scroll State Toggle
+    const header = document.getElementById('header');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 20) {
         header.classList.add('is-scrolled');
       } else {
         header.classList.remove('is-scrolled');
       }
     });
 
-    // Scroll Reveal Observer
-    document.addEventListener('DOMContentLoaded', () => {
-      const revealElements = document.querySelectorAll('.reveal');
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('active');
-          }
-        });
-      }, { threshold: 0.1 });
-
-      revealElements.forEach(el => observer.observe(el));
-
-      // Stat Counters Animation
-      const counterElements = document.querySelectorAll('[data-target]');
-      let counted = false;
-
-      const counterObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting && !counted) {
-            counted = true;
-            counterElements.forEach(counter => {
-              const target = parseInt(counter.getAttribute('data-target'));
-              const duration = 2000;
-              const step = Math.ceil(target / (duration / 20));
-              let current = 0;
-
-              const timer = setInterval(() => {
-                current += step;
-                if (current >= target) {
-                  counter.textContent = target.toLocaleString('de-DE') + (target === 100 ? '%' : '+');
-                  clearInterval(timer);
-                } else {
-                  counter.textContent = current.toLocaleString('de-DE');
-                }
-              }, 20);
-            });
-          }
-        });
-      }, { threshold: 0.3 });
-
-      const aboutSection = document.getElementById('about');
-      if (aboutSection) counterObserver.observe(aboutSection);
-    });
-
-    // Mobile Menu Toggle
+    // 3. Mobile Menu Toggle
     function toggleMobileMenu() {
       const menu = document.getElementById('mobile-menu');
       menu.classList.toggle('hidden');
     }
 
-    // Modal Toggle
+    // 4. Modal Toggle
     function toggleModal(show) {
-      const modal = document.getElementById('inquiry-modal');
+      const modal = document.getElementById('contact-modal');
       if (show) {
         modal.classList.remove('hidden');
+        modal.classList.add('flex');
         document.body.style.overflow = 'hidden';
       } else {
         modal.classList.add('hidden');
-        document.body.style.overflow = 'auto';
+        modal.classList.remove('flex');
+        document.body.style.overflow = '';
       }
     }
 
-    // Form Submit Handler
-    function handleFormSubmit(e) {
-      e.preventDefault();
-      alert('Vielen Dank für Ihre Anfrage! Das C-Concepts Team wird sich in Kürze bei Ihnen melden.');
-      toggleModal(false);
+    // 5. Slow & Smooth Scroll Reveal Observer
+    const revealTargets = document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale');
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('active');
+        }
+      });
+    }, { 
+      threshold: 0.12,
+      rootMargin: "0px 0px -40px 0px"
+    });
+
+    revealTargets.forEach((el) => revealObserver.observe(el));
+
+    // 6. Counter Animation for Section 7 (Über Uns)
+    const counters = document.querySelectorAll('.counter');
+    let animated = false;
+
+    const counterObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting && !animated) {
+          animated = true;
+          counters.forEach((counter) => {
+            const target = +counter.getAttribute('data-target');
+            const duration = 1800; // Smooth 1.8s count up
+            const increment = target / (duration / 16);
+
+            let current = 0;
+            const updateCounter = () => {
+              current += increment;
+              if (current < target) {
+                counter.innerText = Math.ceil(current);
+                setTimeout(updateCounter, 16);
+              } else {
+                counter.innerText = target;
+              }
+            };
+            updateCounter();
+          });
+        }
+      });
+    }, { threshold: 0.3 });
+
+    if (counters.length > 0) {
+      counterObserver.observe(counters[0].closest('section'));
     }
   </script>
 </body>
