@@ -1,18 +1,1325 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="de" class="scroll-smooth">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/png" href="/images/cconcepts-logo-2.png" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>C-Concepts – Innovative Werbeartikel & Full-Service</title>
-    <meta name="description" content="C-Concepts entwickelt individuelle Werbeartikel, Give-Aways, Promotion-Konzepte und Full-Service-Lösungen – von der Planung und Produktion bis zur Konfektionierung und Logistik." />
-    <!-- Google Fonts for Space Grotesk (Unified Font Family) -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  </head>
-  <body class="bg-[#F7F8FA] text-[#0F172A] antialiased selection:bg-[#005496] selection:text-white overflow-x-hidden font-sans">
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
-  </body>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>C-Concepts Vertriebs GmbH – Innovative Marketing Concepts – Made in Germany</title>
+  <meta name="description" content="C-Concepts entwickelt und realisiert seit 1993 exklusive Werbeartikel, Sonderanfertigungen, Event-Promotions und Full-Service POS-Marketing für führende Marken.">
+  <link rel="icon" type="image/png" href="images/cconcepts-logo-2.png">
+
+  <!-- Google Fonts: Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Tailwind CSS via CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            navy: '#0A1F44',
+            primary: '#1250B0',
+            bright: '#2E7BF6',
+            sky: '#38BDF8',
+            ice: '#EAF2FF',
+            mist: '#F5F8FC',
+            ink: '#0F172A',
+            slate: '#475569',
+          },
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    :root {
+      --navy: #0A1F44;
+      --primary: #1250B0;
+      --bright: #2E7BF6;
+      --sky: #38BDF8;
+      --ice: #EAF2FF;
+      --mist: #F5F8FC;
+      --ink: #0F172A;
+      --slate: #475569;
+      --grad-hero: linear-gradient(135deg, #0A1F44 0%, #1250B0 100%);
+      --grad-cta: linear-gradient(135deg, #1250B0 0%, #2E7BF6 100%);
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      color: var(--ink);
+      background-color: #FFFFFF;
+      overflow-x: hidden;
+    }
+
+    /* Fixed Header Styles & Transition */
+    #header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 50;
+      transition: background-color 300ms ease, backdrop-filter 300ms ease, box-shadow 300ms ease, border-color 300ms ease;
+      background-color: transparent;
+    }
+    #header.is-scrolled {
+      background-color: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      box-shadow: 0 4px 20px -5px rgba(10, 31, 68, 0.08);
+      border-bottom: 1px solid rgba(226, 232, 240, 0.8);
+    }
+
+    /* Dynamic header text colors */
+    #header .nav-link {
+      color: rgba(255, 255, 255, 0.9);
+      transition: color 300ms ease;
+    }
+    #header .nav-link:hover {
+      color: var(--sky);
+    }
+    #header.is-scrolled .nav-link {
+      color: var(--slate);
+    }
+    #header.is-scrolled .nav-link:hover {
+      color: var(--primary);
+    }
+
+    #header .logo-light {
+      display: block;
+    }
+    #header .logo-dark {
+      display: none;
+    }
+    #header.is-scrolled .logo-light {
+      display: none;
+    }
+    #header.is-scrolled .logo-dark {
+      display: block;
+    }
+
+    /* Glassmorphism Floating Cards */
+    .glass-card {
+      background: rgba(255, 255, 255, 0.12);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      border-radius: 16px;
+      animation: float 6s ease-in-out infinite;
+    }
+    .glass-card:nth-child(2) { animation-delay: 2s; }
+    .glass-card:nth-child(3) { animation-delay: 4s; }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-8px); }
+    }
+
+    /* Scroll Reveal Animations */
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+      will-change: opacity, transform;
+    }
+    .reveal.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .reveal-delay-1 { transition-delay: 0.15s; }
+    .reveal-delay-2 { transition-delay: 0.3s; }
+    .reveal-delay-3 { transition-delay: 0.45s; }
+
+    /* Centered Sky Underline for H2 headings */
+    .sky-underline-center {
+      position: relative;
+      display: inline-block;
+    }
+    .sky-underline-center::after {
+      content: '';
+      position: absolute;
+      bottom: -8px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 56px;
+      height: 3px;
+      background-color: var(--sky);
+      border-radius: 2px;
+    }
+
+    /* Card Hover Lift & Border Effect */
+    .card-hover {
+      transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s ease, border-color 0.35s ease;
+      border: 1px solid rgba(18, 80, 176, 0.10);
+    }
+    .card-hover:hover {
+      transform: translateY(-6px);
+      border-color: var(--sky);
+      box-shadow: 0 20px 40px -15px rgba(18, 80, 176, 0.15);
+    }
+
+    /* Glowing Button Effects */
+    .btn-glow {
+      position: relative;
+      box-shadow: 0 4px 14px 0 rgba(18, 80, 176, 0.35);
+      transition: all 0.3s ease;
+    }
+    .btn-glow:hover {
+      box-shadow: 0 6px 22px 0 rgba(46, 123, 246, 0.55);
+      transform: translateY(-1px);
+    }
+
+    /* Light Blue Tint Overlay on Images */
+    .img-tint-container {
+      position: relative;
+      overflow: hidden;
+    }
+    .img-tint-container::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-color: rgba(18, 80, 176, 0.06);
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+    .img-tint-container:hover::after {
+      opacity: 0;
+    }
+
+    /* Clean Logos without background pills */
+    .logo-clean {
+      filter: grayscale(100%) opacity(0.8);
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .logo-clean:hover {
+      filter: grayscale(0%) opacity(1);
+      transform: scale(1.05);
+    }
+
+    .text-gradient-sky {
+      background: linear-gradient(135deg, #FFFFFF 0%, #38BDF8 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .reveal {
+        transition: none !important;
+        opacity: 1 !important;
+        transform: none !important;
+      }
+      .glass-card {
+        animation: none !important;
+      }
+    }
+  </style>
+</head>
+<body class="antialiased text-ink">
+
+  <!-- ==========================================
+       SECTION 1: NAVBAR (Position Fixed, Transparent to Solid White on Scroll)
+       ========================================== -->
+  <header id="header" class="h-20 flex items-center">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full flex items-center justify-between">
+      
+      <!-- Logo (Switches light/dark on scroll) -->
+      <a href="#" class="flex items-center gap-3 focus:outline-none focus:ring-2 focus:ring-bright rounded-lg">
+        <img src="images/cconcepts-logo-light.png" alt="C-Concepts Logo Light" class="logo-light h-10 w-auto object-contain" onerror="this.onerror=null; this.src='images/cconcepts-logo.png';">
+        <img src="images/cconcepts-logo.png" alt="C-Concepts Logo Dark" class="logo-dark h-10 w-auto object-contain">
+      </a>
+
+      <!-- Desktop Navigation Links -->
+      <nav class="hidden md:flex items-center gap-8 text-[15px] font-bold tracking-wide">
+        <a href="#services" class="nav-link py-2">Leistungen</a>
+        <a href="#process" class="nav-link py-2">Ablauf</a>
+        <a href="#projects" class="nav-link py-2">Projekte & Werbemittel</a>
+        <a href="#remundi" class="nav-link py-2">Remundi Grill</a>
+        <a href="#about" class="nav-link py-2">Über Uns</a>
+      </nav>
+
+      <!-- CTA Button & Mobile Toggle -->
+      <div class="flex items-center gap-4">
+        <button onclick="toggleModal(true)" class="hidden sm:inline-flex items-center justify-center px-5 py-2.5 rounded-xl font-bold text-[15px] text-white bg-primary hover:bg-bright btn-glow transition-all">
+          <span>Projekt Anfragen</span>
+          <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+        </button>
+
+        <!-- Mobile Menu Toggle Button -->
+        <button id="menu-btn" onclick="toggleMobileMenu()" class="md:hidden p-2 rounded-lg text-white hover:bg-white/10 focus:outline-none" aria-label="Menü öffnen">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Dropdown Menu -->
+    <div id="mobile-menu" class="hidden md:hidden fixed top-20 inset-x-0 bg-white border-b border-slate-200 px-6 py-6 space-y-4 shadow-2xl z-50">
+      <a href="#services" onclick="toggleMobileMenu()" class="block py-2 text-navy font-bold text-base border-b border-slate-100">Leistungen</a>
+      <a href="#process" onclick="toggleMobileMenu()" class="block py-2 text-navy font-bold text-base border-b border-slate-100">Ablauf</a>
+      <a href="#projects" onclick="toggleMobileMenu()" class="block py-2 text-navy font-bold text-base border-b border-slate-100">Projekte & Werbemittel</a>
+      <a href="#remundi" onclick="toggleMobileMenu()" class="block py-2 text-navy font-bold text-base border-b border-slate-100">Remundi Grill</a>
+      <a href="#about" onclick="toggleMobileMenu()" class="block py-2 text-navy font-bold text-base border-b border-slate-100">Über Uns</a>
+      <button onclick="toggleMobileMenu(); toggleModal(true)" class="w-full text-center px-5 py-3.5 rounded-xl font-bold text-white bg-primary hover:bg-bright transition-all text-base">
+        Projekt Anfragen
+      </button>
+    </div>
+  </header>
+
+
+  <!-- ==========================================
+       SECTION 2: HERO SECTION
+       Photo Attribution: Photo by Alexandre Pellaes on Unsplash (https://unsplash.com/photos/178a50c2df87)
+       Commercial License: Free commercial use via Unsplash License
+       ========================================== -->
+  <section class="relative bg-navy text-white min-h-screen min-h-[680px] flex items-center overflow-hidden pt-20">
+    
+    <!-- Full-Bleed High-Res Unsplash Hero Image -->
+    <!-- Photo by Alexandre Pellaes on Unsplash: https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&w=2000&q=80 -->
+    <div class="absolute inset-0 z-0">
+      <img 
+        src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&w=2000&q=80" 
+        alt="C-Concepts Brand Activation & Trade Show Event Display" 
+        width="2000" 
+        height="1125" 
+        fetchpriority="high"
+        class="w-full h-full object-cover object-right"
+        onerror="this.onerror=null; this.parentElement.style.background='linear-gradient(135deg, #0A1F44 0%, #1250B0 100%)'; this.style.display='none';"
+      >
+      <!-- Single Left Gradient Overlay: linear-gradient(90deg, rgba(10,31,68,0.92) 0%, rgba(10,31,68,0.70) 40%, rgba(10,31,68,0.15) 75%, rgba(10,31,68,0.05) 100%) -->
+      <div class="absolute inset-0 pointer-events-none" style="background: linear-gradient(90deg, rgba(10,31,68,0.92) 0%, rgba(10,31,68,0.70) 40%, rgba(10,31,68,0.15) 75%, rgba(10,31,68,0.05) 100%);"></div>
+      
+      <!-- Light Blue Tint Overlay: rgba(18,80,176,0.10) -->
+      <div class="absolute inset-0 pointer-events-none" style="background-color: rgba(18,80,176,0.10);"></div>
+      
+      <!-- Bottom Fade: linear-gradient(to top, rgba(10,31,68,0.5), transparent 30%) -->
+      <div class="absolute inset-0 pointer-events-none" style="background: linear-gradient(to top, rgba(10,31,68,0.5), transparent 30%);"></div>
+    </div>
+
+    <!-- Main Hero Content -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-24 relative z-20 w-full grid lg:grid-cols-12 gap-12 items-center">
+      
+      <!-- Left Hero Column -->
+      <div class="lg:col-span-7 space-y-8 relative">
+        
+        <!-- Sky-Blue Radial Glow behind headline -->
+        <div class="absolute -top-12 -left-12 w-96 h-96 bg-sky/20 blur-3xl rounded-full pointer-events-none"></div>
+
+        <!-- Eyebrow Label -->
+        <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-[13px] font-bold text-sky uppercase tracking-[0.12em] shadow-sm">
+          <svg class="w-4 h-4 text-sky" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+          <span>Innovative Marketing Concepts</span>
+        </div>
+
+        <!-- Main Headline -->
+        <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight leading-none text-white">
+          STARKE WERBUNG FÜR IHR <span class="text-gradient-sky">UNTERNEHMEN</span>
+        </h1>
+
+        <!-- Subline -->
+        <p class="text-lg sm:text-xl text-ice/90 max-w-xl font-normal leading-[1.65]">
+          Von der ersten kreativen Idee über meisterhafte Sonderanfertigungen bis hin zur weltweiten POS-Logistik. Wir schaffen emotionale Markenmomente, die nachhaltig im Gedächtnis bleiben.
+        </p>
+
+        <!-- CTA Action Buttons -->
+        <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 pt-2">
+          <button onclick="toggleModal(true)" class="px-8 py-4 rounded-xl font-bold text-[15px] text-white bg-primary hover:bg-bright btn-glow transition-all flex items-center justify-center gap-2">
+            <span>Kostenloses Erstgespräch</span>
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+          </button>
+          
+          <a href="#projects" class="px-8 py-4 rounded-xl font-bold text-[15px] text-white border-2 border-white/30 hover:border-white hover:bg-white/10 transition-all text-center">
+            Projekte Entdecken
+          </a>
+        </div>
+
+      </div>
+
+      <!-- Right Floating Glassmorphism Cards -->
+      <!-- Glass cards: background rgba(10,31,68,0.35), backdrop-filter blur(16px), border 1px solid rgba(255,255,255,0.25), pure white text -->
+      <div class="lg:col-span-5 grid sm:grid-cols-1 gap-4 lg:gap-6 justify-end">
+        
+        <!-- Glass Card 1 -->
+        <div class="glass-card p-5 flex items-center gap-4 shadow-xl max-w-md ml-auto" style="background: rgba(10, 31, 68, 0.35); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border: 1px solid rgba(255, 255, 255, 0.25);">
+          <div class="w-12 h-12 rounded-xl bg-bright/25 border border-sky/40 flex items-center justify-center text-sky shrink-0">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+          </div>
+          <div>
+            <div class="text-lg font-extrabold text-white">Seit 1993 in Neuss</div>
+            <div class="text-xs text-white/90 font-medium">30+ Jahre Markt- & Produktionskompetenz</div>
+          </div>
+        </div>
+
+        <!-- Glass Card 2 -->
+        <div class="glass-card p-5 flex items-center gap-4 shadow-xl max-w-md ml-auto" style="background: rgba(10, 31, 68, 0.35); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border: 1px solid rgba(255, 255, 255, 0.25);">
+          <div class="w-12 h-12 rounded-xl bg-bright/25 border border-sky/40 flex items-center justify-center text-sky shrink-0">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+          </div>
+          <div>
+            <div class="text-lg font-extrabold text-white">Made in Germany</div>
+            <div class="text-xs text-white/90 font-medium">Höchste Qualitäts- & Sedex-Zertifizierung</div>
+          </div>
+        </div>
+
+        <!-- Glass Card 3 -->
+        <div class="glass-card p-5 flex items-center gap-4 shadow-xl max-w-md ml-auto" style="background: rgba(10, 31, 68, 0.35); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border: 1px solid rgba(255, 255, 255, 0.25);">
+          <div class="w-12 h-12 rounded-xl bg-bright/25 border border-sky/40 flex items-center justify-center text-sky shrink-0">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"/></svg>
+          </div>
+          <div>
+            <div class="text-lg font-extrabold text-white">5.000+ Projekte</div>
+            <div class="text-xs text-white/90 font-medium">Erfolgreich realisierte Marken-Promotions</div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- Animated Scroll-Down Indicator -->
+    <a href="#intro" class="absolute bottom-6 left-1/2 -translate-x-1/2 z-20 text-white/70 hover:text-white transition-colors flex flex-col items-center gap-2">
+      <span class="text-[11px] font-extrabold tracking-widest uppercase">Scrollen</span>
+      <svg class="w-5 h-5 animate-bounce text-sky" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"/></svg>
+    </a>
+  </section>
+
+
+  <!-- ==========================================
+       SECTION 3: INTRO / VALUE PROPOSITION (Centered Header)
+       ========================================== -->
+  <section id="intro" class="py-16 lg:py-24 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <!-- Center-Aligned Section Header -->
+      <div class="text-center max-w-[640px] mx-auto mb-16 reveal">
+        <span class="text-[13px] font-bold tracking-[0.12em] text-primary uppercase">Kreative Werbemittel & Promotions</span>
+        <h2 class="text-3xl sm:text-4xl font-extrabold text-navy mt-2 sky-underline-center">
+          Werbeartikel, die Begeisterung wecken
+        </h2>
+        <p class="text-slate text-[17px] leading-[1.65] mt-5">
+          Standard-Werbeartikel landen schnell in der Schublade. Wir gestalten Werbemittel und POS-Installationen, die haptisch überzeugen.
+        </p>
+      </div>
+
+      <div class="grid lg:grid-cols-12 gap-12 items-center">
+        
+        <!-- Text Column -->
+        <div class="lg:col-span-6 space-y-6 reveal">
+          <p class="text-ink text-[16px] leading-[1.65]">
+            Wir bei <strong class="text-navy font-semibold">C-Concepts Vertriebs GmbH</strong> entwickeln exklusive Sonderanfertigungen, Marken-Gimmicks und komplette Handelsaktionen, die nachhaltige Kundenbindung schaffen.
+          </p>
+          <p class="text-ink text-[16px] leading-[1.65]">
+            Ob maßgeschneiderter Artikel für bundesweite Aktionen, limitierte VIP-Incentives oder Event-Promotions: Wir begleiten Sie mit Erfahrung, technischem Know-how und absoluter Zuverlässigkeit.
+          </p>
+
+          <!-- Feature Bullets -->
+          <div class="space-y-3 pt-2">
+            <div class="flex items-start gap-3">
+              <div class="w-6 h-6 rounded-full bg-ice flex items-center justify-center text-bright font-bold shrink-0 mt-0.5">✓</div>
+              <div class="text-navy font-semibold text-[16px]">Eigene Sonderanfertigungen nach Corporate Design Vorgaben</div>
+            </div>
+            <div class="flex items-start gap-3">
+              <div class="w-6 h-6 rounded-full bg-ice flex items-center justify-center text-bright font-bold shrink-0 mt-0.5">✓</div>
+              <div class="text-navy font-semibold text-[16px]">Höchste Qualitätsprüfungen und nachhaltige Materialauswahl</div>
+            </div>
+            <div class="flex items-start gap-3">
+              <div class="w-6 h-6 rounded-full bg-ice flex items-center justify-center text-bright font-bold shrink-0 mt-0.5">✓</div>
+              <div class="text-navy font-semibold text-[16px]">Termingenaue Direktbelieferung an Filialen, Events oder Kunden</div>
+            </div>
+          </div>
+
+          <div class="pt-4">
+            <button onclick="toggleModal(true)" class="inline-flex items-center text-primary font-bold hover:text-bright transition-colors text-[15px]">
+              <span>Jetzt Beratung anfordern</span>
+              <svg class="w-5 h-5 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- Image Showcase Column -->
+        <div class="lg:col-span-6 reveal reveal-delay-1">
+          <div class="relative">
+            <div class="img-tint-container rounded-2xl shadow-xl">
+              <img src="images/service-beratung.jpg" alt="C-Concepts Beratung und Planung" class="w-full h-[420px] object-cover rounded-2xl">
+            </div>
+            <div class="absolute -bottom-6 -left-6 bg-white p-6 rounded-2xl shadow-xl border border-slate-100 max-w-xs hidden sm:block">
+              <div class="flex items-center gap-4">
+                <div class="w-12 h-12 rounded-xl bg-primary flex items-center justify-center text-white font-extrabold text-xl">
+                  30+
+                </div>
+                <div>
+                  <div class="text-navy font-bold text-sm">Jahre POS-Erfahrung</div>
+                  <div class="text-slate text-xs">Made in Germany</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ==========================================
+       SECTION 4: PROCESS STRIP ("Von der Idee bis zum Point of Sale")
+       ========================================== -->
+  <section id="process" class="py-16 lg:py-24 bg-mist border-y border-slate-100 relative">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <!-- Center-Aligned Section Header -->
+      <div class="text-center max-w-[640px] mx-auto mb-16 reveal">
+        <span class="text-[13px] font-bold tracking-[0.12em] text-primary uppercase">Nahtloser Workflow</span>
+        <h2 class="text-3xl sm:text-4xl font-extrabold text-navy mt-2 sky-underline-center">
+          Von der Idee bis zum Point of Sale
+        </h2>
+        <p class="text-slate mt-5 text-[17px] leading-[1.65]">
+          Ein strukturierter 5-Stufen-Prozess garantiert erstklassige Ergebnisse ohne unerwartete Überraschungen.
+        </p>
+      </div>
+
+      <!-- Process Steps Grid with Desktop Connecting Line -->
+      <div class="grid md:grid-cols-5 gap-6 relative">
+        
+        <!-- Connecting Line for Desktop -->
+        <div class="hidden md:block absolute top-[140px] left-8 right-8 h-0.5 bg-slate-200/80 -z-0 pointer-events-none"></div>
+
+        <!-- Step 1 -->
+        <div class="bg-white p-8 rounded-2xl shadow-md card-hover reveal flex flex-col justify-between relative z-10 border border-primary/10">
+          <div>
+            <!-- Number 52px gradient text -->
+            <div class="text-[52px] font-extrabold leading-none bg-gradient-to-r from-primary to-sky bg-clip-text text-transparent mb-3">01</div>
+            <!-- Lucide Icon in bright blue -->
+            <div class="w-11 h-11 rounded-xl bg-ice flex items-center justify-center text-bright mb-4">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>
+            </div>
+            <h3 class="text-lg font-bold text-navy mb-2">Beratung & Idee</h3>
+            <p class="text-slate text-[16px] leading-[1.65] line-clamp-3">Analysieren Ihrer Zielgruppe, Budgets und Kampagnenziele für maßgeschneiderte Werbeideen.</p>
+          </div>
+        </div>
+
+        <!-- Step 2 -->
+        <div class="bg-white p-8 rounded-2xl shadow-md card-hover reveal reveal-delay-1 flex flex-col justify-between relative z-10 border border-primary/10">
+          <div>
+            <div class="text-[52px] font-extrabold leading-none bg-gradient-to-r from-primary to-sky bg-clip-text text-transparent mb-3">02</div>
+            <div class="w-11 h-11 rounded-xl bg-ice flex items-center justify-center text-bright mb-4">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></svg>
+            </div>
+            <h3 class="text-lg font-bold text-navy mb-2">Design & Muster</h3>
+            <p class="text-slate text-[16px] leading-[1.65] line-clamp-3">Visualisierung in 3D, Materialmuster und Freigabeprotokoll vor Serienstart.</p>
+          </div>
+        </div>
+
+        <!-- Step 3 -->
+        <div class="bg-white p-8 rounded-2xl shadow-md card-hover reveal reveal-delay-2 flex flex-col justify-between relative z-10 border border-primary/10">
+          <div>
+            <div class="text-[52px] font-extrabold leading-none bg-gradient-to-r from-primary to-sky bg-clip-text text-transparent mb-3">03</div>
+            <div class="w-11 h-11 rounded-xl bg-ice flex items-center justify-center text-bright mb-4">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"/></svg>
+            </div>
+            <h3 class="text-lg font-bold text-navy mb-2">Produktion</h3>
+            <p class="text-slate text-[16px] leading-[1.65] line-clamp-3">Präzise Fertigung und Veredelung unter Einhaltung strenger Qualitätsvorgaben.</p>
+          </div>
+        </div>
+
+        <!-- Step 4 -->
+        <div class="bg-white p-8 rounded-2xl shadow-md card-hover reveal reveal-delay-3 flex flex-col justify-between relative z-10 border border-primary/10">
+          <div>
+            <div class="text-[52px] font-extrabold leading-none bg-gradient-to-r from-primary to-sky bg-clip-text text-transparent mb-3">04</div>
+            <div class="w-11 h-11 rounded-xl bg-ice flex items-center justify-center text-bright mb-4">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/></svg>
+            </div>
+            <h3 class="text-lg font-bold text-navy mb-2">Konfektion</h3>
+            <p class="text-slate text-[16px] leading-[1.65] line-clamp-3">Individuelle Set-Zusammenstellung, Branding der Verpackungen und Beilagen.</p>
+          </div>
+        </div>
+
+        <!-- Step 5 -->
+        <div class="bg-white p-8 rounded-2xl shadow-md card-hover reveal flex flex-col justify-between relative z-10 border border-primary/10">
+          <div>
+            <div class="text-[52px] font-extrabold leading-none bg-gradient-to-r from-primary to-sky bg-clip-text text-transparent mb-3">05</div>
+            <div class="w-11 h-11 rounded-xl bg-ice flex items-center justify-center text-bright mb-4">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+            </div>
+            <h3 class="text-lg font-bold text-navy mb-2">POS-Logistik</h3>
+            <p class="text-slate text-[16px] leading-[1.65] line-clamp-3">Termingerechter Transport und Verteilung direkt an den Point of Sale.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ==========================================
+       SECTION 5: FULL-SERVICE (Centered Header, 4 Cards)
+       ========================================== -->
+  <section id="services" class="py-16 lg:py-24 bg-ice">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <!-- Center-Aligned Section Header -->
+      <div class="text-center max-w-[640px] mx-auto mb-16 reveal">
+        <span class="text-[13px] font-bold tracking-[0.12em] text-primary uppercase">Rundum-Sorglos-Paket</span>
+        <h2 class="text-3xl sm:text-4xl font-extrabold text-navy mt-2 sky-underline-center">
+          Unsere 4 Säulen des Werbemittel-Erfolgs
+        </h2>
+        <p class="text-slate mt-5 text-[17px] leading-[1.65]">
+          Alles aus einer Hand – von der strategischen Planung bis zur weltweiten Lager- und Versandlogistik.
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+        
+        <div class="bg-white p-8 rounded-2xl shadow-md card-hover flex flex-col justify-between reveal">
+          <div>
+            <div class="w-12 h-12 rounded-xl bg-ice text-bright flex items-center justify-center mb-6">
+              <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>
+            </div>
+            <h3 class="text-xl font-bold text-navy mb-3">Planung & Beratung</h3>
+            <p class="text-slate text-[16px] leading-[1.65] line-clamp-3">
+              Persönliche Betreuung von der ersten Konzeption über Machbarkeitsprüfungen bis hin zur Auswahl der optimalen Veredelungstechniken.
+            </p>
+          </div>
+          <div class="mt-8 pt-4 border-t border-slate-100">
+            <span class="text-xs font-bold text-bright uppercase tracking-wider">Kreative Strategie</span>
+          </div>
+        </div>
+
+        <div class="bg-white p-8 rounded-2xl shadow-md card-hover flex flex-col justify-between reveal reveal-delay-1">
+          <div>
+            <div class="w-12 h-12 rounded-xl bg-ice text-bright flex items-center justify-center mb-6">
+              <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 4H6a2 2 0 00-2 2v12a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-2m-4-1v8m0 0l3-3m-3 3L9 8m-5 5h2.586a1 1 0 01.707.293l2.414 2.414a1 1 0 00.707.293h3.172a1 1 0 00.707-.293l2.414-2.414a1 1 0 01.707-.293H20"/></svg>
+            </div>
+            <h3 class="text-xl font-bold text-navy mb-3">Logistik & Lagerung</h3>
+            <p class="text-slate text-[16px] leading-[1.65] line-clamp-3">
+              Moderne Hochregallager in Deutschland für flexible Abrufkontingente, Zwischenlagerung und punktgenauen Filialversand.
+            </p>
+          </div>
+          <div class="mt-8 pt-4 border-t border-slate-100">
+            <span class="text-xs font-bold text-bright uppercase tracking-wider">Effiziente Abläufe</span>
+          </div>
+        </div>
+
+        <div class="bg-white p-8 rounded-2xl shadow-md card-hover flex flex-col justify-between reveal reveal-delay-2">
+          <div>
+            <div class="w-12 h-12 rounded-xl bg-ice text-bright flex items-center justify-center mb-6">
+              <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/></svg>
+            </div>
+            <h3 class="text-xl font-bold text-navy mb-3">Verpackung & Konfektion</h3>
+            <p class="text-slate text-[16px] leading-[1.65] line-clamp-3">
+              Manuelle und maschinelle Konfektionierung vielteiliger Sets, individuelle Geschenkverpackungen und gebrandete Mailings.
+            </p>
+          </div>
+          <div class="mt-8 pt-4 border-t border-slate-100">
+            <span class="text-xs font-bold text-bright uppercase tracking-wider">Perfekt Verpackt</span>
+          </div>
+        </div>
+
+        <!-- FEATURED CARD IN NAVY -->
+        <div class="bg-navy text-white p-8 rounded-2xl shadow-2xl relative overflow-hidden flex flex-col justify-between reveal reveal-delay-3 border-2 border-bright">
+          <div class="absolute top-4 right-4 bg-sky text-navy text-[10px] font-extrabold uppercase px-2.5 py-1 rounded-full">
+            FEATURED
+          </div>
+          <div>
+            <div class="w-12 h-12 rounded-xl bg-white/10 text-sky flex items-center justify-center mb-6">
+              <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"/></svg>
+            </div>
+            <h3 class="text-xl font-bold text-white mb-3">Full-Service Abwicklung</h3>
+            <p class="text-ice/90 text-[16px] leading-[1.65] line-clamp-3">
+              Wir übernehmen das komplette Projektmanagement von A bis Z. Ein fester Ansprechpartner sorgt für reibungslose Übergänge, Termin- und Budgettreue.
+            </p>
+          </div>
+          <div class="mt-8 pt-4 border-t border-white/10">
+            <button onclick="toggleModal(true)" class="w-full py-3.5 bg-primary hover:bg-bright text-white font-bold rounded-xl text-[15px] transition-all btn-glow text-center">
+              Full-Service Anfragen
+            </button>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ==========================================
+       SECTION 6: CTA STRIP ("Ihre Idee. Unsere Umsetzung.")
+       ========================================== -->
+  <section class="py-16 bg-gradient-to-r from-primary via-bright to-primary text-white relative overflow-hidden">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10 space-y-6">
+      <h2 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight">
+        Ihre Idee. Unsere Umsetzung.
+      </h2>
+      <p class="text-lg sm:text-xl text-ice/90 max-w-2xl mx-auto font-normal">
+        Lassen Sie uns gemeinsam ein Werbemittel entwickeln, das aus der Masse heraussticht.
+      </p>
+      <div class="pt-4">
+        <button onclick="toggleModal(true)" class="px-9 py-4 rounded-xl font-extrabold text-[15px] text-navy bg-white hover:bg-ice shadow-xl transition-all hover:scale-105 inline-flex items-center gap-2">
+          <span>Jetzt unverbindlich anfragen</span>
+          <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+        </button>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ==========================================
+       SECTION 7: INNOVATIVE WERBEPRODUKTE & PROJEKTE (Strict CSS Grid Layout, Pepsi 16/9, 6 cards below 4/3)
+       ========================================== -->
+  <section id="projects" class="py-16 lg:py-24 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <!-- Center-Aligned Section Header -->
+      <div class="text-center max-w-[640px] mx-auto mb-16 reveal">
+        <span class="text-[13px] font-bold tracking-[0.12em] text-primary uppercase">Portfolio & Referenzen</span>
+        <h2 class="text-3xl sm:text-4xl font-extrabold text-navy mt-2 sky-underline-center">
+          Innovative Werbeprodukte & Projekte
+        </h2>
+        <p class="text-slate mt-5 text-[17px] leading-[1.65]">
+          Ein Einblick in herausragende Kundenprojekte und maßgeschneiderte Sonderanfertigungen.
+        </p>
+      </div>
+
+      <!-- STRICT PROJECTS GRID -->
+      <div class="space-y-8">
+        
+        <!-- FEATURED PEPSI CARD: Full Width, 2 Columns (Text 45% / Image 55%), Aspect 16/9, min-height 380px -->
+        <div class="bg-mist rounded-[20px] overflow-hidden shadow-md card-hover border border-slate-200 grid lg:grid-cols-12 items-center min-h-[380px] reveal">
+          <div class="lg:col-span-5 p-8 lg:p-10 space-y-5">
+            <div class="inline-flex items-center gap-2 bg-primary/10 text-primary font-bold text-xs px-3 py-1 rounded-full uppercase">
+              ★ HERO CASE STUDY: PEPSI PROMOTION
+            </div>
+            <h3 class="text-2xl sm:text-3xl font-extrabold text-navy">
+              Punica & Pepsi Promotion-Scooter & Mofa Branding
+            </h3>
+            <p class="text-slate text-[16px] leading-[1.65] line-clamp-3">
+              Vollständige Konzeption und Veredelung von Retro-Mofas für bundesweite POS-Gewinnspiele und Event-Promotions. Inklusive maßgeschneidertem Transport-Setup und Filialauslieferung.
+            </p>
+            <a href="#contact" onclick="toggleModal(true)" class="inline-flex items-center gap-1.5 text-primary font-bold text-[15px] hover:text-bright pt-2">
+              <span>Mehr erfahren</span>
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+            </a>
+          </div>
+          <div class="lg:col-span-7 aspect-[16/9] h-full relative img-tint-container">
+            <img src="images/punica-mofa.jpg" alt="Punica Promotion Mofa" class="w-full h-full object-cover">
+          </div>
+        </div>
+
+        <!-- 3-COLUMN GRID BELOW (2 cols tablet, 1 mobile, equal height cards, aspect 4/3 images, 6 cards total) -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          
+          <!-- Card 1 -->
+          <div class="bg-mist rounded-[20px] p-6 shadow-md card-hover border border-slate-200 flex flex-col justify-between h-full reveal">
+            <div>
+              <div class="aspect-[4/3] rounded-xl overflow-hidden mb-5 img-tint-container relative">
+                <img src="images/rockstar-snowboard.jpg" alt="Rockstar Energy Snowboard Edition" class="w-full h-full object-cover">
+              </div>
+              <h3 class="text-[20px] font-bold text-navy mb-2">Rockstar Energy Snowboard Edition</h3>
+              <p class="text-slate text-[16px] leading-[1.65] line-clamp-3">
+                Exklusiv gebrandete High-Performance Snowboards für Wintersport-Aktionen und Event-Sponsoring in den Alpen.
+              </p>
+            </div>
+            <a href="#contact" onclick="toggleModal(true)" class="inline-flex items-center gap-1.5 text-primary font-bold text-[15px] hover:text-bright pt-4 mt-auto">
+              <span>Mehr erfahren</span>
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+            </a>
+          </div>
+
+          <!-- Card 2 -->
+          <div class="bg-mist rounded-[20px] p-6 shadow-md card-hover border border-slate-200 flex flex-col justify-between h-full reveal reveal-delay-1">
+            <div>
+              <div class="aspect-[4/3] rounded-xl overflow-hidden mb-5 img-tint-container relative">
+                <img src="images/kicker-table.jpg" alt="Chio Chips Kicker Tisch" class="w-full h-full object-cover">
+              </div>
+              <h3 class="text-[20px] font-bold text-navy mb-2">Chio Chips Kicker-Tisch</h3>
+              <p class="text-slate text-[16px] leading-[1.65] line-clamp-3">
+                Robustes Gastro-Tischkicker-System im vollen Markenbranding für WM/EM-Aktionen und POS-Gewinnspiele.
+              </p>
+            </div>
+            <a href="#contact" onclick="toggleModal(true)" class="inline-flex items-center gap-1.5 text-primary font-bold text-[15px] hover:text-bright pt-4 mt-auto">
+              <span>Mehr erfahren</span>
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+            </a>
+          </div>
+
+          <!-- Card 3 -->
+          <div class="bg-mist rounded-[20px] p-6 shadow-md card-hover border border-slate-200 flex flex-col justify-between h-full reveal reveal-delay-2">
+            <div>
+              <div class="aspect-[4/3] rounded-xl overflow-hidden mb-5 img-tint-container relative">
+                <img src="images/coffee-bike.jpg" alt="Mobile Bar Coffee Bike" class="w-full h-full object-cover">
+              </div>
+              <h3 class="text-[20px] font-bold text-navy mb-2">Mobile Coffee Bar Bike</h3>
+              <p class="text-slate text-[16px] leading-[1.65] line-clamp-3">
+                Mobiles Barista-Fahrrad mit gebrandeten Bechern & Schirmen für Messeauftritte und Roadshows.
+              </p>
+            </div>
+            <a href="#contact" onclick="toggleModal(true)" class="inline-flex items-center gap-1.5 text-primary font-bold text-[15px] hover:text-bright pt-4 mt-auto">
+              <span>Mehr erfahren</span>
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+            </a>
+          </div>
+
+          <!-- Card 4 -->
+          <div class="bg-mist rounded-[20px] p-6 shadow-md card-hover border border-slate-200 flex flex-col justify-between h-full reveal">
+            <div>
+              <div class="aspect-[4/3] rounded-xl overflow-hidden mb-5 img-tint-container relative">
+                <img src="images/barrel-prod.jpg" alt="Holzfass-Kühler Display" class="w-full h-full object-cover">
+              </div>
+              <h3 class="text-[20px] font-bold text-navy mb-2">Holzfass-Kühler POS Installation</h3>
+              <p class="text-slate text-[16px] leading-[1.65] line-clamp-3">
+                Authentische Echtholz-Fässer mit integrierter Kühlung für Premium-Getränkemarken am Point of Sale.
+              </p>
+            </div>
+            <a href="#contact" onclick="toggleModal(true)" class="inline-flex items-center gap-1.5 text-primary font-bold text-[15px] hover:text-bright pt-4 mt-auto">
+              <span>Mehr erfahren</span>
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+            </a>
+          </div>
+
+          <!-- Card 5 -->
+          <div class="bg-mist rounded-[20px] p-6 shadow-md card-hover border border-slate-200 flex flex-col justify-between h-full reveal reveal-delay-1">
+            <div>
+              <div class="aspect-[4/3] rounded-xl overflow-hidden mb-5 img-tint-container relative">
+                <img src="images/pepsi-becher.jpg" alt="Pepsi Event Becher Serie" class="w-full h-full object-cover">
+              </div>
+              <h3 class="text-[20px] font-bold text-navy mb-2">Pepsi Event Becher-Serie</h3>
+              <p class="text-slate text-[16px] leading-[1.65] line-clamp-3">
+                Hochwertige Mehrweg-Becherserie mit 360-Grad IML-Druck für Festivals und Stadion-Events.
+              </p>
+            </div>
+            <a href="#contact" onclick="toggleModal(true)" class="inline-flex items-center gap-1.5 text-primary font-bold text-[15px] hover:text-bright pt-4 mt-auto">
+              <span>Mehr erfahren</span>
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+            </a>
+          </div>
+
+          <!-- Card 6 -->
+          <div class="bg-mist rounded-[20px] p-6 shadow-md card-hover border border-slate-200 flex flex-col justify-between h-full reveal reveal-delay-2">
+            <div>
+              <div class="aspect-[4/3] rounded-xl overflow-hidden mb-5 img-tint-container relative">
+                <img src="images/service-konfektion.jpg" alt="Custom POS Promotion Set" class="w-full h-full object-cover">
+              </div>
+              <h3 class="text-[20px] font-bold text-navy mb-2">Custom POS Promotion Set</h3>
+              <p class="text-slate text-[16px] leading-[1.65] line-clamp-3">
+                Vollständig konfektionierte Promotion-Pakete inklusive Displays, Flyern und Werbegeschenken.
+              </p>
+            </div>
+            <a href="#contact" onclick="toggleModal(true)" class="inline-flex items-center gap-1.5 text-primary font-bold text-[15px] hover:text-bright pt-4 mt-auto">
+              <span>Mehr erfahren</span>
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+            </a>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ==========================================
+       SECTION 8: CLIENTS / LOGOS (Directly on white, height 44-56px, no pills) & TESTIMONIALS (36px padding, 18px quote in ink, 40px sky quote icon)
+       ========================================== -->
+  <section class="py-16 lg:py-24 bg-mist border-y border-slate-100">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <!-- Center-Aligned Section Header -->
+      <div class="text-center max-w-[640px] mx-auto mb-14 reveal">
+        <span class="text-[13px] font-bold tracking-[0.12em] text-primary uppercase">Vertrauen führender Marken</span>
+        <h2 class="text-3xl sm:text-4xl font-extrabold text-navy mt-2 sky-underline-center">
+          Unsere Partner & Auftraggeber
+        </h2>
+      </div>
+
+      <!-- Clean Logos Row Directly on White Background (No Pills/Boxes, Height 44-56px / h-12 to h-14, Grayscale 0.8) -->
+      <div class="flex flex-wrap items-center justify-center gap-10 md:gap-14 py-10 reveal">
+        <img src="images/logo-pepsi.jpg" alt="Pepsi" class="logo-clean h-12 md:h-14 w-auto object-contain">
+        <img src="images/logo-lipton.jpg" alt="Lipton" class="logo-clean h-12 md:h-14 w-auto object-contain">
+        <img src="images/logo-chio.jpg" alt="Chio" class="logo-clean h-12 md:h-14 w-auto object-contain">
+        <img src="images/logo-funny.jpg" alt="funny-frisch" class="logo-clean h-12 md:h-14 w-auto object-contain">
+        <img src="images/logo-rockstar.jpg" alt="Rockstar Energy" class="logo-clean h-12 md:h-14 w-auto object-contain">
+        <img src="images/logo-punica.jpg" alt="Punica" class="logo-clean h-12 md:h-14 w-auto object-contain">
+        <img src="images/logo-oasis.jpg" alt="Oasis" class="logo-clean h-12 md:h-14 w-auto object-contain">
+      </div>
+
+      <!-- Testimonials Grid (Padding 36px / p-9, Quote 18px/1.7 in ink, Sky quote icon 40px) -->
+      <div class="grid md:grid-cols-3 gap-8 mt-16">
+        
+        <!-- Card 1 -->
+        <div class="bg-white p-9 rounded-2xl shadow-md border border-slate-100 flex flex-col justify-between card-hover reveal h-full">
+          <div>
+            <!-- Sky-colored quote icon 40px -->
+            <div class="text-sky mb-5">
+              <svg class="w-10 h-10 text-sky" fill="currentColor" viewBox="0 0 24 24"><path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/></svg>
+            </div>
+            <p class="text-ink text-[18px] leading-[1.7] italic mb-8">
+              „C-Concepts setzt unsere Werbeartikel-Ideen seit Jahren punktgenau um. Selbst bei extrem knappen Terminen für unsere bundesweiten Handelsaktionen bleibt die Qualität erstklassig.“
+            </p>
+          </div>
+          <div class="flex items-center justify-between pt-6 border-t border-slate-100">
+            <div class="flex items-center gap-4">
+              <!-- Avatar Circle 48px -->
+              <div class="w-12 h-12 rounded-full bg-primary text-white font-extrabold flex items-center justify-center text-base shadow-sm">
+                MK
+              </div>
+              <div>
+                <div class="text-base font-bold text-navy">Marketing & Brand Lead</div>
+                <div class="text-xs text-slate-500">Getränkekonzern Deutschland</div>
+              </div>
+            </div>
+            <img src="images/logo-pepsi.jpg" alt="Pepsi Partner" class="h-8 w-auto object-contain opacity-70">
+          </div>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="bg-white p-9 rounded-2xl shadow-md border border-slate-100 flex flex-col justify-between card-hover reveal reveal-delay-1 h-full">
+          <div>
+            <div class="text-sky mb-5">
+              <svg class="w-10 h-10 text-sky" fill="currentColor" viewBox="0 0 24 24"><path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/></svg>
+            </div>
+            <p class="text-ink text-[18px] leading-[1.7] italic mb-8">
+              „Die Flexibilität in der Konfektionierung und die professionelle Lagerlogistik entlasten unser eigenes Team enorm. Ein Partner, auf den man sich zu 100% verlassen kann.“
+            </p>
+          </div>
+          <div class="flex items-center justify-between pt-6 border-t border-slate-100">
+            <div class="flex items-center gap-4">
+              <div class="w-12 h-12 rounded-full bg-bright text-white font-extrabold flex items-center justify-center text-base shadow-sm">
+                TL
+              </div>
+              <div>
+                <div class="text-base font-bold text-navy">Trade Logistics Director</div>
+                <div class="text-xs text-slate-500">Snack & FMCG Brand</div>
+              </div>
+            </div>
+            <img src="images/logo-chio.jpg" alt="Chio Partner" class="h-8 w-auto object-contain opacity-70">
+          </div>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="bg-white p-9 rounded-2xl shadow-md border border-slate-100 flex flex-col justify-between card-hover reveal reveal-delay-2 h-full">
+          <div>
+            <div class="text-sky mb-5">
+              <svg class="w-10 h-10 text-sky" fill="currentColor" viewBox="0 0 24 24"><path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/></svg>
+            </div>
+            <p class="text-ink text-[18px] leading-[1.7] italic mb-8">
+              „Vom Remundi-Grill Incentive bis zu den gebrandeten Merchandise-Sets: Die Qualität spricht für sich. Made in Germany ist bei C-Concepts ein echtes Versprechen.“
+            </p>
+          </div>
+          <div class="flex items-center justify-between pt-6 border-t border-slate-100">
+            <div class="flex items-center gap-4">
+              <div class="w-12 h-12 rounded-full bg-navy text-white font-extrabold flex items-center justify-center text-base shadow-sm">
+                SB
+              </div>
+              <div>
+                <div class="text-base font-bold text-navy">Senior Event Manager</div>
+                <div class="text-xs text-slate-500">Promotion Agency</div>
+              </div>
+            </div>
+            <img src="images/logo-funny.jpg" alt="funny-frisch Partner" class="h-8 w-auto object-contain opacity-70">
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ==========================================
+       SECTION 9: REMUNDI GRILL-ERLEBNIS
+       ========================================== -->
+  <section id="remundi" class="py-16 lg:py-24 bg-gradient-to-br from-navy via-navy to-primary text-white relative overflow-hidden">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid lg:grid-cols-12 gap-12 items-center">
+        
+        <!-- Text & Bullet Points -->
+        <div class="lg:col-span-6 space-y-6 reveal">
+          <div class="inline-flex items-center gap-2 bg-bright/20 text-sky px-3.5 py-1 rounded-full text-xs font-extrabold uppercase tracking-wider">
+            EXKLUSIVES PREMIUM-HIGHLIGHT
+          </div>
+          <h2 class="text-3xl sm:text-4xl font-extrabold leading-tight">
+            Remundi Grill-Erlebnis – Das ultimative Outdoor-Incentive
+          </h2>
+          <p class="text-ice/90 text-[17px] leading-[1.65]">
+            Feuer, Genuss und Markenpräsenz in meisterhafter Vollendung. Wir veredeln die legendären Remundi Feuer- und Grillstellen als emotionale VIP-Geschenke und POS-Highlights.
+          </p>
+
+          <!-- 3 Bullet Points with Sky Check Icons -->
+          <div class="space-y-4 pt-2">
+            <div class="flex items-start gap-4">
+              <div class="w-8 h-8 rounded-full bg-sky/20 border border-sky/40 flex items-center justify-center text-sky font-bold shrink-0 mt-1">
+                ✓
+              </div>
+              <div>
+                <h4 class="text-base font-bold text-white">Exklusive Outdoor-Veredelung</h4>
+                <p class="text-[16px] text-ice/80 mt-1 leading-[1.65]">Spezielle Hitzebeständige Laser-Gravuren und Branding-Plaketten für extrem lange Lebensdauer.</p>
+              </div>
+            </div>
+
+            <div class="flex items-start gap-4">
+              <div class="w-8 h-8 rounded-full bg-sky/20 border border-sky/40 flex items-center justify-center text-sky font-bold shrink-0 mt-1">
+                ✓
+              </div>
+              <div>
+                <h4 class="text-base font-bold text-white">Skalierbare Serienfertigung</h4>
+                <p class="text-[16px] text-ice/80 mt-1 leading-[1.65]">Ob Einzelstück als Vorstandspräsent oder hunderte Einheiten für deutschlandweite Kunden-Incentives.</p>
+              </div>
+            </div>
+
+            <div class="flex items-start gap-4">
+              <div class="w-8 h-8 rounded-full bg-sky/20 border border-sky/40 flex items-center justify-center text-sky font-bold shrink-0 mt-1">
+                ✓
+              </div>
+              <div>
+                <h4 class="text-base font-bold text-white">Komplette POS-Logistik & Einzelversand</h4>
+                <p class="text-[16px] text-ice/80 mt-1 leading-[1.65]">Sichere Palettierung und Direktlieferung bis an die Haustür des Gewinners oder Kunden.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="pt-4">
+            <button onclick="toggleModal(true)" class="px-7 py-3.5 bg-primary hover:bg-bright text-white font-bold rounded-xl text-[15px] transition-all btn-glow">
+              Remundi Incentive Anfragen
+            </button>
+          </div>
+        </div>
+
+        <!-- Image Showcase -->
+        <div class="lg:col-span-6 reveal reveal-delay-1">
+          <div class="img-tint-container rounded-2xl border-2 border-white/20 shadow-2xl">
+            <img src="images/remundi-grill.jpg" alt="Remundi Outdoor Grill Highlight" class="w-full h-[450px] object-cover rounded-2xl">
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ==========================================
+       SECTION 10: ABOUT "Innovative Marketing Concepts – Made in Germany" (Centered Header)
+       ========================================== -->
+  <section id="about" class="py-16 lg:py-24 bg-ice">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <!-- Center-Aligned Section Header -->
+      <div class="text-center max-w-[640px] mx-auto mb-16 reveal">
+        <span class="text-[13px] font-bold tracking-[0.12em] text-primary uppercase">Tradition & Innovation</span>
+        <h2 class="text-3xl sm:text-4xl font-extrabold text-navy mt-2 sky-underline-center">
+          Innovative Marketing Concepts
+        </h2>
+        <p class="text-slate mt-5 text-[17px] leading-[1.65]">
+          Seit 1993 Ihr zuverlässiger Partner für Markenwerbung und POS-Marketing in Neuss.
+        </p>
+      </div>
+
+      <div class="grid lg:grid-cols-12 gap-12 items-center">
+        
+        <!-- Image & Badges -->
+        <div class="lg:col-span-6 order-2 lg:order-1 reveal">
+          <div class="relative">
+            <div class="img-tint-container rounded-2xl shadow-xl">
+              <img src="images/service-logistik.jpg" alt="C-Concepts Logistikzentrum Neuss" class="w-full h-[420px] object-cover rounded-2xl">
+            </div>
+            <div class="absolute top-6 left-6 bg-white p-4 rounded-xl shadow-lg flex items-center gap-3 border border-slate-100">
+              <img src="images/sedex-logo.png" alt="Sedex Certified" class="h-10 w-auto object-contain">
+              <div>
+                <div class="text-xs font-bold text-navy">Sedex Zertifiziert</div>
+                <div class="text-[11px] text-slate">Ethische Standards & Nachhaltigkeit</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Text & Animated Stat Counters -->
+        <div class="lg:col-span-6 order-1 lg:order-2 space-y-6 reveal">
+          <p class="text-ink text-[16px] leading-[1.65]">
+            Seit der Gründung im Jahr 1993 steht <strong class="text-navy">C-Concepts Vertriebs GmbH</strong> in Neuss für absolute Verlässlichkeit, Erfindungsreichtum und erstklassige Abwicklung im Werbemittel- und Marketing-Sektor.
+          </p>
+          <p class="text-ink text-[16px] leading-[1.65]">
+            Wir verbinden traditionelle Hanseatische Kaufmannstugenden mit moderner Logistik und kreativen Produktideen. Unser engagiertes Team aus Experten sorgt dafür, dass jede Kampagne pünktlich und in höchster Güte am Zielort ankommt.
+          </p>
+
+          <!-- Animated Stat Counters -->
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-6 pt-6 border-t border-slate-200">
+            <div>
+              <div class="text-3xl sm:text-4xl font-extrabold text-sky font-sans" data-target="30">0</div>
+              <div class="text-xs font-bold text-navy mt-1">Jahre Erfahrung</div>
+            </div>
+            <div>
+              <div class="text-3xl sm:text-4xl font-extrabold text-sky font-sans" data-target="5000">0</div>
+              <div class="text-xs font-bold text-navy mt-1">Projekte Realisiert</div>
+            </div>
+            <div>
+              <div class="text-3xl sm:text-4xl font-extrabold text-sky font-sans" data-target="100">0</div>
+              <div class="text-xs font-bold text-navy mt-1">% Termintreue</div>
+            </div>
+            <div>
+              <div class="text-3xl sm:text-4xl font-extrabold text-sky font-sans" data-target="150">0</div>
+              <div class="text-xs font-bold text-navy mt-1">Starke Marken</div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ==========================================
+       SECTION 11: FINAL CTA
+       ========================================== -->
+  <section class="py-16 lg:py-24 bg-gradient-to-r from-primary via-bright to-primary text-white text-center relative overflow-hidden">
+    
+    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[350px] bg-bright/40 blur-[110px] rounded-full pointer-events-none"></div>
+    <div class="absolute inset-0 opacity-10 pointer-events-none" style="background-image: radial-gradient(rgba(255,255,255,0.4) 1px, transparent 1px); background-size: 24px 24px;"></div>
+
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8 relative z-10">
+      <h2 class="text-4xl sm:text-5xl font-extrabold tracking-tight drop-shadow-sm">
+        BEREIT FÜR IHRE NÄCHSTE ERFOLGREICHE PROMOTION?
+      </h2>
+      <p class="text-lg sm:text-xl text-ice/90 max-w-2xl mx-auto font-normal leading-[1.65]">
+        Senden Sie uns jetzt Ihre Anfrage oder rufen Sie uns direkt an. Wir erstellen Ihnen innerhalb von 24 Stunden ein unverbindliches Konzeptangebot.
+      </p>
+      <div class="flex flex-col sm:flex-row justify-center items-center gap-5 pt-4">
+        <button onclick="toggleModal(true)" class="w-full sm:w-auto px-10 py-5 rounded-xl font-extrabold text-lg text-navy bg-white hover:bg-ice shadow-2xl transition-all hover:scale-105">
+          Jetzt Projekt Anfragen
+        </button>
+        <a href="tel:+49213192680" class="w-full sm:w-auto px-8 py-5 rounded-xl font-bold text-lg text-white border-2 border-white/40 hover:border-white hover:bg-white/10 transition-all">
+          ☎ +49 (0) 2131 92 68 0
+        </a>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ==========================================
+       SECTION 12: FOOTER (Top padding 80px, column headings 16px/700, link spacing 14px, top border rgba)
+       ========================================== -->
+  <footer class="bg-navy text-white pt-20 pb-12 border-t border-white/10">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 pb-14 border-b border-white/10">
+        
+        <!-- Col 1: About & Logo -->
+        <div class="lg:col-span-2 space-y-5">
+          <div class="h-10 w-auto flex items-center font-bold text-white text-2xl">
+            <img src="images/cconcepts-logo-light.png" alt="C-Concepts Logo Light" class="h-10 w-auto object-contain" onerror="this.onerror=null; this.src='images/cconcepts-logo.png';">
+          </div>
+          <p class="text-slate-300 text-[15px] leading-[1.65] max-w-sm">
+            C-Concepts Vertriebs GmbH – Ihr Spezialist für emotionale Markenwerbung, Sonderanfertigungen und bundesweiten POS-Full-Service seit 1993.
+          </p>
+          <div class="flex items-center gap-3 pt-2">
+            <img src="images/sedex-logo.png" alt="Sedex Audit Member" class="h-8 w-auto bg-white/10 p-1.5 rounded">
+            <span class="text-xs text-slate-400">Geprüfte Qualität & Ethische Standards</span>
+          </div>
+        </div>
+
+        <!-- Col 2: Navigation -->
+        <div>
+          <h4 class="text-[16px] font-bold text-white uppercase tracking-wider mb-6">Navigation</h4>
+          <ul class="space-y-3.5 text-[15px] text-slate-300">
+            <li><a href="#services" class="hover:text-white transition-colors">Leistungen</a></li>
+            <li><a href="#process" class="hover:text-white transition-colors">Ablauf & Prozess</a></li>
+            <li><a href="#projects" class="hover:text-white transition-colors">Projekte & Bento</a></li>
+            <li><a href="#remundi" class="hover:text-white transition-colors">Remundi Outdoor Grill</a></li>
+            <li><a href="#about" class="hover:text-white transition-colors">Über Uns</a></li>
+          </ul>
+        </div>
+
+        <!-- Col 3: Services -->
+        <div>
+          <h4 class="text-[16px] font-bold text-white uppercase tracking-wider mb-6">Leistungen</h4>
+          <ul class="space-y-3.5 text-[15px] text-slate-300">
+            <li>Planung & Design</li>
+            <li>Sonderanfertigungen</li>
+            <li>Event-Promotions</li>
+            <li>Konfektionierung</li>
+            <li>POS-Lager & Logistik</li>
+          </ul>
+        </div>
+
+        <!-- Col 4: Contact info -->
+        <div>
+          <h4 class="text-[16px] font-bold text-white uppercase tracking-wider mb-6">Kontakt</h4>
+          <address class="not-italic space-y-3.5 text-[15px] text-slate-300">
+            <p class="font-bold text-white text-[16px]">C-Concepts Vertriebs GmbH</p>
+            <p>Jägerstraße 46</p>
+            <p>41464 Neuss / Germany</p>
+            <p class="pt-1">Tel: <a href="tel:+49213192680" class="hover:text-sky font-bold text-white">+49 (0) 2131 92 68 0</a></p>
+            <p>Mail: <a href="mailto:info@c-concepts.de" class="hover:text-sky font-bold text-white">info@c-concepts.de</a></p>
+          </address>
+        </div>
+
+      </div>
+
+      <!-- Bottom Legal Row -->
+      <div class="pt-8 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-400 gap-4">
+        <div>
+          © 1993 - 2026 C-Concepts Vertriebs GmbH. Alle Rechte vorbehalten. Made in Germany.
+        </div>
+        <div class="flex items-center gap-6">
+          <a href="#" class="hover:text-white transition-colors">Impressum</a>
+          <a href="#" class="hover:text-white transition-colors">Datenschutz</a>
+          <a href="#" class="hover:text-white transition-colors">AGB</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+
+  <!-- ==========================================
+       INTERACTIVE INQUIRY MODAL
+       ========================================== -->
+  <div id="inquiry-modal" class="fixed inset-0 z-50 bg-navy/80 backdrop-blur-sm hidden flex items-center justify-center p-4">
+    <div class="bg-white rounded-3xl max-w-xl w-full p-8 shadow-2xl relative border border-slate-200">
+      
+      <!-- Close Button -->
+      <button onclick="toggleModal(false)" class="absolute top-6 right-6 text-slate-400 hover:text-navy focus:outline-none" aria-label="Schließen">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+      </button>
+
+      <div class="mb-6">
+        <span class="text-xs font-extrabold text-bright uppercase tracking-wider">Unverbindlich & Schnelle Antwort</span>
+        <h3 class="text-2xl font-extrabold text-navy mt-1">Ihr Projekt Anfragen</h3>
+        <p class="text-slate text-xs sm:text-sm mt-1">Teilen Sie uns erste Details mit. Wir melden uns innerhalb eines Werktages.</p>
+      </div>
+
+      <form onsubmit="handleFormSubmit(event)" class="space-y-4">
+        <div>
+          <label class="block text-xs font-bold text-navy uppercase mb-1">Gewünschte Leistung</label>
+          <select required class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:ring-2 focus:ring-primary focus:outline-none text-sm text-navy bg-slate-50">
+            <option value="">Bitte wählen...</option>
+            <option value="sonderanfertigung">Sonderanfertigung & Gimmicks</option>
+            <option value="event">Event-Promotion & POS Displays</option>
+            <option value="remundi">Remundi Grill Incentive</option>
+            <option value="fullservice">Full-Service Logistik & Konfektion</option>
+          </select>
+        </div>
+
+        <div class="grid grid-cols-2 gap-4">
+          <div>
+            <label class="block text-xs font-bold text-navy uppercase mb-1">Vorname / Name *</label>
+            <input type="text" required placeholder="Max Mustermann" class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:ring-2 focus:ring-primary focus:outline-none text-sm text-navy bg-slate-50">
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-navy uppercase mb-1">Firma</label>
+            <input type="text" placeholder="Muster GmbH" class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:ring-2 focus:ring-primary focus:outline-none text-sm text-navy bg-slate-50">
+          </div>
+        </div>
+
+        <div class="grid grid-cols-2 gap-4">
+          <div>
+            <label class="block text-xs font-bold text-navy uppercase mb-1">E-Mail Adresse *</label>
+            <input type="email" required placeholder="name@firma.de" class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:ring-2 focus:ring-primary focus:outline-none text-sm text-navy bg-slate-50">
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-navy uppercase mb-1">Telefon</label>
+            <input type="tel" placeholder="+49 123 45678" class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:ring-2 focus:ring-primary focus:outline-none text-sm text-navy bg-slate-50">
+          </div>
+        </div>
+
+        <div>
+          <label class="block text-xs font-bold text-navy uppercase mb-1">Projektbeschreibung & Wünsche</label>
+          <textarea rows="3" placeholder="Menge, Zeitraum, Zielgruppe..." class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:ring-2 focus:ring-primary focus:outline-none text-sm text-navy bg-slate-50"></textarea>
+        </div>
+
+        <button type="submit" class="w-full py-4 bg-primary hover:bg-bright text-white font-bold rounded-xl text-base transition-all btn-glow">
+          Anfrage Jetzt Absenden
+        </button>
+      </form>
+    </div>
+  </div>
+
+
+  <!-- ==========================================
+       JAVASCRIPT LOGIC
+       ========================================== -->
+  <script>
+    // Navbar Scroll Listener for Fixed Transparent -> Solid White + Blur
+    window.addEventListener('scroll', () => {
+      const header = document.getElementById('header');
+      if (window.scrollY > 40) {
+        header.classList.add('is-scrolled');
+      } else {
+        header.classList.remove('is-scrolled');
+      }
+    });
+
+    // Scroll Reveal Observer
+    document.addEventListener('DOMContentLoaded', () => {
+      const revealElements = document.querySelectorAll('.reveal');
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('active');
+          }
+        });
+      }, { threshold: 0.1 });
+
+      revealElements.forEach(el => observer.observe(el));
+
+      // Stat Counters Animation
+      const counterElements = document.querySelectorAll('[data-target]');
+      let counted = false;
+
+      const counterObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting && !counted) {
+            counted = true;
+            counterElements.forEach(counter => {
+              const target = parseInt(counter.getAttribute('data-target'));
+              const duration = 2000;
+              const step = Math.ceil(target / (duration / 20));
+              let current = 0;
+
+              const timer = setInterval(() => {
+                current += step;
+                if (current >= target) {
+                  counter.textContent = target.toLocaleString('de-DE') + (target === 100 ? '%' : '+');
+                  clearInterval(timer);
+                } else {
+                  counter.textContent = current.toLocaleString('de-DE');
+                }
+              }, 20);
+            });
+          }
+        });
+      }, { threshold: 0.3 });
+
+      const aboutSection = document.getElementById('about');
+      if (aboutSection) counterObserver.observe(aboutSection);
+    });
+
+    // Mobile Menu Toggle
+    function toggleMobileMenu() {
+      const menu = document.getElementById('mobile-menu');
+      menu.classList.toggle('hidden');
+    }
+
+    // Modal Toggle
+    function toggleModal(show) {
+      const modal = document.getElementById('inquiry-modal');
+      if (show) {
+        modal.classList.remove('hidden');
+        document.body.style.overflow = 'hidden';
+      } else {
+        modal.classList.add('hidden');
+        document.body.style.overflow = 'auto';
+      }
+    }
+
+    // Form Submit Handler
+    function handleFormSubmit(e) {
+      e.preventDefault();
+      alert('Vielen Dank für Ihre Anfrage! Das C-Concepts Team wird sich in Kürze bei Ihnen melden.');
+      toggleModal(false);
+    }
+  </script>
+</body>
 </html>
